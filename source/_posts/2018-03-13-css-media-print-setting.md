@@ -1,8 +1,7 @@
 ---
 title: 關於 @media print 的二三事..
 keywords:
-  - css
-  - media print
+  - css, media print
 thumbnailImagePosition: left
 autoThumbnailImage: 'yes'
 metaAlignment: center
