@@ -1,7 +1,7 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-上
 keywords:
-  - javascript, array, object
+  - javascript, array
 categories:
   - javascript
 tags:
@@ -34,7 +34,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
   var emptyArray = [];
 ```
 
-- 陣列取值賦值: `array[index]`的方式可取得、新增或更新特定筆數的值，前提是要知道程式語言的索引是從 0 開始，一組資料的第1筆對他們而言是第0筆，假設陣列共有5筆資料，但要分別取得每筆內容時會是從 0~4 而不是 1~5。
+- 陣列取值賦值: `array[index]`的方式可取得、新增或更新特定筆數的值，前提是要知道程式語言的索引是從 0 開始，一組資料的第 1 筆對他們而言是第 0 筆，假設陣列共有 5 筆資料，但要分別取得每筆內容時會是從 0~4 而不是 1~5。
 ```js
   var array = [1,2,3];
   //取得 array 第一筆資料
