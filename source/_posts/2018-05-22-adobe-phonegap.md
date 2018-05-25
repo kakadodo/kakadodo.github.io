@@ -32,7 +32,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 2. [Visual Studio IDE](https://msdn.microsoft.com/zh-tw/library/dn879821.aspx)
   Visual Studio 本來就是個融合多種程式開發語言的 IDE，他們也有提供開發 Cordova 應用的模組喔!!個人覺得滿好用的，在空白專案建立的同時，會自動幫你設好專案的結構，重要的配置檔 config.xml 也幫你寫好好，不太需要自己爬文去補配置語法。相關的 API 也會以擴充功能的方式讓你直接下載安裝，安裝好的同時，API 的配置檔也幫你寫進去了，超棒棒來著!!
   另外強大的一點是，提供多種裝置模擬器測試，也可連接實際裝置測試，邊寫邊改 code，寫好後也能使用內建功能一鍵佈署，APP 就被打包出來了!
-  講成這樣應該要介紹 Visual Studio 才對啊!!但想想當初在研究這個花了不少時間~且會需要額外配置 Android AMD、SDK 等裝置相關套件才能正常運作...故..有興趣請自行估狗(逃避)
+  講成這樣應該要介紹 Visual Studio 才對啊!!但想想當初在研究這個花了不少時間~且會需要額外配置 Android AVD、SDK 等裝置相關套件才能正常運作...故..有興趣請自行估狗(逃避)
 
 3. [Adobe PhoneGap CLI](https://build.phonegap.com/)
   Adobe PhoneGap 本身提供兩種方式來開發，一種跟 Cordova CLI 差不多，一樣以 npm 來安裝。另一種就是官方提供的桌機板應用程式(Windows / Mac)，等於是給你 GUI 介面來做等同於 CLI 做的事啦~
