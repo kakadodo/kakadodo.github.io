@@ -1,5 +1,5 @@
 ---
-title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 6.BOM
+title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 7.BOM
 keywords:
   - javascript, 瀏覽器 BOM,
 categories:
