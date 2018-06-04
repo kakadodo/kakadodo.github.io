@@ -192,6 +192,6 @@ console.log('還剩下 '+leftDay+' 天 '+leftHours+' 時 '+leftMinutes+' 分 '+l
 ```
 如此一來便可得知剩餘多少時間，再搭配 setTimeout 之類的排程函式，就可以做出動態的倒數計時囉!!!!
 
-<iframe width="100%" height="300" src="//jsfiddle.net/o7ebw8sy/1/embedded/js,result/dark/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="300" src="//jsfiddle.net/o7ebw8sy/4/embedded/js,result/dark/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 以上內容如有勘誤，還請不吝告知🙇
