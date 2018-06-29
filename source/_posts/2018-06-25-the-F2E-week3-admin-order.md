@@ -12,7 +12,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week3.jpg
 第三週來了!!!後台介面寫的好煎熬~~~
 <!-- excerpt -->
 
-![blog image](https://kakadodo.github.io/theF2EChallange/img/week3.jpg "Week 2. Admin Order")
+![blog image](https://kakadodo.github.io/theF2EChallange/img/week3.jpg "Week 3. Admin Order")
 
 這週主題是很經典的後台介面!看到 UI 稿時已經開始頭痛了 哈哈
 除了要有可視化圖表外，版面中有許多小元件要刻~整體就是個巢到出水的概念~
