@@ -5,7 +5,7 @@ keywords:
 categories:
   - the F2E challenge
 thumbnailImagePosition: left
-date: 2018-07-2 08:49:11
+date: 2018-07-02 08:49:11
 thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week4.jpg
 ---
 
@@ -45,7 +45,7 @@ grid 雖然彈性很大，但基本上是格線的概念，設計稿雖然有照
 
 做完的結論是，grid 好用嗎?
 
-**"懂得怎麼用的話，應該可以稱霸排版界"** 😆
+**"懂得怎麼用的話，應該可以稱霸排版界"** 😆 (flexbox 覺得不開心)
 
 現階段還是會 prefer flexbox 啦~~~~(逃避
 
