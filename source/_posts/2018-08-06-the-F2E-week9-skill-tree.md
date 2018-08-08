@@ -39,7 +39,10 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week9.jpg
 
 終於挺過這煎熬的 9 週啦!!!真心感謝六角學院提供這樣的機會來磨練自己~雖然寫的方式可能不是最佳的做法，但隨著每週而來的主題一一去攻破它~確實是滿有成就感的!!我可以很肯定地說現在比 9 週前的自己更有錢途了XDD
 
-
 作品網址: <https://kakadodo.github.io/theF2EChallange/skill-tree.html>
 
 以上內容如有勘誤，還請不吝告知🙇
+
+2018-08-08 更新:
+拿到完賽的獎狀啦!!!連獎狀都用前端做也太妙XDDD
+完賽獎狀: <https://www.thef2e.com/Certificate/-LDy0zAZD6uNPBRo--X->
