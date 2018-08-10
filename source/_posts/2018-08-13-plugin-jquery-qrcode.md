@@ -5,7 +5,8 @@ keywords:
 categories:
   - javascript plugin
 tags:
-  - jQuery, plugin
+  - jQuery
+  - plugin
 thumbnailImagePosition: left
 date: 2018-08-13 08:38:34
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-08-13-plugin-jquery-qrcode.jpg?alt=media&token=50234ac7-e9f1-4b48-9720-5f0a81cf7a39
