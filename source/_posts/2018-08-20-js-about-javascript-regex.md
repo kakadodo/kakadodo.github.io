@@ -1,0 +1,110 @@
+---
+title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 9.Regex
+keywords:
+  - javascript, regex, 正規式
+categories:
+  - javascript
+tags:
+  - javascript
+thumbnailImagePosition: left
+date: 2018-08-20 08:45:37
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+---
+
+Regex 應該是 coding 世界中的隱藏大魔王吧! 不小心誤觸很容易遍體麟傷，但打贏了經驗值會飆升就是了..
+<!-- more -->
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+
+Regex (Regular Expression 正規表示式)，原理是利用它規範的一系列規則來找出符合語句的字串。通常會用它來進行字串檢索、驗證或是替換某些條件下的內容。
+
+會說它是隱藏大魔王的原因是，即使今天完全不會 Regex，而要做字串驗證或是字串修改的話，還是有其他方式可以辦到(例如最基本卻好用到爆的  `indexOf()` 方法)，但在程式撰寫上相對來說會比較繁雜一點，可能用 Regex 可以一行解決，用 indexOf 卻要寫好幾行啊~~
+
+但這個特殊的語法乍看之下真的會懷疑人生，一度覺得自己還在寫 javascript 嗎? 😭 看著也滿煎熬的...要理解它的規則會需要花一點時間轉換。把它想成是另一種類型的摩斯密碼可能就好懂點了 XDD 一定要先清楚它規範的規則是甚麼意思，才會了解組合起來的正規式在判斷甚麼樣條件的內容。
+
+正規式有兩種創建方式:
+(範例 - 檢查是否有符合"abc"的字串片段)
+1. 直接撰寫正規表達式的實例，將匹配規則寫在兩個 `/` 之中
+  ```js
+    const regex = /abc/;
+    const str = 'aaabcabcbc';
+    console.log(regex.test(str)); //true
+  ```
+1. 使用 RegExp 建構式來創建實例，呼叫 `new RegExp()`
+  ```js
+    const regex = new RegExp('abc');
+    const str = 'aaabcabcbc';
+    console.log(regex.test(str)); //true
+  ```
+
+上面用的 `.test()` 是正規式物件的方法，可以用來檢測帶入的內容是否有符合正規式，有就回傳 true，沒有反之。
+```js
+  //語法
+  /我是正規式/.test(我是要檢查的內容); //回傳布林值
+```
+自己一開始在寫 .test() 時很容易把正規式跟要檢查的內容放錯位置，開發者工具跳錯心就會揪一下...所以要特別註明，它是 **正規式物件的方法** 喔!!所以前面要接的是正規式而不是一般字串。
+
+除了 test 之外，String 物件的 match、replace、split 等方法都可以搭配正規式來使用。
+<a class="jsbin-embed" href="http://jsbin.com/hutokamejo/embed?js,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?4.1.4"></script>
+
+"這樣看下來感覺沒很難啊??" 如果有這種想法的話...那就大錯特錯了!!(怪只怪自己範例太爛)
+一般用 Regex 大多會在較複雜的驗證模式，舉例來說最常看到使用正規式的 email 驗證，條件可能需要判斷是否含英文大小寫、數字或是 @ 符號等等，這種時候如果用 Ragex 來做就可以一行秒殺，雖然看起來很頭痛...
+```js
+function validateEmail(email) {
+  const reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return reg.test(email);
+}
+validateEmail('test@gmail.com'); //return true
+```
+這串正規式是爬 Stack Overflow 看到的，腦中冒出的唯一念頭是【誰來告訴我那串是在寫甚麼鬼東西???】XDDDD
+目前慧根還無法完全了解，有幾個片段轉換後覺得很奇怪，不過大部分符號表示的意思是可以理解的!
+
+以下就來介紹主要常見的正規式寫法:
+(匹配對象以字母 abc 為例)
+- `/a/` 比對 a
+- `^a` 比對字串的起始位置是否為 a
+- `a$` 比對字串的結束位置是否為 a
+- `\` 避開特殊字元
+  (假設要比對 ^，就可以寫成 `\^` 避開 ^ 符號的特殊意義)
+- `*` 比對前一個字元有 0~無限多個
+- `+` 比對前一個字元有 1~無限多個
+- `?` 比對前一個字元有 0~1個，如果是接在*、+、? 或 {} 之後，則表示要取得符合標準的最小片段
+- `{n}` 比對前一個字元有 n 個，`{n, m}` 設定範圍 ，`{n,}` n~無限多個
+- `.` 任意字元
+- `[abc]` 比對方括號中任意字元，a or b or c 其中一個符合即可
+- `(ab)` 比對括號中的字串，並將符合的字串設成變數暫存($1,$2...)，RegExp.$1 可調用變數
+- `|` 或的意思，比對使否符合前一個字元或是後一個字元，通常會用 () 包起
+- `[^a]` 不含 a 的字串
+- `\d` 比對數字，同理可用 `[0-9]`
+- `\D` 比對非數字，同理可用 `[^0-9]`
+- `\w` 比對數字、字母、底線，同理可用 `[a-zA-Z0-9_]`
+- `\W` 比對 \w 以外的字元，同理可用 `[^a-zA-Z0-9_]`
+- `\s` 比對空白字元，同理可用 `[ \r\t\n\f]`
+- `\S` 比對非空白字元，同理可用 `[^ \r\t\n\f]`
+
+最常見的應該就上述這些了，其他比較特殊的字元我就...略 XD
+
+另外 RegExp 還提供了搜尋方式的設定，可以讓匹配範圍更有靈活，其中最常用的就是 g 跟 i 了!
+`g` 為全域搜尋，可以匹配出全部有符合正規式標準的字串。(預設只會匹配到第一個)
+`i` 為搜尋涵蓋大小寫，可以匹配出符合正規式標準的大小寫字串。(預設是會區分大小寫)
+實例會直接將設定加在後面，建構式建立的話則是設定在第二個參數。
+
+```js
+  //替換指定文字沒加 g
+  const sentence = "Today is Friday, i can't wait to back home. Crazy Friday!!";
+  console.log(sentence.replace(/Friday/, 'Monday')); 
+  //Today is Monday, i can't wait to back home. Crazy Friday!! 只有第一個 Friday 被換掉
+
+  //替換指定文字有加 g
+  console.log(sentence.replace(/Friday/g, 'Monday')); 
+  //Today is Monday, i can't wait to back home. Crazy Monday!!
+
+  //替換指定文字沒加 i
+  console.log(sentence.replace(new RegExp('friday'), 'Monday'));
+  //Today is Friday, i can't wait to back home. Crazy Friday!! 找不到匹配的正規式
+
+  //替換指定文字有加 i
+  console.log(sentence.replace(new RegExp('friday', 'ig'), 'Monday'));
+  //Today is Monday, i can't wait to back home. Crazy Monday!!
+```
+
+以上內容如有勘誤，還請不吝告知🙇
