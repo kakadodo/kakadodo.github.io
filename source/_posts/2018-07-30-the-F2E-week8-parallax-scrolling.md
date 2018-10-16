@@ -1,7 +1,7 @@
 ---
 title: The F2E - 前端修練精神時光屋挑戰系列 - Week 8. Parallax Scrolling
 keywords:
-  - Parallax, css animation, transition
+  - Parallax, CSS animation, transition
 categories:
   - the F2E challenge
 thumbnailImagePosition: left
@@ -32,7 +32,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week8.jpg
 
 ### 挑戰心得:
 
-看了這次直播主的介紹才知道有 TweenMax 這款好用的動畫函式庫，雖然也需要一個口令一個動作去描述..但用 javascript 寫指令總是比用 CSS 寫 animation 流暢啊 QQ
+看了這次直播主的介紹才知道有 TweenMax 這款好用的動畫函式庫，雖然也需要一個口令一個動作去描述..但用 JavaScript 寫指令總是比用 CSS 寫 animation 流暢啊 QQ
 但直播主還沒介紹前就開始寫了..所以成品是用最原始的 transition + animation 完成
 這樣的代價就是 CSS 檔案瞬間肥大..裡面應該有 1/5 的成分在寫 `@keyframes`，為了讓元素看起來不會太規律..所以有稍微認真的在不同的元素上加不同的動畫，做完真的成就感大增但心也好累 XD
 
@@ -64,7 +64,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week8.jpg
 
 問答完成之後就是要顯示統計結果，這塊設計稿要求用滾動視差來完成，因為之前有短暫接觸過 [Skrollr](https://github.com/Prinzhorn/skrollr) 這個套件，這次就用它來解決!
 
-Skrollr 厲害的一點就是可以完全靠 html 埋屬性來設定滾動視差，滾動的依據可以是 document 的高度，或是相關元素距離 viewport 的位置來觸發。javascript 則只要寫短短的一句初始化指令即可!
+Skrollr 厲害的一點就是可以完全靠 html 埋屬性來設定滾動視差，滾動的依據可以是 document 的高度，或是相關元素距離 viewport 的位置來觸發。JavaScript 則只要寫短短的一句初始化指令即可!
 
 而設計稿呈現方式是當頁面在滾動時，背景會不斷出現圖形並且有一定的角度滑入及滑出...當下整個腦塞，想不出來要怎麼搭配套件做出這個效果，所以用了一個最原始最暴力(最爛)的方式來完成 XDDD
 默默開 Illstrator 輸出了三張背景圖..再針對頁面滾動的比例來改變背景圖的位置，於是乎~滾動視差的背景動畫就完成啦!!!(被打)

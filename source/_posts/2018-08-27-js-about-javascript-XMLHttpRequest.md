@@ -1,17 +1,17 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 10.Ajax - XMLHttpRequest
 keywords:
-  - javascript, XMLHttpRequest, Ajax 非同步請求
+  - JavaScript, XMLHttpRequest, Ajax 非同步請求
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-08-27 09:01:58
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
-身為前端的一份子，使用 Ajax 取得資料應該是必經過程吧! 由於現在越來越多優化的套件可以使用，原生 javascript 的語法反而快忘光了!
+身為前端的一份子，使用 Ajax 取得資料應該是必經過程吧! 由於現在越來越多優化的套件可以使用，原生 JavaScript 的語法反而快忘光了!
 這篇就來重溫紀錄一下最開始接觸的底層語法 XMLHttpRequest :D
 <!-- excerpt -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
@@ -96,6 +96,6 @@ function showData(result){
 getData(showData);  //1.呼叫 getData，並將 showData 透過參數傳入
 ```
 
-這樣寫下來會覺得有 jQuery 真好! 不過了解底層有助於加深對它的觀念，搞懂 javascript 怎麼去實現這些功能，搭配現成套件使用的話就更好上手了!
+這樣寫下來會覺得有 jQuery 真好! 不過了解底層有助於加深對它的觀念，搞懂 JavaScript 怎麼去實現這些功能，搭配現成套件使用的話就更好上手了!
 
 以上內容如有勘誤，還請不吝告知🙇

@@ -1,14 +1,14 @@
 ---
 title: 神奇的 < a > 錨點 - 網頁轉存 PDF 後的畫面跳轉功能
 keywords:
-  - save as pdf, 網頁轉存 PDF, css media print
+  - save as PDF, 網頁轉存 PDF, CSS media print
 thumbnailImagePosition: left
 date: 2018-03-30 10:25:46
 categories:
-  - web other
+  - Web Other
 tags:
   - media print
-  - html to pdf
+  - HTML to PDF
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-03-30-css-alink-pdf.jpg?alt=media&token=10b38439-fd8d-4329-b1c0-9ca49e1e2d38
 ---
 
@@ -29,13 +29,13 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 - 另存後的 PDF 檔
 <iframe src="2018-03-30-css-alink-pdf.pdf" width="100%" height="500" frameborder="0"></iframe>
 
-這個範例比較特別的是，PDF 列印的尺寸有用 javascript 控制，不確定內容長度的情況下，尺寸如果寫死，可能會造成分頁切割時的破版狀況，雖然可以用 css 的 `page-break` 屬性來避免區塊被分割，但列印出來的畫面就會不時地出現一片留白..怎麼說服自己都覺得這樣會被嫌棄..
-因此才想到如果可以由 jsvascript 幫忙判斷畫面渲染完的總長度，再動態設定 css 的 page size。不過這想法因為不知道怎麼用 js 寫 media print 的 css 卡很久，直到這篇[感人的發問](https://stackoverflow.com/q/46202655/9330569)解救了我!!
+這個範例比較特別的是，PDF 列印的尺寸有用 JavaScript 控制，不確定內容長度的情況下，尺寸如果寫死，可能會造成分頁切割時的破版狀況，雖然可以用 CSS 的 `page-break` 屬性來避免區塊被分割，但列印出來的畫面就會不時地出現一片留白..怎麼說服自己都覺得這樣會被嫌棄..
+因此才想到如果可以由 JavaScript 幫忙判斷畫面渲染完的總長度，再動態設定 CSS 的 page size。不過這想法因為不知道怎麼用 js 寫 media print 的 CSS 卡很久，直到這篇[感人的發問](https://stackoverflow.com/q/46202655/9330569)解救了我!!
 
 ```js
 //抓出渲染完後的頁面總高度，另外+50是預留一點空間以免高度的值有小數點
 var height = $(document).height() + 50;
-//動態在body最後加一段内嵌 css，沒想到這方法的我真是好傻好天真!!
+//動態在body最後加一段内嵌 CSS，沒想到這方法的我真是好傻好天真!!
 $('body').append('<style>@media print{@page{size:210mm '+height+'px;}}</style>');
 ```
 

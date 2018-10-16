@@ -1,11 +1,11 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()
 keywords:
-  - javascript, ES6
+  - JavaScript, ES6
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
   - ES6
 thumbnailImagePosition: left
 date: 2018-09-28 09:01:58

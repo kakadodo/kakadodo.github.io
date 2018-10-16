@@ -1,7 +1,7 @@
 ---
 title: The F2E - 前端修練精神時光屋挑戰系列 - Week 6. Validation
 keywords:
-  - form validation, html5
+  - form validation, HTML5
 categories:
   - the F2E challenge
 thumbnailImagePosition: left
@@ -31,12 +31,12 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week6.jpg
 資料驗證則嘗試用 HTML5 原生的表單驗證功能，HTML5 有針對表單元件追加不少用來驗證、限制輸入內容的屬性，當使用者觸發 submit 時，會檢查欄位是否符合標準，再對欄位加上 CSS 的偽類選擇器 `:valid` 及 `:invalid`，這樣可以針對選擇器寫自訂的樣式，做出提示使用者輸入的訊息!Bootstrap 4 有對 HTML5 的表格驗證做自定義的樣式設定，所以這次就套用它的設定來寫表單啦!
 
 以下列出有用到的表單驗證 attribute:
-- novalidate  `<form>`加上此屬性會禁用瀏覽器預設的回饋提示( javascript 還是可以透過 [約束驗證 API][0] 來得知欄位是否通過驗證)
+- novalidate  `<form>`加上此屬性會禁用瀏覽器預設的回饋提示( JavaScript 還是可以透過 [約束驗證 API][0] 來得知欄位是否通過驗證)
 - min / max  限制 input 的最小值與最大值，可用在 type=number, range, date..等數字型態的欄位
 - pattern  正規式判斷，可用在 text, search, url, tel, email, and password。input 可加上 title 屬性來提示使用者輸入的規範。
 - required  欄位必填，如果沒輸入內容會視為 :invalid
 
-表單驗證失敗時瀏覽器會出現預設的訊息回饋，這類訊息無法更改 CSS 樣式設定，各家瀏覽器的顯示方式也會不同，僅能用 javascript 來自定義訊息的文字內容。Bootstrap 有建議可以在表單加上 novalidate 屬性取消預設的驗證訊息，再用 javascript 阻擋表單送出來觸發自定義的驗證回饋。
+表單驗證失敗時瀏覽器會出現預設的訊息回饋，這類訊息無法更改 CSS 樣式設定，各家瀏覽器的顯示方式也會不同，僅能用 JavaScript 來自定義訊息的文字內容。Bootstrap 有建議可以在表單加上 novalidate 屬性取消預設的驗證訊息，再用 JavaScript 阻擋表單送出來觸發自定義的驗證回饋。
 
 每個欄位依據 [約束驗證 API][0] 判斷的結果會加上 :valid 或 :invalid 的偽元素，這兩個偽元素預設沒有任何的樣式設定，需要自行撰寫 CSS 樣式。
 ```scss

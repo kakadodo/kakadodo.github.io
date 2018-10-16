@@ -1,11 +1,11 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-上
 keywords:
-  - javascript, array
+  - JavaScript, Array
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-04-11 11:44:28
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a

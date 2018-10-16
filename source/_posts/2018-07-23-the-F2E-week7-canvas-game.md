@@ -23,12 +23,12 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 給我生出個 canvas 射擊遊戲!!!
 
 ### 運用技術:
-- javascript canvas
+- JavaScript canvas
 - ai2canvas plugin
 
 ### 挑戰心得:
 既然沒做出來~乾脆來介紹這次用的神奇插件 😆😆😆
-要在 canvas 上作畫，需要將繪製的物件利用數學的點、線、面三種方式來完成。也就是說我們需要用 javascript 一行一行把物件畫出來!對於數學邏輯有障礙的人如果碰到複雜的圖形一定會想哭的啊..
+要在 canvas 上作畫，需要將繪製的物件利用數學的點、線、面三種方式來完成。也就是說我們需要用 JavaScript 一行一行把物件畫出來!對於數學邏輯有障礙的人如果碰到複雜的圖形一定會想哭的啊..
 
 而這次用到的 Illustrator 插件 [ai2canvas][ai2canvas]，它可以將 ai 轉檔成 canvas 格式的 html 文件。轉出後的 html 檔，插件已經幫你把畫面用 canvas 畫出來。對於習慣靠雙手直接在畫布畫圖的人來說就可以輕鬆的畫自己想要畫的圖，再讓插件幫你自動生出 canvas 的程式碼。
 

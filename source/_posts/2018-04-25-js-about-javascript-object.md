@@ -1,23 +1,23 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 3.物件(Object)
 keywords:
-  - javascript, object
+  - JavaScript, Object
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-04-25 13:58:32
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
 物件是甚麼東西?能吃嗎?
-這是我一開始碰 javascript 時的一大問號，實在搞不懂為什麼要叫物件...
+這是我一開始碰 JavaScript 時的一大問號，實在搞不懂為什麼要叫物件...
 <!-- more -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 #### 物件 (Object)
-簡單來說，物件是程式語言中的一種型別，在 javascript 的世界中扮演著非常非常非~常非常重要的一角，因為對 javascript 而言，可以說零零總總的一切都是由物件所組成。
+簡單來說，物件是程式語言中的一種型別，在 JavaScript 的世界中扮演著非常非常非~常非常重要的一角，因為對 JavaScript 而言，可以說零零總總的一切都是由物件所組成。
 之前有提到 array 跟 object 令人傻傻分不清就在於，array 也是物件的一種，它們其實都由 key 跟 value 組合而成，只是 array 的 key 是有順序性的 index，而 object 的 key 則是屬性(property)或方法(method)。
 
 下面列出的物件用法就可看出兩者有多相似了:
@@ -148,7 +148,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
   console.log(mary);
   //{name: "Ben", age: 18} Mary 自動被改名，那欸安內?!
 ```
-  當物件被宣告時，javascript 會將它存放在記憶體中的一個位置，變數則是記住那個位置在哪裡，當宣告另一個變數來指定時，自然還是指定記憶體的位置在哪而不是它真正的值，要真正產生出一組有相同結構但不同值的物件，就會使用到物件建構式。
+  當物件被宣告時，JavaScript 會將它存放在記憶體中的一個位置，變數則是記住那個位置在哪裡，當宣告另一個變數來指定時，自然還是指定記憶體的位置在哪而不是它真正的值，要真正產生出一組有相同結構但不同值的物件，就會使用到物件建構式。
 
 - 物件建構式(constructor)與原型(prototype): 建構式本身是一組函式，而這組函式可以有結構性的產生出不同的物件實體(產生出來的物件記憶體位置都不相同)
 ```js
@@ -188,7 +188,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 ```
   ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-04-25-js-about-javascript-object.jpg?alt=media&token=bbab4589-4c81-428d-bfca-122c22dcb47a)
   上圖為 mary 這個物件的內容，黃色框框可看到`__proto__`屬性中有 introSelf 這個方法，而橘色框框的 `constructor` 就是建構式 Person，裡面可找到有個屬性為 prototype，也就是 introSelf 真正存在的地方。
-  利用 prototype 的方式就可讓多個實例共享同一個方法，以減少記憶體的使用。這種模式也就是原型鍊，藉由原型來彼此相連，原型的終點都會導向到 Object.prototype，所以才說 javascript 的零零總總皆源自於物件呀!!
+  利用 prototype 的方式就可讓多個實例共享同一個方法，以減少記憶體的使用。這種模式也就是原型鍊，藉由原型來彼此相連，原型的終點都會導向到 Object.prototype，所以才說 JavaScript 的零零總總皆源自於物件呀!!
   而且在接觸 prototype 這名詞之前的我們，早就用它用了無數次啦~陣列篇講到的一些方法，原理都是藉由 Array.prototype 來實現的，不然自己產生出來的新陣列怎麼會莫名有一堆方法可用咧?
 
   ![blog image](https://ithelp.ithome.com.tw/upload/images/20171228/20065504Yf8N277vXl.jpg)

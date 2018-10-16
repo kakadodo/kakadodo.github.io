@@ -1,11 +1,11 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 12.ES6 - 物件與函式的新寫法、箭頭函式
 keywords:
-  - javascript, ES6
+  - JavaScript, ES6
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
   - ES6
 thumbnailImagePosition: left
 date: 2018-09-07 09:01:58
@@ -105,7 +105,7 @@ let add = (n1, n2) => (n1 + n2);
 //箭頭函式宣告
 let add = n1 => n1 * n1;
 ```
-第三種寫出來時會有一種莫名的爽感 XDD 感覺已經不像在寫 javascript 了。
+第三種寫出來時會有一種莫名的爽感 XDD 感覺已經不像在寫 JavaScript 了。
 
 不過好用的東西往往會有稍不注意就踩到的大雷，不了解這些雷點的話，寫出來的結果只會讓人想 QQ
 以下就列出幾個需要注意的雷點:

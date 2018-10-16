@@ -1,11 +1,11 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)
 keywords:
-  - javascript, loop, for loop, while loop, switch
+  - JavaScript, loop, for loop, while loop, switch
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-02 08:56:44
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
@@ -17,7 +17,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 <!-- more -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
-javascript 中有不少迴圈的應用，之前 Array 篇有好幾種方法就是迴圈的進階版，可以更簡潔的表達 code 的目的及生成出想要的結果，不過今天要寫的是最早開始就存在的迴圈功能。元老級還是有一定地位的!!
+JavaScript 中有不少迴圈的應用，之前 Array 篇有好幾種方法就是迴圈的進階版，可以更簡潔的表達 code 的目的及生成出想要的結果，不過今天要寫的是最早開始就存在的迴圈功能。元老級還是有一定地位的!!
 
 #### for 迴圈
 由一組小括號和大括號組成，對迴圈來說最重要的就是條件，如果條件沒設好可能會陷入無窮迴圈，然後就迎接瀏覽器 GG。(想試試看的人可以不要放條件更新..)

@@ -1,18 +1,18 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 14.ES6 - Promise、Fetch 處理非同步程式
 keywords:
-  - javascript, ES6
+  - JavaScript, ES6
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
   - ES6
 thumbnailImagePosition: left
 date: 2018-09-25 09:01:58
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
-ES6 新增了 Promise 物件可以方便包裝非同步程式，而 Fetch 則是經過包裝後的 Promise，專門用來處理非同步資料，寫法有點像 jQuery 的 ajax，但卻是原生的 javascript 語法。
+ES6 新增了 Promise 物件可以方便包裝非同步程式，而 Fetch 則是經過包裝後的 Promise，專門用來處理非同步資料，寫法有點像 jQuery 的 ajax，但卻是原生的 JavaScript 語法。
 <!-- excerpt -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
 

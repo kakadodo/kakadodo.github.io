@@ -1,7 +1,7 @@
 ---
 title: The F2E - 前端修練精神時光屋挑戰系列 - Week 4. Product Gallery
 keywords:
-  - css, grid
+  - CSS, grid
 categories:
   - the F2E challenge
 thumbnailImagePosition: left

@@ -1,17 +1,17 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 7.BOM
 keywords:
-  - javascript, 瀏覽器 BOM,
+  - JavaScript, 瀏覽器 BOM,
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-28 08:31:19
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
-BOM(Browser Object Model) 是指各家瀏覽器提供 javascript 對自身進行操控的物件，當然這樣的前提下，每家瀏覽器的元素名稱可能就會不同(有些人就是愛特立獨行..)
+BOM(Browser Object Model) 是指各家瀏覽器提供 JavaScript 對自身進行操控的物件，當然這樣的前提下，每家瀏覽器的元素名稱可能就會不同(有些人就是愛特立獨行..)
 但大部分還是照共同的規範來實作功能，不然開發者會太煎熬......
 <!-- more -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
@@ -49,7 +49,7 @@ BOM(Browser Object Model) 是指各家瀏覽器提供 javascript 對自身進行
 4. window.location
   取得瀏覽器當前的連結資訊
   - `location.href`
-    這個也算滿常用的~用 javascript 的方式來進行轉址，跟用滑鼠點擊 a 連結後轉址一樣。
+    這個也算滿常用的~用 JavaScript 的方式來進行轉址，跟用滑鼠點擊 a 連結後轉址一樣。
 
 5. window.navigator
   取得瀏覽器本身的資訊，有在處理瀏覽器版本兼容的應該都不陌生..可以藉由取得它的資訊來判斷使用者的瀏覽器版本為何。

@@ -1,17 +1,17 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 5.This
 keywords:
-  - javascript, this
+  - JavaScript, this
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-09 08:41:04
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
-this 根本是 javascript 中的搞曖昧高手吧~在不同的地方指的是不同的對象。
+this 根本是 JavaScript 中的搞曖昧高手吧~在不同的地方指的是不同的對象。
 如果不去了解他變心的原因在哪，好用應該會變成好賭爛 (╬☉д⊙)
 <!-- more -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")

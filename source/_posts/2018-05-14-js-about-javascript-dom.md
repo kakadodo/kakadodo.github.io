@@ -1,23 +1,23 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 6.DOM
 keywords:
-  - javascript, DOM element
+  - JavaScript, DOM element
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-14 08:53:04
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
 各位母親們，母親節快樂!!這次自家的哥哥大手筆請客，整個假日就是吃好吃滿的概念..(撐)
-這回來寫 javascript 的 DOM 元素，瀏覽器會將 html 的內容轉換成各個 DOM 元素，讓 javascript 可以巡訪及操作。
+這回來寫 JavaScript 的 DOM 元素，瀏覽器會將 html 的內容轉換成各個 DOM 元素，讓 JavaScript 可以巡訪及操作。
 DOM 就像一個大家庭~彼此之間的關係是有跡可循滴~熟的話可以直接找到本人，不熟的話就要透過親戚間的巡訪才能找到~就是個小型社會嘛!
 <!-- more -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
-javascript 提供以下幾種方式可以直接找到指定的 DOM 元素:
+JavaScript 提供以下幾種方式可以直接找到指定的 DOM 元素:
 
 1. getElementById
   由於 html 中 ID 不會重複命名的情況下，使用這個方法可以很直接地找到想要的單一元素。不過是不是每個元素都要設 ID 那就見仁見智了...ID 用太頻繁應該會被後端追殺 XDD
@@ -57,7 +57,7 @@ javascript 提供以下幾種方式可以直接找到指定的 DOM 元素:
   console.log(a.item(0)); //可以抓到真正的 DOM 元素
   ```
 
-如果今天要查找的元素，沒有設定 id / class，或是用 javascript 動態新增的話，DOM 間的巡訪就很重要了!
+如果今天要查找的元素，沒有設定 id / class，或是用 JavaScript 動態新增的話，DOM 間的巡訪就很重要了!
 
 1. parentNode
   找到目前 DOM 元素的父層元素
@@ -92,7 +92,7 @@ var inputEmail = form.elements.email; //elements後面接的是表單元素的na
 console.log(inputEmail);
 ```
 
-除了查找 DOM 之外，動態產生 DOM 也是很重要的~~ javascript 有兩種方式可產生 DOM 元素
+除了查找 DOM 之外，動態產生 DOM 也是很重要的~~ JavaScript 有兩種方式可產生 DOM 元素
 1. innerHTML
   以某個元素為容器，容器內的原始內容會被 innerHTML 全部替換掉，塞入的值是字串，執行效能較快，但設定方式若不當容易有資安風險。
   ```js

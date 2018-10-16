@@ -1,11 +1,11 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值
 keywords:
-  - javascript, ES6
+  - JavaScript, ES6
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
   - ES6
 thumbnailImagePosition: left
 date: 2018-08-31 09:01:58
@@ -29,7 +29,7 @@ ES6 有不少 "超偷懶" 語法，根本在開外掛模式 XD
 ---
 
 ## 字串模板 (template string)
-ES6 提供了字串模板的功能，可以更方便的於 javascript 中組字串。字串模板會以兩個 **\` \` (反斜線)** 框起，於反斜線中寫入的任何文字都會當成 string 處理，此時要使用變數或是表達式，就要另外用 `${}` 包住。
+ES6 提供了字串模板的功能，可以更方便的於 JavaScript 中組字串。字串模板會以兩個 **\` \` (反斜線)** 框起，於反斜線中寫入的任何文字都會當成 string 處理，此時要使用變數或是表達式，就要另外用 `${}` 包住。
 ```js
 // 示範一: 使用 ES6
 const imgUrl = "img/logo.png";

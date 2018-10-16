@@ -1,13 +1,13 @@
 ---
 title: 關於 @media print 的二三事..
 keywords:
-  - css, media print
+  - CSS, media print
 thumbnailImagePosition: left
 autoThumbnailImage: 'yes'
 metaAlignment: center
 date: 2018-03-13 10:52:00
 categories:
-  - css
+  - CSS
 tags:
   - media print
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180313-css-media-print-setting.jpg?alt=media&token=eb3e2b6e-d75e-476e-9e34-c065c48c6047

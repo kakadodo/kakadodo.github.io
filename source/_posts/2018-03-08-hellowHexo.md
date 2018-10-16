@@ -1,16 +1,16 @@
 ---
 title: 第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages
 keywords:
-  - hexo
+  - Hexo
 thumbnailImagePosition: left
 autoThumbnailImage: 'yes'
 metaAlignment: center
 date: 2018-03-08 14:06:01
 categories:
-  - hexo
+  - Hexo
 tags:
-  - hexo
-  - github
+  - Hexo
+  - GitHub
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=000d57fc-2758-49e4-a640-aba5c780ee0b
 ---
 

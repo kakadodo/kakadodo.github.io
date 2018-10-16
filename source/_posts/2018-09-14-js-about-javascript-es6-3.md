@@ -1,18 +1,18 @@
 ---
 title: 這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別
 keywords:
-  - javascript, ES6
+  - JavaScript, ES6
 categories:
-  - javascript
+  - JavaScript
 tags:
-  - javascript
+  - JavaScript
   - ES6
 thumbnailImagePosition: left
 date: 2018-09-14 09:01:58
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
 ---
 
-javascript 中創建物件的正統用法是使用建構式，建構式跟原型息息相關，如果沒搞懂原型概念的話看了只會覺得霧煞煞。而 ES6 新出的 Class 類別其實是建構式的語法糖，原理來說其實並無改變，只是撰寫方式更為簡潔有條理。
+JavaScript 中創建物件的正統用法是使用建構式，建構式跟原型息息相關，如果沒搞懂原型概念的話看了只會覺得霧煞煞。而 ES6 新出的 Class 類別其實是建構式的語法糖，原理來說其實並無改變，只是撰寫方式更為簡潔有條理。
 <!-- excerpt -->
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
@@ -132,6 +132,6 @@ const mary = new Person('Mary', 'Chang', 15);
 mary.eat(); // 跳錯: mary.eat is not a function
 Person.eat(); // 好餓!我要吃 10 碗!
 ```
-只能給建構式本身使用的方法用處會高嗎??? 我自己是還沒這樣創建過啦~不過 javascript 中的 `Array.from()` 倒是用了不少次~它本身就是一個 Array 的靜態方法喔!!自行產生的 array，查看 prototype 的話是找不到 .from() 這個 method 的!
+只能給建構式本身使用的方法用處會高嗎??? 我自己是還沒這樣創建過啦~不過 JavaScript 中的 `Array.from()` 倒是用了不少次~它本身就是一個 Array 的靜態方法喔!!自行產生的 array，查看 prototype 的話是找不到 .from() 這個 method 的!
 
 以上內容如有勘誤，還請不吝告知🙇
