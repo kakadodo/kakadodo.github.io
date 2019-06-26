@@ -18,12 +18,12 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 [六角學院提供的設計稿連結](https://xd.adobe.com/spec/256981fc-ef65-4d9b-773c-45d8ef0353c6-5358/screen/50fba855-bde7-4771-b73c-3fd839418cf0/multiplication-chart/)
 
-### 運用技術:
+## 運用技術:
 - Pug
 - SCSS、Grid、Flexbox
 - Vue.js
 
-### 挑戰心得:
+## 挑戰心得:
 覺得這關算是滿佛心的任務，雖然乍看要做出跟"數學"有關的東西就莫名恐懼
 我自己覺得困難點在畫面排版，一開始很猶豫要用 Flexbox 還是 Grid 來排...結果最後做一做兩種都用到了哈哈
 
@@ -79,7 +79,7 @@ new Vue({
 於是乎............
 
 Codepen 作品:
-<iframe height="350" style="width: 100%;" scrolling="no" title="JS地下城 - 1F 九九乘法表" src="//codepen.io/chelseac/embed/rRzGxg/?height=350&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="JS地下城 - 1F 九九乘法表" src="//codepen.io/chelseac/embed/rRzGxg/?height=500&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/chelseac/pen/rRzGxg/'>JS地下城 - 1F 九九乘法表</a> by Chelsea
   (<a href='https://codepen.io/chelseac'>@chelseac</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

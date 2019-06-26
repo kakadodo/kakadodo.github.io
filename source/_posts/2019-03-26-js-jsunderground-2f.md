@@ -17,11 +17,11 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 [六角學院提供的設計稿連結](https://xd.adobe.com/spec/43be2f02-1d11-4dfb-4e3d-5c4df1df3896-358f/screen/e7b79d5d-37bb-41f7-8ca2-9df3811589e9/003-clock/)
 
-### 運用技術:
+## 運用技術:
 - svg (根本複製貼上)
 - 原生 JavaScript Date 物件運用
 
-### 挑戰心得:
+## 挑戰心得:
 這關作的我好心虛...大概半小時寫完 = ="
 看到過關條件說時鐘可以用圖產生，立馬開 AI 秒上圖啊~~~不過組裝零件的過程要注意一下初始放置位置就是了。
 

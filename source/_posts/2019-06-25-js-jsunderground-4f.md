@@ -18,10 +18,12 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 [六角學院提供的設計稿連結](https://xd.adobe.com/spec/6f0eb277-9976-489c-5668-95757eccfa55-193f/screen/e900dd75-7b6c-4a48-bbd6-789c4e100856/007-world-clock/)
 
-### 運用技術:
+## 運用技術:
+
 - Vanilla JavaScript
 
-### 挑戰心得:
+## 挑戰心得:
+
 >"天啊! Moment.js 也太好用了吧!"
 
 這次感觸最深的心得結語 XDDDDD
@@ -33,7 +35,12 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 - [Date.prototype.toLocaleTimeString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString) 轉換當地時間
 
 這三個方法都可以額外帶兩個參數進去，第一個參數是"當地顯示格式(locale)"，第二個參數則是"格式的詳細設定(options)"
-舉例來說，英國(en-BG)預設顯示日期的格式會是 `日/月/西元年, 時:分:秒 (24小時制)`，而台灣(zh-TW)則是 `西元年/月/日 時/分/秒 (12小時制)`，不同國家有其預設的格式，locale 就是可以指定要以哪個國家的格式作顯示。當然這個格式可以再作進一步的調整，像是月份要用數字或英文顯示，時間要用 12小時還是 24小時顯示，時區是取當地時間或是有特別指定哪個時區等等，比較細部的設定就會設定在第二個參數 options 中。
+
+舉例來說:
+英國(en-BG)預設顯示日期的格式會是 `日/月/西元年, 時:分:秒 (24小時制)`
+而台灣(zh-TW)則是 `西元年/月/日 時/分/秒 (12小時制)`
+
+不同國家有其預設的格式，locale 就是可以指定要以哪個國家的格式作顯示。當然這個格式可以再作進一步的調整，像是月份要用數字或英文顯示，時間要用 12小時還是 24小時顯示，時區是取當地時間或是有特別指定哪個時區等等，比較細部的設定就會設定在第二個參數 options 中。
 
 至於語系預設的格式長怎樣，各城市的 country code 是什麼，就只能靠 google 了，此次設計稿剛好跟 MDN 提供的範例 "英國" 很像，所以自己在寫 code 的時候就直接拿 en-BG 來用(感謝設計師通情達理)，直到現在在寫心得才認真去找一下參考，最後找到以下兩個參考來源:
 - [Date format by country - Wikipedia](https://en.wikipedia.org/wiki/Date_format_by_country)
@@ -54,7 +61,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 - UTC 世界協調時間（Universal Time Coordinated ）
 - GMT 格林威治標準時間 ( Greenwich Mean Time )
 
-雖然是兩種不同計算時間的方法，但所得的結果相差微小，因此大多會將兩者視為相同，例如 Chrome 瀏覽器取得的 Date 內容是用 GMT，ie 則用 UTC 表示，兩個瀏覽器同時取得本地時間都是一樣的(台灣 GMT+8/UTC+8)。關於兩者的詳細介紹可以參考這篇 - [到底是 GMT+8 還是 UTC+8 ?](https://pansci.asia/archives/84978)
+雖然是兩種不同計算時間的方法，但所得的結果相差微小，因此大多會將兩者視為相同，例如 Chrome 瀏覽器取得的 Date 內容是用 GMT，IE 則用 UTC 表示，兩個瀏覽器同時取得本地時間都是一樣的(台灣 GMT+8/UTC+8)。關於兩者的詳細介紹可以參考這篇 - [到底是 GMT+8 還是 UTC+8 ?](https://pansci.asia/archives/84978)
 
 <br>
 

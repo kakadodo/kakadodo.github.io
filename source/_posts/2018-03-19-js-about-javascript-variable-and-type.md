@@ -24,7 +24,6 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 廢話完就來介紹一些 JavaScript 的小觀念吧!
 
----
 
 #### 變數 (Variable)
 變數可以把他想成是一個空的容器，這個容器你可以給他取名字、放你想要放的內容，但容器本身宣告的位置很重要，如果把它放在特定的房間( local area )裡，那就只能在那房間使用它;如果放在連接每一處的走廊上( global area )，則哪裡都可以取得它。變數一般透過宣告來定義，當然也可以不宣告直接寫變數，如果你想造成不必要的麻煩..

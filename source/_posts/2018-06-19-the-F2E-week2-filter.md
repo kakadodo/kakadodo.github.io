@@ -17,17 +17,17 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week2.jpg
 我選擇的篩選器主題是 gogoro 的電池站查找，gogoro 很佛心有提供電池站資訊的 open data，做完剛好自己用的到~整個一舉兩得!
 (雖然官方app就可以找站點了 XDD)
 
-### 使用者故事:
+## 使用者故事:
 一個好的服務都會有個強大的篩選功能，方便客戶篩選搜尋出想要的資料，舉凡旅館、活動、電商、線上課程皆能觀看到其應用。
 開發者們可以自行尋找 OPEN API 或 JSON 假資料練習資料篩選功能。
 
-### 運用技術:
+## 運用技術:
 - Pug (html模板語言)
 - SCSS (css預處理語言)
 - Vue (前端框架)
 - Google Map API
 
-### 挑戰心得:
+## 挑戰心得:
 既然要篩選器，就要先對 open data 研究一番才行，gogoro 的 [API](https://wapi.gogoro.com/tw/api/vm/list) 滿好懂~參數的內容大致如下:
 - Id:站點ID
 - LocName:站點名稱

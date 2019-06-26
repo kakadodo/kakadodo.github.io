@@ -19,15 +19,15 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week4.jpg
 不過老師卻在這時候推坑 CSS grid，好像是個好機會來學新東西 🙋🙋🙋
 設計稿: <http://bit.ly/2lxMFQC>
 
-### 使用者故事:
+## 使用者故事:
 請設計產品品項列表，設計時請在瀏覽器兼容性範圍內設計出讓人耳目一新的 UI 設計。
 
-### 運用技術:
+## 運用技術:
 - Pug (html模板語言)
 - SCSS (css預處理語言)
 - CSS grid
 
-### 挑戰心得:
+## 挑戰心得:
 之前沒有接觸過 grid，秉著前端就是要對新技術見怪不怪的吸收精神，花了點時間學習 grid 的使用方式，下面提供兩個教學連結:
 - [CSS GRID - by Wes Bos](https://cssgrid.io/)
   大推 Wes Bos 的教學影片，講解清楚且 code 寫得超乾淨!!重點是課程免費!不看太對不起自己了~~

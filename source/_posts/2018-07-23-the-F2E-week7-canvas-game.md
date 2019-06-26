@@ -19,14 +19,14 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 設計稿: <https://bit.ly/2xDwA4W>
 
-### 使用者故事:
+## 使用者故事:
 給我生出個 canvas 射擊遊戲!!!
 
-### 運用技術:
+## 運用技術:
 - JavaScript canvas
 - ai2canvas plugin
 
-### 挑戰心得:
+## 挑戰心得:
 既然沒做出來~乾脆來介紹這次用的神奇插件 😆😆😆
 要在 canvas 上作畫，需要將繪製的物件利用數學的點、線、面三種方式來完成。也就是說我們需要用 JavaScript 一行一行把物件畫出來!對於數學邏輯有障礙的人如果碰到複雜的圖形一定會想哭的啊..
 

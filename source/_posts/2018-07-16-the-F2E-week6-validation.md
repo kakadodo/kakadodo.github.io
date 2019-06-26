@@ -16,16 +16,16 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week6.jpg
 
 設計稿: <http://bit.ly/2udrg3l>
 
-### 使用者故事:
+## 使用者故事:
 實現表單驗證功能，使用者體驗可以得知輸入的內容是否正確
 
-### 運用技術:
+## 運用技術:
 - Pug (html模板語言)
 - SCSS (css預處理語言)
 - Vue
 - HTML5 form validation
 
-### 挑戰心得:
+## 挑戰心得:
 要做表單驗證馬上想到可以用 Vue.js，對 input 做 model 的資料綁定，就不需要另外綁一堆監聽 哈哈(懶人模式ing)
 
 資料驗證則嘗試用 HTML5 原生的表單驗證功能，HTML5 有針對表單元件追加不少用來驗證、限制輸入內容的屬性，當使用者觸發 submit 時，會檢查欄位是否符合標準，再對欄位加上 CSS 的偽類選擇器 `:valid` 及 `:invalid`，這樣可以針對選擇器寫自訂的樣式，做出提示使用者輸入的訊息!Bootstrap 4 有對 HTML5 的表格驗證做自定義的樣式設定，所以這次就套用它的設定來寫表單啦!

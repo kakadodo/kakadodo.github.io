@@ -4,10 +4,11 @@
 
 # Site
 title: 你今天打肉了沒?
-subtitle: 驀然回首，驚覺寫最多次的 code 是 /* console.log() */
-description: 肉咖前端的學習筆記，努力把肉打掉吧!!
+subtitle: 肉咖前端的學習筆記，努力把肉打掉吧!!
+description: 驀然回首，驚覺寫最多次的 code 是 /* console.log() */
 author: Chelsea Chang
-language: zh-tw
+# language: zh-TW
+language: en
 timezone:
 
 # URL
@@ -72,7 +73,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: tranquilpeak
+# theme: tranquilpeak
+theme: cactus
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

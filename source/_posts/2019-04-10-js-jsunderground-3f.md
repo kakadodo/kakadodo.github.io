@@ -17,12 +17,12 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 [六角學院提供的設計稿連結](https://xd.adobe.com/spec/9dc81ec7-dd2e-46f6-5f76-5a64df413c97-ebf9/screen/3c3e8e4f-df7d-480d-8236-e60803d4645f/002-calculator/)
 
-### 運用技術:
+## 運用技術:
 - Vue.js
 - [Numeral.js](http://numeraljs.com/)
 - SCSS
 
-### 挑戰心得:
+## 挑戰心得:
 好痛苦啊...這關，到底為何計算機會在第三關就出現啊 XDD
 這關除了要把計算機給寫出來之外，也有額外的過關條件【自學一個你原本不太會的技巧】，剛好最近在群組看到有人分享處理數字格式的 JS 套件，就趁這機會來試試看了~(擺明想偷懶)
 

@@ -20,17 +20,17 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week8.jpg
 設計稿: <http://bit.ly/2uX1m47>
 影片模擬動線: <https://www.youtube.com/watch?v=xViDpVyIBoU>
 
-### 使用者故事:
+## 使用者故事:
 1. 一開始直接進場到第一個題目
 2. 點選第一題題目完，自動轉場到第二個題目，以此類推
 3. 33秒後必須一直觸發滑鼠滾輪，滾到直到看到答案。
 
-### 運用技術:
+## 運用技術:
 - Pug
 - CSS Animation
 - Parallax Skrollr Plugin
 
-### 挑戰心得:
+## 挑戰心得:
 
 看了這次直播主的介紹才知道有 TweenMax 這款好用的動畫函式庫，雖然也需要一個口令一個動作去描述..但用 JavaScript 寫指令總是比用 CSS 寫 animation 流暢啊 QQ
 但直播主還沒介紹前就開始寫了..所以成品是用最原始的 transition + animation 完成

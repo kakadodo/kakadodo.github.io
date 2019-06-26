@@ -20,12 +20,12 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week9.jpg
 
 設計稿: <https://xd.adobe.com/spec/912f916f-0b05-49ae-66e8-b42b299c19b7-e71e/>
 
-### 運用技術:
+## 運用技術:
 - Pug
 - Flexbox
 - Vue.js
 
-### 挑戰心得:
+## 挑戰心得:
 這次的設計稿是 Adobe XD 的版本，雖然使用上滿不習慣的..但畢竟支援多平台!所以我要用支持鼓勵的心態去面對它!!
 愛用 Adobe 的產品~希望 XD 功能可以越來越強大!
 

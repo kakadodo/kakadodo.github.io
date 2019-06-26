@@ -36,7 +36,7 @@ jsPDF 滿強大的!語法直觀、支援分頁功能，chrome 及 firefox 都可
 
 # @media print 相關設定
 
-#### 兩種撰寫 @media print 的方式:
+## 兩種撰寫 @media print 的方式:
   1. CSS 檔分為 screen 及 print 兩種格式。
     ```html
     <link href="screen.css" media="screen">
@@ -54,7 +54,7 @@ jsPDF 滿強大的!語法直觀、支援分頁功能，chrome 及 firefox 都可
     }
     ```
 
-#### 列印模式下的頁面配置( @page ):
+## 列印模式下的頁面配置( @page ):
 @page 是列印模式下對頁面配置的特殊屬性，主要可設定頁面的 size, margin , orphans 和 widow。
   - size 可直接指定寬度與高度(搭配單位 mm 或 cm 皆可)、或是通用尺寸( A4、A5.. )，此外可設定頁面的呈現方向( portrait / landscape )
   - margin 就是一般頁面的邊距(常用 word 的人應該不陌生 :D )
@@ -68,7 +68,7 @@ jsPDF 滿強大的!語法直觀、支援分頁功能，chrome 及 firefox 都可
 }
 ```
 
-#### 元素分頁的斷點設定:
+## 元素分頁的斷點設定:
 元素後要被分頁嗎? page-break-after : auto | always | avoid | left | right
 元素前要被分頁嗎? page-break-before : auto | always | avoid | left | right
 元素本身要被分頁嗎? page-break-inside : auto | avoid
@@ -101,7 +101,7 @@ div.pageBlock{
 }
 ```
 
-#### 其他通用設定:
+## 其他通用設定:
 - 字體大小的單位建議改成 pt 以符合印刷設定
 - 非必要列印的內容( nav、 video.. )就設 `display: none`
 - img 寬度設為 `max-width: 100%`
@@ -138,7 +138,7 @@ thead{
 }
 ```
 
-#### 為了列印 PDF 的特殊設定:
+## 為了列印 PDF 的特殊設定:
 因 chrome 列印模式下會清除部分樣式讓畫面變簡潔，因此背景顏色及背景圖片都會取消顯示，雖然在列印介面下可以手動勾選是否顯示背景圖形，但前端就是要想辦法滿足人客的惰性..因此找到了可以強制設定列印模式時依然顯示背景圖的屬性 σ`∀´)σ
 ```css
 body{

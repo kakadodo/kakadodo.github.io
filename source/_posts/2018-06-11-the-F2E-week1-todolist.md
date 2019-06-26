@@ -20,7 +20,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week1.jpg
 
 第一週的主題是 todolist，雖然這題目真的做好多次了 XD 但是做完還是花了不少時間...
 
-### 使用者故事:
+## 使用者故事:
 1. 能夠紀錄每天的待辦事項
 2. 可標示每個待辦優先重要級別，預設為無。
 3. 可拖拉待辦事項，調整排序。
@@ -32,14 +32,13 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week1.jpg
 這次時間比較不夠，沒有自己想 UI，盡可能重現原本[設計稿](https://bit.ly/2HfaR2M)的樣子。
 使用者故事也盡量做到都有..只差在 file 的檔案上傳是個空殼 XDD 實際不會有任何存檔的功能。
 
-### 運用技術:
+## 運用技術:
 - Pug (html模板語言)
 - SCSS (css預處理語言)
 - jQuery (主要的 js 應用)
 - HTML5 localStorage (資料庫儲存)
 
-### 挑戰心得:
-
+## 挑戰心得:
 切版方面搭配 flexbox 其實咻咻咻一下就可以完成了!比較特別的使用方式應該是列表的一些小功能顯示吧!因為要讓每筆清單都可以有自己的操作(編輯、設為重要、已完成等..)，所以會有幾個按鈕的操作顯示切換，這塊我是使用 checkbox 來達成，但後期有衍生一些小問題出來..
 
 首先 checkbox 要以自訂樣式來呈現，所以使用了 `-webkit-appearance: none;` 來取消瀏覽器預設的 checkbox 樣式，CSS 有針對 checkbox 的 :checked 狀態來做外觀上的顯示切換，本想說到時再搭配 jQuery 判斷當下的狀態是不是 checked ，再決定要執行哪一部指令就好。結果在撰寫時才發現， cehckbox 的 checked 狀態改變需要透過實際操作觸發才會真的有效果....因此我用 jQuery 來動態改變屬性值時，checked 的值確實有改變，但 CSS 外觀不會變....囧rz
