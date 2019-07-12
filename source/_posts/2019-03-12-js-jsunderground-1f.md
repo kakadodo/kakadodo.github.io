@@ -3,9 +3,10 @@ title: JS 地下城挑戰心得 1F - 九九乘法表
 keywords:
   - JavaScript, JS 地下城
 categories:
-  - JavaScript, JS 地下城
+  - JS 地下城
 tags:
-  - JavaScript, JS 地下城
+  - JavaScript
+  - JS 地下城
 thumbnailImagePosition: left
 date: 2019-03-12 09:00:00
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190312-js-jsunderground-1f.jpg?alt=media&token=e8bbf4b9-eb63-488d-9d11-24d043264089

@@ -5,7 +5,8 @@ keywords:
 categories:
   - Vue Plugins
 tags:
-  - Vue Plugins, Vue
+  - Vue Plugins
+  - Vue
 thumbnailImagePosition: left
 date: 2019-05-20 15:00:00
 thumbnailImage: https://vue-meta.nuxtjs.org/vue-meta.png

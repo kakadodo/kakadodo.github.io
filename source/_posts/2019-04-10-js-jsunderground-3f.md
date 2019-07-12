@@ -3,9 +3,10 @@ title: JS 地下城挑戰心得 3F - 計算機
 keywords:
   - JavaScript, JS 地下城
 categories:
-  - JavaScript, JS 地下城
+  - JS 地下城
 tags:
-  - JavaScript, JS 地下城
+  - JavaScript
+  - JS 地下城
 thumbnailImagePosition: left
 date: 2019-04-10 15:00:00
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190410-js-jsunderground-3f.jpg?alt=media&token=6cfe0532-3eb7-4e4b-bc2a-e92ebaf9cf8d

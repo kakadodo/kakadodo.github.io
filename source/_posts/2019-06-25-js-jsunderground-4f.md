@@ -3,9 +3,10 @@ title: JS 地下城挑戰心得 4F - 時區
 keywords:
   - JavaScript, JS 地下城
 categories:
-  - JavaScript, JS 地下城
+  - JS 地下城
 tags:
-  - JavaScript, JS 地下城
+  - JavaScript
+  - JS 地下城
 thumbnailImagePosition: left
 date: 2019-06-25 14:00:00
 thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190625-js-jsunderground-4f.jpg?alt=media&token=a246df01-1436-4d58-a9f2-e72d2ce080ec
