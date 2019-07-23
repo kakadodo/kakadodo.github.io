@@ -1,5 +1,5 @@
 ---
-title: The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. pomodoro
+title: The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro
 keywords:
   - 番茄鐘, Vue.js, CSS Animation, todolist
 categories:
@@ -13,7 +13,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/2nd-week1.jpg
 
 這次參賽規模好大，除了有專門的作品投稿網站，還可以自行挑選不同 UI 設計師作的設計稿當主題，慶幸這次是選工程師類型，跪著看設計稿啊..
 <!-- excerpt -->
-![blog image](https://kakadodo.github.io/theF2EChallange/img/2nd-week1.jpg "Week 1. pomodoro")
+![blog image](https://kakadodo.github.io/theF2EChallange/img/2nd-week1.jpg "Week 1. Pomodoro")
 
 這次主題根本是第一屆第一週的升級版啊~~
 除了 todolist 還要做計時器，洧杰老師真得很會挖坑耶😱
