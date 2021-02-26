@@ -8,13 +8,13 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2019-01-02 09:00:00
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 我的天啊!不知不覺就這樣到了 2019 年...時間真得過很快~
 收收連假的心趕緊來寫一篇~畢竟之後有更"盛大"的過年要來 哈(整個文不對題)
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 "閉包"跟上次介紹的 IIFE 都屬於 JavaScrupt Function 比較進階的概念，尤其是這個命名...一開始看到這名詞真的會滿臉黑人問號 🤷🏿‍🤷🏿‍🤷🏿‍
 

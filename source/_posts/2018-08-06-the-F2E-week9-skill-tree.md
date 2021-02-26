@@ -30,7 +30,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/week9.jpg
 愛用 Adobe 的產品~希望 XD 功能可以越來越強大!
 
 看完 workflow 後，大概有兩個方向去做，一個是版面雖然看起來整齊但層次有點給他豐富..這塊決定靠 flexbox 來解決!另一個就是這樣的主題如果要完成功能面勢必需要有資料呀呀呀~~~~所以在開始切版前花了一點時間在寫假資料..
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-08-06-the-F2E-week9-skill-tree-1.jpg?alt=media&token=03408c70-a995-40fd-b62e-3acf8e1214a9 "技能樹資料結構")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-08-06-the-F2E-week9-skill-tree-1.jpg?alt=media&token=0a067f66-36e0-4b8b-8561-92ae77a3c7ed "技能樹資料結構")
 因為技能樹是有關卡限制的，需要先滿足前一關的所有推薦項目，下一個關卡才會開放，因此結構上面會先以各個大關卡做區分，之後再針對每一個項目設定"是否完成"的屬性，之後用 Vue 載入資料時，就可以跑迴圈去判斷當前這關是不是所有推薦項目都完成了!
 
 版面使用 flexbox 雖可以快速達成設計稿的樣子，但在做的過程中有發現到一個問題，應該是我資料設定不佳XD，本來打算用 flex-wrap 屬性來排列每個技能格，但資料結構在設計時是以大關卡區分，關卡中的技能格就沒再另外做分支...如果用 flex-wrap 就無法達成設計稿要的排列順序(畫面上看起來技能格是每三個排成一排來顯示，但 JavaScript 區的第一排技能格卻只有兩個= =)。最後只好用途法煉鋼的方式來寫 Vue 的 html 模板，這件事告訴了我們資料結構規劃好，之後寫 code 沒煩惱。(?)

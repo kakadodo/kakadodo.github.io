@@ -8,14 +8,14 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-02 08:56:44
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 勞工節放完啦，又是寶寶心悶的開始~~
 人森就跟迴圈一樣，過了一個假日就開始期待下一個假日
 ━(ﾟ∀ﾟ)━( ﾟ∀)━( ﾟ)━( )━( )━(ﾟ)━(∀ﾟ)━(ﾟ∀ﾟ)━
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 JavaScript 中有不少迴圈的應用，之前 Array 篇有好幾種方法就是迴圈的進階版，可以更簡潔的表達 code 的目的及生成出想要的結果，不過今天要寫的是最早開始就存在的迴圈功能。元老級還是有一定地位的!!
 

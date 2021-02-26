@@ -8,13 +8,13 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-12-25 09:00:00
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 IIFE 算是 JavaScrip function 中很重要的觀念跟運用!搞懂的話可是會讓功力大昇啊~~
 突然發現自己紀錄的順序也太跳了吧 XDD 都寫到 async await 了居然又跳回最早開始就有的功能...
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 平常在寫 code 時，可能是想到甚麼寫甚麼的概念，照腦袋所想的順序 var 很多變數或是宣告很多 function，這種寫法雖然沒有甚麼不對，但當程式碼一多時...很可能就會出現 "不好管理" 以及 "重複命名" 或是 "結果好像出乎意料?" 的狀況發生。由於 JavaScript 最小的私有作用域在 function，一般寫在最外圍的變數其實是很危險的~一不小心可能值就被改變了也沒注意到。如果有個方法可以讓變數處於被保護的狀態，只能被有關的功能給修改或取用的話那該有多好啊~~
 

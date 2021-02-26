@@ -9,12 +9,12 @@ tags:
   - JS 地下城
 thumbnailImagePosition: left
 date: 2019-03-26 17:00:00
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190326-js-jsunderground-2f.jpg?alt=media&token=921d0825-f518-444d-b339-aae9d582122c
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190326-js-jsunderground-2f.jpg?alt=media&token=b060449c-7b6c-4ce2-ad93-b697cb1aca6f
 ---
 
 下班前是該來刷一下進度了，這種攻城速度在古代應該會秒死 :p
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190326-js-jsunderground-2f.jpg?alt=media&token=921d0825-f518-444d-b339-aae9d582122c "JS 地下城挑戰心得 2F - 時鐘")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190326-js-jsunderground-2f.jpg?alt=media&token=b060449c-7b6c-4ce2-ad93-b697cb1aca6f "JS 地下城挑戰心得 2F - 時鐘")
 
 [六角學院提供的設計稿連結](https://xd.adobe.com/spec/43be2f02-1d11-4dfb-4e3d-5c4df1df3896-358f/screen/e7b79d5d-37bb-41f7-8ca2-9df3811589e9/003-clock/)
 

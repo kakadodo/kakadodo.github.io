@@ -9,12 +9,12 @@ tags:
   - ES6
 thumbnailImagePosition: left
 date: 2018-09-14 09:01:58
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 JavaScript 中創建物件的正統用法是使用建構式，建構式跟原型息息相關，如果沒搞懂原型概念的話看了只會覺得霧煞煞。而 ES6 新出的 Class 類別其實是建構式的語法糖，原理來說其實並無改變，只是撰寫方式更為簡潔有條理。
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 介紹 Class 之前，先回顧一下原本建構式，寫法跟創建 function 很像，不過為了容易辨別與 function 之間的差異，命名會是大寫駝峰式，而 function 內部則是定義建構式的屬性及方法。如果方法是共用給物件實例的話，則會寫在建構式的 prototype 中而不是建構式本身，因為這樣會造成不必要的記憶體產生。
 ```js

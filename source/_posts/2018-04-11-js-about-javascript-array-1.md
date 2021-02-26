@@ -8,12 +8,12 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-04-11 11:44:28
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 啊\~\~\~要養成寫 blog 的習慣好難~一開始就認定自己不可能每天都寫(腦容量不夠)，想說好歹一周要產出一篇..結果碰到一個連假就 GG 了，連假真是甜蜜的惡魔~~💘💘💘
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 陣列及物件這兩位同胞在一開始接觸 js 時，帶來了不少磨難與困惑..看起來很像，用起來也很像，更不用說兩者之間還可以互相寄生(?)，甚至歸根到底都是同種來源(Object)..根本黑人問號 at all
 這篇就先來寫關於陣列的二三事~
 

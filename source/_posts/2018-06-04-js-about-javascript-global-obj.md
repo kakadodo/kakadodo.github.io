@@ -8,12 +8,12 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-06-04 08:45:37
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 使用 JavaScript 創建各種型態的資料時，資料本身已經有許多方法可使用，之前提到是因為每個創建出來的實例可以藉由 prototype 來追循到上層擁有的方法。這次要來寫的就是這些上層階級(?)啦!它們都是 JavaScript 的全域物件。
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 #### String - 處理字串型別資料
 - `.length` : 取得字串的總長度(含符號及空白)

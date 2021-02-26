@@ -8,13 +8,13 @@ tags:
   - CSS
 thumbnailImagePosition: left
 date: 2019-01-08 09:00:00
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=4f09cf23-48dd-4727-8006-9fdbd4f1b638
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b
 ---
 
 驚覺自己有好一陣子沒在碰樣式了，怕會忘光的恐懼下...來回歸初心撰寫 CSS 紀錄 XD
 以目前最常使用的功能來說大概非 Flex 莫屬吧!
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=4f09cf23-48dd-4727-8006-9fdbd4f1b638 "好加在有 CSS")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b "好加在有 CSS")
 
 相信現在還是有不少人在使用 float 排版，雖然沒甚麼不好~但要特別處理 float 之後的 clearfix 實在有點煩，有時候會忘記加導致 div 整個跑掉(看到畫面跑掉就覺得煎熬)，有些比較特殊的版面也較難靠它達成。
 
@@ -22,7 +22,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 不過現實面還是得考慮，由於該屬性是比較後期才出現(CSS3)，某萬惡瀏覽器早期版是不支援的，不過...真得還有人在用嗎? 😭
 
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css-flex-1.jpg?alt=media&token=ee93b61f-500a-4eb9-b92d-7bba6d160956 "各瀏覽器對 Flex 的支援度")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css-flex-1.jpg?alt=media&token=41b38910-c91d-4e7d-86c4-b726543df35e "各瀏覽器對 Flex 的支援度")
 
 上圖截自 [Can I Use](https://caniuse.com/#search=flex) 提供各瀏覽器對 Flex 的支援度一覽，格子呈現紅色就表示不支援該功能，淺綠色表示只支援部分功能，要完全的草綠才是全支援喔!拜託用 IE 的好歹轉用 Edge 吧~官方本身都說不再維護了ㄋㄟ...(碎念)
 

@@ -8,13 +8,13 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-08-27 09:01:58
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 身為前端的一份子，使用 Ajax 取得資料應該是必經過程吧! 由於現在越來越多優化的套件可以使用，原生 JavaScript 的語法反而快忘光了!
 這篇就來重溫紀錄一下最開始接觸的底層語法 XMLHttpRequest :D
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 Ajax (Asynchronous JavaScript and XML，AJAX) 非同步 JavaScript 及 XML，其原理是讓 Web 應用程式能快速、即時更動介面及內容，不需要重新讀取整個網頁，讓程式更快回應使用者的操作。雖然這個名稱提到的是 XML，但以現代的資料處理來說，使用輕量化的 JSON 格式更為方便且通用!而 Ajax 當中的核心物件就是 XMLHttpRequest 啦!
 
@@ -39,7 +39,7 @@ xhr.addEventListener("load", function(){
 xhr.open("GET", "https://randomuser.me/api/");  //開啟一個請求
 xhr.send();  //送出請求
 ```
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-08-27-js-about-javascript-XMLHttpRequest-1.jpg?alt=media&token=bbd8e971-ddec-4d29-be28-fa60dbcf22ea "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-08-27-js-about-javascript-XMLHttpRequest-1.jpg?alt=media&token=943c5e80-da19-4fe5-964b-919bb8f6a712 "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 當 XMLHttpRequest 接收完回傳的內容，便會觸發 load 事件，我們便可以藉由 onload 的 callback function 取得回傳資料來做後續動作。而回傳的資料除了 data(responseText) 本身外，也包含了這筆請求的相關狀態。
 - readyState: XMLHttpRequest 請求的狀態。

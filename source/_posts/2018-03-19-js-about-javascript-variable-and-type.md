@@ -8,13 +8,13 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-03-19 09:38:39
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 記得前年想不開決定踏入前端的領域時，最害怕的就是寫腳本語言這件事。搞懂 html 及 css 就花了一段時間，還是看在可以產生出美美的畫面才奮發去學 XD
 但可惜的就是再美的畫面，不能互動~沒有功能~就是少了點甚麼，更重要的是...不會 JavaScript 找的到工作嘛你!到頭來還是得面對啊~孩子
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 自己學 JavaScript 的步驟不太一樣，先從 native JavaScript 看起，後來才接觸 jQuery，印象最深刻的就是翻開歐萊禮那厚厚一本的 "深入淺出 JavaScript" ，看得我似懂非懂，好像抓到了重點，但又不知道怎麼活用，看完後只是徒增恐懼感啊!! ∑(✘Д✘๑ ) 
 (不過這系列的 jQuery 倒是滿淺顯易懂的，所以應該是我慧根低...)
 

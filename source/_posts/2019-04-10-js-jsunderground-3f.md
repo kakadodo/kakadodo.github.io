@@ -9,12 +9,12 @@ tags:
   - JS 地下城
 thumbnailImagePosition: left
 date: 2019-04-10 15:00:00
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190410-js-jsunderground-3f.jpg?alt=media&token=6cfe0532-3eb7-4e4b-bc2a-e92ebaf9cf8d
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190410-js-jsunderground-3f.jpg?alt=media&token=dddba219-1762-4169-9b63-49e939956c5b
 ---
 
 寫計算機寫到懷疑人生...好想回到國小重新上數學課 💀
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190410-js-jsunderground-3f.jpg?alt=media&token=6cfe0532-3eb7-4e4b-bc2a-e92ebaf9cf8d "JS 地下城挑戰心得 3F - 計算機")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190410-js-jsunderground-3f.jpg?alt=media&token=dddba219-1762-4169-9b63-49e939956c5b "JS 地下城挑戰心得 3F - 計算機")
 
 [六角學院提供的設計稿連結](https://xd.adobe.com/spec/9dc81ec7-dd2e-46f6-5f76-5a64df413c97-ebf9/screen/3c3e8e4f-df7d-480d-8236-e60803d4645f/002-calculator/)
 

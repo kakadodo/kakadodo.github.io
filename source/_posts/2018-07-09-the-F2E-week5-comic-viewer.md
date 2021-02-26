@@ -87,7 +87,7 @@ $('navWrapper')[0].scrollLeft = $('.nav-list')[4].offsetLeft - $('navWrapper')[0
 //要scroll的距離 = 縮圖離視窗的距離 - 外層容器離視窗的距離 - 外層容器寬度的一半 + 縮圖自身寬度的一半
 ```
 <附上圖解說明，可以觀察滾軸的位置變化>
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-09-the-F2E-week5-comic-viewer.png?alt=media&token=d6979946-0e81-441c-acf3-8b2d955755e6 "scroll left 算法圖解")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-09-the-F2E-week5-comic-viewer.png?alt=media&token=418f0021-9a4b-44d2-ad00-ae87192da6f2 "scroll left 算法圖解")
 
 
 作品網址: <https://kakadodo.github.io/theF2EChallange/comic-viewer.html>

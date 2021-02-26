@@ -11,13 +11,13 @@ categories:
 tags:
   - Hexo
   - GitHub
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=000d57fc-2758-49e4-a640-aba5c780ee0b
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=ad649ebb-6eaa-4d78-8bf3-c599e26cfd82
 ---
 
 各位觀眾!!!
 終於讓 blog 上線了!!! (腦內開啟無限循環灑花系統 ｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡ )
 <!-- excerpt -->
-![hello hexo image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=000d57fc-2758-49e4-a640-aba5c780ee0b "建置 Hexo 及佈署到 GitHub Pages")
+![hello hexo image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=ad649ebb-6eaa-4d78-8bf3-c599e26cfd82 "建置 Hexo 及佈署到 GitHub Pages")
 
 前陣子在 Facebook 看了[卡斯柏](https://www.facebook.com/WccCasper/)老蘇的線上直播教學[使用 Hexo 打造部落格](https://www.facebook.com/WccCasper/videos/486603828402512/)後，一直想找個時間來現學現做自己的部落格，當作自己在前端路程打滾中學到碰到被雷到的心得筆記，趁最近有點小空來嘗試一下，但是 ~~~ 果然看得容易，做得要人命。🙄
 
@@ -80,7 +80,7 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
   $ cd /c/users/<your_name>
   $ ssh-keygen -t rsa -b 4096 -C <"your_email@example.com">
   ```
-  ![SSH Key 產生圖例](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo-2.jpg?alt=media&token=296513dd-b5d2-4049-b80c-d199291bd115 "SSH Key 產生畫面")
+  ![SSH Key 產生圖例](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo-2.jpg?alt=media&token=926c9207-1ba3-41c2-b0dc-048623492dad "SSH Key 產生畫面")
 
   用編輯器打開剛剛產生的 id_rsa.pub 檔案，複製裡面的代碼( Public Key )，這串落落長的代碼用來讓我們的電腦可以跟 GitHub 遠端連接，可想像成是古時候的打暗號??
 

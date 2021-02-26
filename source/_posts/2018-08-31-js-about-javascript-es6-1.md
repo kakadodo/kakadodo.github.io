@@ -9,14 +9,14 @@ tags:
   - ES6
 thumbnailImagePosition: left
 date: 2018-08-31 09:01:58
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 現在支援 ES6 語法的瀏覽器越來越多了~~不趕快納入必備技能怎麼行!
 ES6 有不少 "超偷懶" 語法，根本在開外掛模式 XD
 這篇就來介紹如何利用 ES6 的 **字串模板**、 **展開剩餘**、 **解構賦值** 來 write less do more 啦!
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 在開始撰寫 ES6 前要注意一下，雖然現在的瀏覽器大多支援 ES6 語法，如要考慮到舊版瀏覽器或是某萬惡瀏覽器，還是得透過一些編譯的工具將 ES6 的語言轉為舊版瀏覽器可用的語法才行。自己是使用 [Babel](https://babeljs.io/) 這款工具來編譯 ES6 的語法，相關操作可以參考官網教學，現在一些主流的編輯器也會有擴充功能可以進行編譯，諸如此類的一堆東風可借~好 ES6，不用嗎? 😍
 

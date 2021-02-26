@@ -8,12 +8,12 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-08-20 08:45:37
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 Regex 應該是 coding 世界中的隱藏大魔王吧! 不小心誤觸很容易遍體麟傷，但打贏了經驗值會飆升就是了..
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 Regex (Regular Expression 正規表示式)，原理是利用它規範的一系列規則來找出符合語句的字串。通常會用它來進行字串檢索、驗證或是替換某些條件下的內容。
 

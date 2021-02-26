@@ -9,13 +9,13 @@ tags:
   - ES6
 thumbnailImagePosition: left
 date: 2018-12-04 09:01:58
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 覺得這篇內容應該是自己最不可能用到的功能了 XD
 但都接觸到了就記錄一下吧~
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 這陣子一直在把之前"收集"起來的教學影片慢慢消化...發現自己真的發了瘋的狂註冊內容都差不多的課程 XD ( Udemy 免費跟促銷真得太過分了!!) 但講師不同就覺得好像會獲得不同收穫...還是默默看起來了
 

@@ -9,14 +9,14 @@ categories:
 tags:
   - media print
   - HTML to PDF
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-03-30-css-alink-pdf.jpg?alt=media&token=10b38439-fd8d-4329-b1c0-9ca49e1e2d38
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-03-30-css-alink-pdf.jpg?alt=media&token=5f02e652-0ab8-490c-aeae-a7d21de99275
 ---
 
 這陣子一直在研究專案的畫面呈現，如同之前[關於 @media print 的二三事..](2018/03/13/css-media-print-setting)提到的，人客希望打包整個網頁變成 PDF..於是開始了 try 到抓狂的實驗路程 ┏(*д*┏)┓))
 
 <!-- excerpt -->
 
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-03-30-css-alink-pdf.jpg?alt=media&token=10b38439-fd8d-4329-b1c0-9ca49e1e2d38 '神奇的 < a > 錨點 - 網頁轉存 PDF 後的畫面跳轉功能')
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-03-30-css-alink-pdf.jpg?alt=media&token=5f02e652-0ab8-490c-aeae-a7d21de99275 '神奇的 < a > 錨點 - 網頁轉存 PDF 後的畫面跳轉功能')
 
 由於專案的方向是要讓使用者可以自行決定要呈現的畫面內容量，無法確定實際會產生的區塊數，因此就有個大大大大大~問題，當轉存成 PDF 後，該怎麼讓使用者依然能方便的找到他們想看的區塊?一想到這點腦子就卡住了，怎麼想都覺得"就用滑鼠跟手指慢慢划，慢慢找吧 哈哈"，然後我就會去領便當了...
 
@@ -28,10 +28,10 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 
 - 原始碼
 
-  <iframe width="100%" height="300" src="//jsfiddle.net/a4wdjnh7/78/embedded/js,html,css/dark/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+  <iframe width="100%" height="300" src="//jsfiddle.net/a4wdjnh7/78/embedded/js,html,css/dark/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0" loading="lazy"></iframe>
 
 - 另存後的 PDF 檔
-  <iframe src="2018-03-30-css-alink-pdf.pdf" width="100%" height="500" frameborder="0"></iframe>
+  <iframe src="2018-03-30-css-alink-pdf.pdf" width="100%" height="500" frameborder="0" loading="lazy"></iframe>
 
 這個範例比較特別的是，PDF 列印的尺寸有用 JavaScript 控制，不確定內容長度的情況下，尺寸如果寫死，可能會造成分頁切割時的破版狀況，雖然可以用 CSS 的 `page-break` 屬性來避免區塊被分割，但列印出來的畫面就會不時地出現一片留白..怎麼說服自己都覺得這樣會被嫌棄..
 因此才想到如果可以由 JavaScript 幫忙判斷畫面渲染完的總長度，再動態設定 CSS 的 page size。不過這想法因為不知道怎麼用 js 寫 media print 的 CSS 卡很久，直到這篇[感人的發問](https://stackoverflow.com/q/46202655/9330569)解救了我!!

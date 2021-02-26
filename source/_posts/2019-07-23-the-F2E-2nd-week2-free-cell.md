@@ -48,7 +48,7 @@ thumbnailImage: https://kakadodo.github.io/theF2EChallange/img/2nd-week2.jpg
 這次採用的設計稿最吸引人的莫過於可愛的像素圖示，因此盡可能忠實的呈現這些可愛的小圖。
 製作過程中也順便學習到一個**文字加上 border** 的 CSS 技巧，我是參考 CSS-TRICKS [Adding Stroke to Web Text][textBorder] 來寫的。
 文章中有提到字型也可以當作一種向量圖來看待，不論畫面放多大都不會失真就是其特色，因此按照常理推論，字型應該也具有可以加上 *stroke* 的功能，不過瀏覽器支援度需求高，且需要搭配 -webkit- 前綴使用。
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190723-the-F2E-2nd-week2-free-cell-1.jpg?alt=media&token=6f40cd32-b493-483c-b45f-e800365ba8bc "Can I Use - Text Stroke")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190723-the-F2E-2nd-week2-free-cell-1.jpg?alt=media&token=4eb06c2b-2fd6-4cbe-a697-4cd6ecb866ac "Can I Use - Text Stroke")
 
 保險一點的話，可以使用"模擬 Stroke"的方式來製作文字外框，雖然寫法有點 tricky，但能寫出效果就是好 code 😆
 ```css

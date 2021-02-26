@@ -48,16 +48,16 @@ thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-2.jpg?alt=media&token=9e93b6c8-c402-4797-bb02-d07b5674476c "step 2")
 
 1. 轉存時，選擇 檔案 -> 轉存 -> 轉存為 -> 存檔類型選擇 `<canvas>`，之後就會在指定的資料夾產生 html 文件。(可能產生繪製不出來的 png 圖)
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-3.jpg?alt=media&token=79e8df8f-2602-4091-9acb-e104597bc4f6 "step 3")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-3.jpg?alt=media&token=16889cef-7e07-48e7-b90e-baa2ec107fe1 "step 3")
 
 1. html 檔打開就會看到生成好的 canvas 啦!!!整個無違和~
 ![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-4.jpg?alt=media&token=4b2fb2c5-136b-4a3a-be1a-1a272119d1cd "step 4")
 
 1. 檢查原始碼可以發現，插件會依照命名產生相對應的 function，並在 function 中描繪 canvas 圖形，再於 `init()` 調用這些 function 把圖形繪製出來。
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-5.jpg?alt=media&token=55af78ad-4df6-4b66-8989-8259839b04ea "step 5")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-5.jpg?alt=media&token=4d8c2d2c-5a6f-4876-891d-960a0e92938e "step 5")
 
 1. 如果轉出時有產生 png 圖檔，插件會以載入的形式把圖檔放到 html 中，再用 canvas 去抓圖檔作繪製。
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-6.jpg?alt=media&token=8a1cf5d2-31ed-4828-a457-d9936092c627 "step 6")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-07-23-the-F2E-week7-canvas-game-6.jpg?alt=media&token=909ac729-d058-42d7-9462-03a0facbb7af "step 6")
 
 單純的 canvas 繪圖，用這套插件一下就可以做出來了~超方便!不過如果是要作遊戲或者比較複雜的動畫，感覺還是用遊戲框架或是自己手寫比較好...之前在嘗試時就發現即使是簡單的圓形，插件可能會選擇以 curve 繪製的方式來取代 arc。看到時還困惑我到底是畫了甚麼複雜的圖XDD
 

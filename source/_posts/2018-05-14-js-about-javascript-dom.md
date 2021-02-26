@@ -8,14 +8,14 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-14 08:53:04
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 各位母親們，母親節快樂!!這次自家的哥哥大手筆請客，整個假日就是吃好吃滿的概念..(撐)
 這回來寫 JavaScript 的 DOM 元素，瀏覽器會將 html 的內容轉換成各個 DOM 元素，讓 JavaScript 可以巡訪及操作。
 DOM 就像一個大家庭~彼此之間的關係是有跡可循滴~熟的話可以直接找到本人，不熟的話就要透過親戚間的巡訪才能找到~就是個小型社會嘛!
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 JavaScript 提供以下幾種方式可以直接找到指定的 DOM 元素:
 

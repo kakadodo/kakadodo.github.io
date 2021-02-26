@@ -9,12 +9,12 @@ tags:
   - ES6
 thumbnailImagePosition: left
 date: 2018-09-25 09:01:58
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 ES6 新增了 Promise 物件可以方便包裝非同步程式，而 Fetch 則是經過包裝後的 Promise，專門用來處理非同步資料，寫法有點像 jQuery 的 ajax，但卻是原生的 JavaScript 語法。
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 ## Promise
 使用 Promise 物件可以讓我們對非同步程式的執行結果更有掌握度(成功 or 失敗狀態都可取得)，也可避免恐怖的 callback hell 產生，其關鍵在於建立出來的 Promise 物件可由 `.then()` 這個方法來不斷串接下一步要做的事情，如此一來可讓程式碼都維持在單層的情況下而不是一層包著一層來撰寫。

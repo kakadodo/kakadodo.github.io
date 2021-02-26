@@ -8,12 +8,12 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-12-18 09:00:00
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 JavaScript 中使用到 this 是很常見的事情，但偶爾我們會需要用到一些"偷吃步"的方式來達成某些功能，這時候可能就需要將 this 的對象重新指向..
 <!-- excerpt -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 通常會改變 this 的對象可能是某個物件中的方法我們想要在別處來調用，但因為物件的 this 會指向物件本身，如果別的物件想要使用的話，就會需要將 this 的指向改變到自己身上，這時就會借用到 Function prototype 內建的三種方法: **call、apply、bind**。
 

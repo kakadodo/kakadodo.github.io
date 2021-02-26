@@ -8,12 +8,12 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-04-12 09:23:15
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 承皆上回的陣列基本用法~來介紹更多處理陣列的方法!有些方法會有瀏覽器版本的限制在，今年是 2018 年...可以不用管舊 IE 了嗎? (☍﹏⁰。) 
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 想要讓陣列中的每筆資料都能抓出來做應用，剛開始學應該會想到使用 for 迴圈，雖然 for 迴圈真得很萬用，但寫起來還是有點繁瑣..所以後來就新增了幾種方法來操作陣列，但這些方法不兼容 IE9 以下版本喔喔喔喔~
 

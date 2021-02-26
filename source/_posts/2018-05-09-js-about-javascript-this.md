@@ -8,13 +8,13 @@ tags:
   - JavaScript
 thumbnailImagePosition: left
 date: 2018-05-09 08:41:04
-thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a
+thumbnailImage: https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d
 ---
 
 this 根本是 JavaScript 中的搞曖昧高手吧~在不同的地方指的是不同的對象。
 如果不去了解他變心的原因在哪，好用應該會變成好賭爛 (╬☉д⊙)
 <!-- more -->
-![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=aa9b337d-f36d-4b93-afd3-03b01f56938a "這個朋友必交! 關於 JavaScript 的眉眉角角")
+![blog image](https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d "這個朋友必交! 關於 JavaScript 的眉眉角角")
 
 this 指的是 function 的執行情境，執行情境聽起來很玄，簡單想就是呼叫 function 執行的對象是誰。
 

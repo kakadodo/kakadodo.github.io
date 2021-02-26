@@ -7,3 +7,6 @@ public/
 themes/
 .deploy*/
 .algolia
+ai_source/
+imagemin/
+gulpfile.js
