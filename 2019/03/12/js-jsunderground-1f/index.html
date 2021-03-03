@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="終於有時間來寫一下部落格了!!荒廢了快兩個月說…😿很開心又有前端的挑戰任務可以做~雖然無法即時跟進，還是想找時間試試看自己能不能達成任務嘿嘿   六角學院提供的設計稿連結 運用技術: Pug SCSS、Grid、Flexbox Vue.js  挑戰心得:覺得這關算是滿佛心的任務，雖然乍看要做出跟”數學”有關的東西就莫名恐懼我自己覺得困難點在畫面排版，一開始很猶豫要用 Flexbox 還是 Gri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 地下城挑戰心得 1F - 九九乘法表">
+<meta property="og:url" content="https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="終於有時間來寫一下部落格了!!荒廢了快兩個月說…😿很開心又有前端的挑戰任務可以做~雖然無法即時跟進，還是想找時間試試看自己能不能達成任務嘿嘿   六角學院提供的設計稿連結 運用技術: Pug SCSS、Grid、Flexbox Vue.js  挑戰心得:覺得這關算是滿佛心的任務，雖然乍看要做出跟”數學”有關的東西就莫名恐懼我自己覺得困難點在畫面排版，一開始很猶豫要用 Flexbox 還是 Gri">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190312-js-jsunderground-1f.jpg?alt=media&token=bdc56b3e-d5ec-4a43-9a9d-935064b009f4">
+<meta property="article:published_time" content="2019-03-12T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:29:16.933Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="JS 地下城">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190312-js-jsunderground-1f.jpg?alt=media&token=bdc56b3e-d5ec-4a43-9a9d-935064b009f4">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>JS 地下城挑戰心得 1F - 九九乘法表</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/03/26/js-jsunderground-2f/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/01/22/css-about-css-border-radius/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&text=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&is_video=false&description=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=JS 地下城挑戰心得 1F - 九九乘法表&body=Check out this article: https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&name=JS 地下城挑戰心得 1F - 九九乘法表&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">1.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">2.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        JS 地下城挑戰心得 1F - 九九乘法表
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-03-12T01:00:00.000Z" itemprop="datePublished">2019-03-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/js-%E5%9C%B0%E4%B8%8B%E5%9F%8E/">JS 地下城</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/js-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" rel="tag">JS 地下城</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>終於有時間來寫一下部落格了!!荒廢了快兩個月說…😿<br>很開心又有前端的挑戰任務可以做~雖然無法即時跟進，還是想找時間試試看自己能不能達成任務嘿嘿</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190312-js-jsunderground-1f.jpg?alt=media&token=bdc56b3e-d5ec-4a43-9a9d-935064b009f4" alt="blog image" title="JS 地下城挑戰心得 1F - 九九乘法表"></p>
+<p><a target="_blank" rel="noopener" href="https://xd.adobe.com/spec/256981fc-ef65-4d9b-773c-45d8ef0353c6-5358/screen/50fba855-bde7-4771-b73c-3fd839418cf0/multiplication-chart/">六角學院提供的設計稿連結</a></p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug</li>
+<li>SCSS、Grid、Flexbox</li>
+<li>Vue.js</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>覺得這關算是滿佛心的任務，雖然乍看要做出跟”數學”有關的東西就莫名恐懼<br>我自己覺得困難點在畫面排版，一開始很猶豫要用 Flexbox 還是 Grid 來排…結果最後做一做兩種都用到了哈哈</p>
+<p>外層九個大區塊使用 Grid 來產生，主要的設定都會寫在 Grid 外層，一下就可以輕鬆搞定裡面的排列模式。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid_wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid; <span class="comment">// 使用 Grid 排版</span></span><br><span class="line">  grid-template-<span class="attribute">columns</span>: <span class="number">350px</span> <span class="number">350px</span> <span class="number">350px</span>; <span class="comment">// 三欄模式，每欄固定 350px 寬</span></span><br><span class="line">  grid-<span class="attribute">auto</span>-rows: <span class="number">366px</span>; <span class="comment">// 列不寫死數量，只要有新的列產生預設高度就是 366px</span></span><br><span class="line">  grid-<span class="attribute">column-gap</span>: <span class="number">30px</span>; <span class="comment">// 設定欄之間的間距</span></span><br><span class="line">  grid-row-gap: <span class="number">40px</span>; <span class="comment">// 設定列之間的間距</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>設定完後畫面馬上就切成想要的格式了~這塊大概在 5 分鐘內就完成了吧<br>稍微複雜的是欄位內容的呈現方式，我是覺得使用 Grid 反而沒那麼輕鬆，所以改成用 Flex 來完成</p>
+<p>第一欄因為是標題，所以跟其他欄位用不同的 class 來設定，一開始被上下兩條的裝飾線卡住，最後乾脆開 AI 畫成 svg 了事 XDD<br>後來看到其他人作品是用 span 做出橫線再加上兩個 X 字母完成，只能說我好像小題大作了………(反正有做出來啊!!Q_Q)</p>
+<p>公式這塊主要藉由 Flex 可以改變排列方向及 wrap 的特性來達成</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid_column</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column; <span class="comment">// 變成縱向排列</span></span><br><span class="line">  <span class="attribute">flex-wrap</span>: wrap; <span class="comment">// 高度不夠內容就會移至下一欄</span></span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">  <span class="attribute">align-content</span>: space-around;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">64px</span> <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>設定後畫面大概就差不多了<del>之後就是調一些間距跟文字樣式的設定等等</del>Done!<br>(不過沒 RWD 就是了)</p>
+<p>再來就輪到 JavaScript 跑資料了~本來以為這塊要花不少時間…(莫名心虛)<br>由於這陣子天天跟 Vue 相依偎，自然使用它來搞定，事實也證明用 Vue 來寫根本犯規，codepen 的 JavaScript 欄只有掛載 Vue 這條內容，html 大概也就兩三行指令吧 XDDD</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- html 內容，使用 pug 寫法 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 排除第一欄的標題，所以只用 v-for 產生 8 個欄位，</span></span><br><span class="line"><span class="comment">內部的公式再使用一次 v-for 來跑每一行的內容，完成! --&gt;</span></span><br><span class="line">.grid_column(v-for=&quot;num in 8&quot;, :key=&quot;num&quot;)</span><br><span class="line">  .main_number &#123;&#123;num+1&#125;&#125;</span><br><span class="line">  .mult_number(v-for=&quot;subNum in 9&quot;, :key=&quot;&#x27;sub$&#123;subNum&#125;&#x27;&quot;)</span><br><span class="line">    | &#123;&#123;num+1&#125;&#125; x &#123;&#123;subNum&#125;&#125; = &#123;&#123;(num+1)*(subNum)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaScript 就寫這樣而已 XDDD</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>於是乎…………</p>
+<p>Codepen 作品:</p>
+<iframe height="500" style="width: 100%;" scrolling="no" title="JS地下城 - 1F 九九乘法表" src="//codepen.io/chelseac/embed/rRzGxg/?height=500&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/chelseac/pen/rRzGxg/'>JS地下城 - 1F 九九乘法表</a> by Chelsea
+  (<a target="_blank" rel="noopener" href='https://codepen.io/chelseac'>@chelseac</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<p>心得就是，有前端工具真是太幸福了~(笑)</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">1.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">2.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&text=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&is_video=false&description=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=JS 地下城挑戰心得 1F - 九九乘法表&body=Check out this article: https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&title=JS 地下城挑戰心得 1F - 九九乘法表"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/03/12/js-jsunderground-1f/&name=JS 地下城挑戰心得 1F - 九九乘法表&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

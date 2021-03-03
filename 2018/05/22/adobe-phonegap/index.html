@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="我絕對沒有要踏入 APP 開發的深淵…實務所需，踏邊邊應該極限了吧 QQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不用 CLI 也能製作 Andriod APP - Adobe PhoneGap">
+<meta property="og:url" content="https://kakadodo.github.io/2018/05/22/adobe-phonegap/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="我絕對沒有要踏入 APP 開發的深淵…實務所需，踏邊邊應該極限了吧 QQ">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-1.jpg?alt=media&token=d121e35d-c152-4143-b389-582d239e1bdf">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-5.jpg?alt=media&token=efaf2f3c-1292-405c-9082-2f8f6242ec5a">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-2.jpg?alt=media&token=a1c4bc8a-3b4f-4591-8345-7c9e158d9d49">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-3.jpg?alt=media&token=9bcbf2a6-7de0-4ff3-b899-c9685f0ace79">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-4.jpg?alt=media&token=4d15fb8f-1478-4559-b3ec-a4ac2cc43174">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-6.jpg?alt=media&token=30735c4f-2f97-4fcb-a8fe-7f4da5f4864b">
+<meta property="article:published_time" content="2018-05-22T00:38:34.000Z">
+<meta property="article:modified_time" content="2021-02-26T17:58:28.382Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="Adobe PhoneGap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-1.jpg?alt=media&token=d121e35d-c152-4143-b389-582d239e1bdf">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>不用 CLI 也能製作 Andriod APP - Adobe PhoneGap</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/05/28/js-abount-javascript-bom/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/05/14/js-about-javascript-dom/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/05/22/adobe-phonegap/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&text=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&is_video=false&description=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap&body=Check out this article: https://kakadodo.github.io/2018/05/22/adobe-phonegap/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&name=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap&description=&lt;p&gt;我絕對沒有要踏入 APP 開發的深淵…實務所需，踏邊邊應該極限了吧 QQ&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        不用 CLI 也能製作 Andriod APP - Adobe PhoneGap
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-05-22T00:38:34.000Z" itemprop="datePublished">2018-05-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/web-others/">Web Others</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/adobe-phonegap/" rel="tag">Adobe PhoneGap</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>我絕對沒有要踏入 APP 開發的深淵…實務所需，踏邊邊應該極限了吧 QQ</p>
+<span id="more"></span>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-1.jpg?alt=media&token=d121e35d-c152-4143-b389-582d239e1bdf" alt="blog image" title="不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"></p>
+<p>照理說 APP 開發是軟體工程的範圍，但現在的前端開發能力越來越廣 + 強大，如果用前端來開發 APP 是可能的嗎???<br>這問題連想都不用想，已經有人把這概念實際做出來了 Σ(ﾟ д ﾟ)</p>
+<p>能夠應用 HTML, CSS 及 JavaScript 做出 APP 軟體，就是靠 Cordova 這個腳本框架，關於 Cordova 的故事有興趣可以估狗維基百科，簡而言之這個框架是佛心的 open source，只要有需要你就可以用~他也提供很多能夠連接裝置硬體的 API，就算不會各廠手機原生的程式語言，也能藉此與它們溝通。</p>
+<p>當然也不是說有了這個就不需要原生語言啦，要做出大型應用或遊戲類型等要求流暢度、高互動的軟體，還是要靠原生語言才行。Cordava 能做好的是讓一般 web 網頁結構也能包裝成一個行動裝置的 APP。</p>
+<p>而 Adobe PhoneGap 則是 Cordova 在最初階段時 Adobe 公司額外拉出的服務，它包含了 Cordova 核心，並且有相當程度的便利性來製作 APP，真心覺得 Adobe 公司很會賺錢…總是可以生出一堆神奇的軟體讓人花錢用(?)</p>
+<p>實際測試過有三種方式可以開發 Cordova 應用:</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://cordova.apache.org/">Cordova CLI</a><br>自家出產應該沒甚麼好說的，主流開發 Cordova 應用的方式，但就是要跟 command line 當好朋友，排斥用 CLI 的人可能會覺得用的很煎熬 ｡ﾟヽ(ﾟ ´Д`)ﾉﾟ｡<br>也因為是 CLI 的關係，一些配置會需要另外打指令碼來產生，所以相關文件要仔細閱讀過才會知道流程要怎麼走，最後也是用指令打包出 APP</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/dn879821.aspx">Visual Studio IDE</a><br>Visual Studio 本來就是個融合多種程式開發語言的 IDE，他們也有提供開發 Cordova 應用的模組喔!!個人覺得滿好用的，在空白專案建立的同時，會自動幫你設好專案的結構，重要的配置檔 config.xml 也幫你寫好好，不太需要自己爬文去補配置語法。相關的 API 也會以擴充功能的方式讓你直接下載安裝，安裝好的同時，API 的配置檔也幫你寫進去了，超棒棒來著!!<br>另外強大的一點是，提供多種裝置模擬器測試，也可連接實際裝置測試，邊寫邊改 code，寫好後也能使用內建功能一鍵佈署，APP 就被打包出來了!<br>講成這樣應該要介紹 Visual Studio 才對啊!!但想想當初在研究這個花了不少時間~且會需要額外配置 Android AVD、SDK 等裝置相關套件才能正常運作…故..有興趣請自行估狗(逃避)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://build.phonegap.com/">Adobe PhoneGap CLI</a><br>Adobe PhoneGap 本身提供兩種方式來開發，一種跟 Cordova CLI 差不多，一樣以 npm 來安裝。另一種就是官方提供的桌機板應用程式(Windows / Mac)，等於是給你 GUI 介面來做等同於 CLI 做的事啦~<br>配置好後，搭配 Adobe 線上的 PhoneGap Build 就可以打包成 APP 了!<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-5.jpg?alt=media&token=efaf2f3c-1292-405c-9082-2f8f6242ec5a" alt="blog image" title="Adobe account 選擇"><br>要使用 PhoneGap Build 需要有 Adobe 的帳號，一般帳號有一個免費的私有 APP 空間，APP 的大小需在 50MB 內，如果要放更多 APP 空間的話，就要成為付費會員囉!<br>PhoneGap Build 的特點之一就是可以讓你在沒有 Android SDK 的情況下也能打包 APP，並且放置在它提供的雲端空間讓人下載，這樣即使沒有上架到 Google 商店，只要知道連結都可以下載到 APP。</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-2.jpg?alt=media&token=a1c4bc8a-3b4f-4591-8345-7c9e158d9d49" alt="blog image" title="Adobe PhoneGap GUI 介面"><br>PhoneGap 官網有非常親民簡單的圖文使用教學，跟著步驟做應該不會有問題。介面很簡單直覺，+號按了可以新增專案或開啟現有專案，-號則是關閉現有專案的執行，預設建立專案或開啟專案後，PhoneGap 會開啟本地端的伺服器，這樣就可以邊寫 code 邊看畫面。<br>PhoneGap 也提供多種建立專案的 template，可依照自己需求選擇。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-3.jpg?alt=media&token=9bcbf2a6-7de0-4ff3-b899-c9685f0ace79" alt="blog image" title="PhoneGap 自動生成的文件結構"><br>(以 hellow world template 為示例)<br>專案建立後，打開資料夾可以看到自動幫你生好的資料結構，主要會動到的只有 <strong>www 資料夾</strong> 跟 <strong>config.xml</strong> (plugin 資料夾是在有需要使用行動裝置硬體的 API 才會用到，不然也可以略過)，www 資料夾就是主要放置 HTML、CSS、JavaScript 及靜態資料的地方，其中 res 的資料夾存放 APP 會用到的 icon 圖示及 screen 畫面(screen 畫面需要搭配 Codorva API 設定才會出現)。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-4.jpg?alt=media&token=4d15fb8f-1478-4559-b3ec-a4ac2cc43174" alt="blog image" title="PhoneGap 自動生成的 config.xml"><br>專案建立時會有幾個欄位需要填寫，這些欄位的內容實際上就是設定到 <strong>confing.xml</strong> 裡，裡面會描述所有與這個 APP 有關的設定。<code>&lt;widget&gt;</code> 的 id 是一串倒過來的網址，這個 id 是用來辨識 APP 的，id 必須唯一且不能跟其他 APP 重複到。<br><code>&lt;name&gt;</code>則是該 APP 的顯示名稱，<code>&lt;description&gt;</code>是 APP 的描述，<code>&lt;author&gt;</code>應該不用說了吧 XD，這些會在上架到 Google 商店時看的到。<br><code>&lt;plugin&gt;</code>就是這個 APP 有用到的擴充元件，只要有用就必須要寫到配置檔裡，不然 Cordova 會抓不到這個元件。<code>&lt;platform&gt;</code>則是關於各廠牌裝置的設定，icon、screen 等連結位置會寫在裡面。</p>
+<p>上述都設定好，網頁也寫好的話，就可以來打包 APP 了，上傳檔案前，記得先將專案壓縮成 <strong>.zip 檔</strong>，進入 Adboe PhoneGap Build，並連結帳號成功，會進到以下畫面。<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-05-22-adobe-phonegap-6.jpg?alt=media&token=30735c4f-2f97-4fcb-a8fe-7f4da5f4864b" alt="blog image" title="PhoneGap Build 操作步驟"><br>選擇 private 後會出現上傳 zip 檔的選項，選好會跳到下一個畫面，這邊就可以看到當初在 config.xml 設定的基本內容，確認沒問題就執行 ready to build，畫面跳轉後右邊會出現 QR Code 的圖示，PhoneGap Build 提供 QR Code 可以直接掃描下載檔案。如果顯示圖中的步驟三 pending ，表示檔案尚未打包完成需要等待一下，確定完成並且成功會顯示像步驟四的畫面。如此如此~~就成功產出自己用 web 前端技術做出來的 APP 囉!!鼓掌!!</p>
+<p>看!完全沒用到 command line 吧! XDDDD</p>
+<p>以上內容如有勘誤，還請不吝告知 🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/05/22/adobe-phonegap/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&text=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&is_video=false&description=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap&body=Check out this article: https://kakadodo.github.io/2018/05/22/adobe-phonegap/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&title=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/05/22/adobe-phonegap/&name=不用 CLI 也能製作 Andriod APP - Adobe PhoneGap&description=&lt;p&gt;我絕對沒有要踏入 APP 開發的深淵…實務所需，踏邊邊應該極限了吧 QQ&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

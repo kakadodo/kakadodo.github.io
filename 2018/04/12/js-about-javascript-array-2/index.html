@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="承皆上回的陣列基本用法~來介紹更多處理陣列的方法!有些方法會有瀏覽器版本的限制在，今年是 2018 年…可以不用管舊 IE 了嗎? (☍﹏⁰。)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下">
+<meta property="og:url" content="https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="承皆上回的陣列基本用法~來介紹更多處理陣列的方法!有些方法會有瀏覽器版本的限制在，今年是 2018 年…可以不用管舊 IE 了嗎? (☍﹏⁰。)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-04-12T01:23:15.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.014Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/04/25/js-about-javascript-object/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/04/11/js-about-javascript-array-1/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下&body=Check out this article: https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下&description=&lt;p&gt;承皆上回的陣列基本用法~來介紹更多處理陣列的方法!有些方法會有瀏覽器版本的限制在，今年是 2018 年…可以不用管舊 IE 了嗎? (☍﹏⁰。) &lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-04-12T01:23:15.000Z" itemprop="datePublished">2018-04-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>承皆上回的陣列基本用法~來介紹更多處理陣列的方法!有些方法會有瀏覽器版本的限制在，今年是 2018 年…可以不用管舊 IE 了嗎? (☍﹏⁰。) </p>
+<span id="more"></span>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>想要讓陣列中的每筆資料都能抓出來做應用，剛開始學應該會想到使用 for 迴圈，雖然 for 迴圈真得很萬用，但寫起來還是有點繁瑣..所以後來就新增了幾種方法來操作陣列，但這些方法不兼容 IE9 以下版本喔喔喔喔~</p>
+<ul>
+<li><p>array.map(): 結果會回傳一組新陣列而不影響原本內容，很常用來將資料轉換成新的組合方式，有點像加工食品機的概念(?)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> friends = [<span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;Mary&#x27;</span>, <span class="string">&#x27;Ben&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> friendsData = friends.map(<span class="function"><span class="keyword">function</span>(<span class="params">value, index</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(value == <span class="string">&#x27;Mary&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> value + <span class="string">&#x27; is female.&#x27;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value + <span class="string">&#x27; is male.&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(friends, friendsData)</span><br><span class="line"><span class="comment">//friends結果: [&quot;Tom&quot;, &quot;Mary&quot;, &quot;Ben&quot;]</span></span><br><span class="line"><span class="comment">//friendsData結果: [&quot;Tom is male.&quot;, &quot;Mary is female.&quot;, &quot;Ben is male.&quot;]</span></span><br></pre></td></tr></table></figure>
+<p>map()會巡訪陣列每筆資料，因此不用知道陣列長度有多少，function 中就會寫要怎麼加工每筆資料，以及最後記得要用 <code>return</code> 來將每筆資料回傳，不然得到的結果會是一組滿滿 undefined 的新陣列~ (눈‸눈)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果純加工而不回傳..</span></span><br><span class="line"><span class="keyword">var</span> friends = [<span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;Mary&#x27;</span>, <span class="string">&#x27;Ben&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> friendsData = friends.map(<span class="function"><span class="keyword">function</span>(<span class="params">value, index</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(value == <span class="string">&#x27;Mary&#x27;</span>)&#123;</span><br><span class="line">    value = value + <span class="string">&#x27; is female.&#x27;</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    value = value + <span class="string">&#x27; is male.&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(friendsData) <span class="comment">//[undefined, undefined, undefined]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.forEach(): 與 map() 有點相似，但結果不太相同，map()目的是巡覽每筆資料做處理並回傳一組新陣列，forEach 則是巡覽每筆資料再用資料去做其他事，它不會回傳值，功能類似 for 迴圈，只是一定會跑遍每筆資料的概念。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> friends = [<span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;Mary&#x27;</span>, <span class="string">&#x27;Ben&#x27;</span>];</span><br><span class="line">friends.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, index</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value + <span class="string">&#x27; Wake up!!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//結果出現三行 &quot;Tom Wake up!!&quot;, &quot;Mary Wake up!!&quot;, &quot;Ben Wake up!!&quot;，原本的 friends 陣列不會有變化</span></span><br><span class="line"><span class="comment">//Wake up 根本在對現在的自己說吧XD</span></span><br></pre></td></tr></table></figure>
+<p>當然 forEach 也可以做條件式判斷，例如只想叫醒 Tom 跟 Ben 然後排擠 Mary 的話，就可以用 <code>return</code> 大法把 Mary 給 GG，因為 forEach 不會理回傳值，因此在 if 判斷中加上 return 等於結束這回合的意思， forEach 還是會繼續跑下一回合直到全部跑完。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> friends = [<span class="string">&#x27;Tom&#x27;</span>, <span class="string">&#x27;Mary&#x27;</span>, <span class="string">&#x27;Ben&#x27;</span>];</span><br><span class="line">friends.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, index</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(value == <span class="string">&#x27;Mary&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value + <span class="string">&#x27; Wake up!!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//結果只出現兩行 &quot;Tom Wake up!!&quot;, &quot;Ben Wake up!!&quot;，Mary 表示已流淚</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.filter(): 用來篩選陣列值，會回傳符合條件為 true 的值存成一組新的陣列，filter 的 callback function 可以帶入三個參數 -  value、index 跟原本的 array。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">6</span>];</span><br><span class="line"><span class="comment">//依序跑每筆資料，只會回傳數字大於 3 的值</span></span><br><span class="line"><span class="keyword">var</span> bigNumbers = numbers.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value &gt; <span class="number">3</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(bigNumbers); <span class="comment">//[5, 7, 9, 4, 6]</span></span><br></pre></td></tr></table></figure>
+<p>filter 也可以過濾掉陣列中重複出現的值，敲棒棒。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> uniqueNumbers = numbers.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> array.indexOf(value) == index;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(uniqueNumbers); <span class="comment">//[1, 2, 3, 5, 7, 9, 4, 6, 8]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.some(): 檢查陣列資料，回傳布林值 true or false，只要有一筆符合條件為 true，檢查結果就算 true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">6</span>];</span><br><span class="line"><span class="keyword">var</span> result = numbers.some(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value == <span class="number">7</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;資料中有7嗎? 結果: &#x27;</span>+result); <span class="comment">//資料中有7嗎? 結果: true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.every(): 檢查陣列資料，回傳布林值 true or false，每筆資料皆符合條件為 true，檢查結果才算 true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>];</span><br><span class="line"><span class="keyword">var</span> result = numbers.every(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value &gt; <span class="number">4</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;資料中數字都大於4嗎? 結果: &#x27;</span>+result); <span class="comment">//資料中數字都大於4嗎? 結果: false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.reduce(callback, initialValue): 將陣列中資料依序與一個累加器(accumlator)傳入 callback function 做某件事，這件事的結果只會回傳單一值。聽起來很玄..用起來也滿玄的~以為是用來做數學運算的，結果看了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">MDN</a>的範例後覺得有眼不識泰山!<br>累加器預設是陣列第一個值，當 reduce 執行一次後，累加器的值就會變成執行後的結果，以此類推到跑完整個陣列，累加器也可以另外設初始值(initialValue)，只要當作 reduce 本身的第二個參數即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以短短一行就讓陣列資料作加總</span></span><br><span class="line"><span class="keyword">var</span> money = [<span class="number">100</span>,<span class="number">300</span>,<span class="number">500</span>,<span class="number">200</span>,<span class="number">1500</span>];</span><br><span class="line"><span class="keyword">var</span> totalMoney = money.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumlator,currentValue</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span>  accumlator + currentValue;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(totalMoney); <span class="comment">//2600</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//累加器給定初始值，展開多維陣列</span></span><br><span class="line"><span class="keyword">var</span> mutipleArray = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>]];</span><br><span class="line"><span class="keyword">var</span> concatArray = mutipleArray.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumlator,currentValue</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> accumlator.concat(currentValue);</span><br><span class="line">&#125;, []);</span><br><span class="line"><span class="built_in">console</span>.log(concatArray); <span class="comment">//[1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<p>以下為舊 IE 有支援的一些好用方法:</p>
+<ul>
+<li><p>array.join(separator): 把陣列組成字串，separator 可自行決定要用甚麼，沒輸入的話預設是逗號，如果要串成完整的一段字則輸入<code>&quot;&quot;</code>兩個引號。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strArray = [<span class="string">&#x27;你&#x27;</span>,<span class="string">&#x27;今天&#x27;</span>,<span class="string">&#x27;打&#x27;</span>,<span class="string">&#x27;肉了嗎&#x27;</span>,<span class="string">&#x27;?&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> str = strArray.join(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(str); <span class="comment">//&quot;你今天打肉了嗎?&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//沒輸入相連符號預設是用逗號連接</span></span><br><span class="line"><span class="keyword">var</span> str2 = strArray.join();</span><br><span class="line"><span class="built_in">console</span>.log(str2); <span class="comment">//&quot;你,今天,打,肉了嗎,?&quot; 沙小!?</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.slice(beginIndex, endIndex): 切割陣列的某一段範圍，會回傳一組擷取後的陣列(原陣列不受影響)。要注意的是 endIndex 的值不包含在擷取範圍內，假設從 index 0 切到 index 3，實際得到的結果會是 index 0、1、2 這三個的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strArray = [<span class="string">&#x27;你&#x27;</span>,<span class="string">&#x27;今天&#x27;</span>,<span class="string">&#x27;打&#x27;</span>,<span class="string">&#x27;肉了嗎&#x27;</span>,<span class="string">&#x27;?&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> sliceArray = strArray.slice(<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(sliceArray); <span class="comment">//[&quot;今天&quot;, &quot;打&quot;]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array.splice(start, deleteCount, value..): 可以同時刪除值及新增值的方法，start 是要更動的索引位置，deleteCount 可指定從 start 開始要刪除的數量，第三個參數(value..)以後則是要追加到 start 位置的值。(值可以多個，整批插隊的意思啦!)如果有另外宣告變數來執行 splice， 刪除的值會存到該變數。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//刪除值，且不指定數量</span></span><br><span class="line"><span class="keyword">var</span> strArray = [<span class="string">&#x27;你&#x27;</span>,<span class="string">&#x27;今天&#x27;</span>,<span class="string">&#x27;打&#x27;</span>,<span class="string">&#x27;肉了嗎&#x27;</span>,<span class="string">&#x27;?&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> deleteArray = strArray.splice(<span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;strArray: &#x27;</span>+strArray, <span class="string">&#x27;deleteArray: &#x27;</span>+deleteArray); <span class="comment">//strArray: [你,今天,打], deleteArray: [肉了嗎,?]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//不刪值，且從開始位置增加值</span></span><br><span class="line"><span class="keyword">var</span> strArray = [<span class="string">&#x27;你&#x27;</span>,<span class="string">&#x27;今天&#x27;</span>,<span class="string">&#x27;打&#x27;</span>,<span class="string">&#x27;肉了嗎&#x27;</span>,<span class="string">&#x27;?&#x27;</span>];</span><br><span class="line">strArray.splice(<span class="number">3</span>,<span class="number">0</span>,<span class="string">&#x27;肥&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(strArray); <span class="comment">//[&quot;你&quot;, &quot;今天&quot;, &quot;打&quot;, &quot;肥&quot;, &quot;肉了嗎&quot;, &quot;?&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//刪除特定數量的值，再增加多個值</span></span><br><span class="line"><span class="keyword">var</span> strArray = [<span class="string">&#x27;你&#x27;</span>,<span class="string">&#x27;今天&#x27;</span>,<span class="string">&#x27;打&#x27;</span>,<span class="string">&#x27;肉了嗎&#x27;</span>,<span class="string">&#x27;?&#x27;</span>];</span><br><span class="line">strArray.splice(<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;LOL&#x27;</span>,<span class="string">&#x27;了嗎&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(strArray); <span class="comment">//[&quot;你&quot;, &quot;今天&quot;, &quot;打&quot;, &quot;LOL&quot;, &quot;了嗎&quot;, &quot;?&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//開始位置可以設為負數，表示從陣列最後面倒數的位置</span></span><br><span class="line"><span class="keyword">var</span> strArray = [<span class="string">&#x27;你&#x27;</span>,<span class="string">&#x27;今天&#x27;</span>,<span class="string">&#x27;打&#x27;</span>,<span class="string">&#x27;肉了嗎&#x27;</span>,<span class="string">&#x27;?&#x27;</span>];</span><br><span class="line">strArray.splice(-<span class="number">2</span>,<span class="number">1</span>,<span class="string">&#x27;LOL&#x27;</span>,<span class="string">&#x27;了嗎&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(strArray); <span class="comment">//[&quot;你&quot;, &quot;今天&quot;, &quot;打&quot;, &quot;LOL&quot;, &quot;了嗎&quot;, &quot;?&quot;]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>自己常用到的大概就這些吧~雖然範例很爛..這些方法互相搭配使用，就可以產生各種不同的資料結構了!!另外上面提到的多維陣列，如果單純取值的話，可以用最簡單的中括號取得，假設是三維陣列<code>[[[1,6],[2,7]],[3,4,5]]</code>，要取得 2 這筆資料可以寫成 <code>[[[1,6],[2,7]],[3,4,5]][0][1][0]</code> 這樣，就會得到 2 囉!!(鬼才看得懂)</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下&body=Check out this article: https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/04/12/js-about-javascript-array-2/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 2.陣列(Array)-下&description=&lt;p&gt;承皆上回的陣列基本用法~來介紹更多處理陣列的方法!有些方法會有瀏覽器版本的限制在，今年是 2018 年…可以不用管舊 IE 了嗎? (☍﹏⁰。) &lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="這次前言我要碎碎念一番…最近不知道在忙甚麼行程通通擠在一起，這禮拜除了工作在趕急件之外，其中兩天還去參加 Modern Web，自己也沒天生神力無法邊聽演講邊寫 code，只好默默扛著筆電跑場，回家再默默加班趕急件，六日兩天又是很久一次的大學同學出遊，出去玩還要帶筆電的話會太厭世，將近一週每天睡不滿 4 小時的情況下..禮拜天甚至為了要去划獨木舟看日出只睡了兩個小時，真的覺得自己要棄賽了 QQ但是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive">
+<meta property="og:url" content="https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="這次前言我要碎碎念一番…最近不知道在忙甚麼行程通通擠在一起，這禮拜除了工作在趕急件之外，其中兩天還去參加 Modern Web，自己也沒天生神力無法邊聽演講邊寫 code，只好默默扛著筆電跑場，回家再默默加班趕急件，六日兩天又是很久一次的大學同學出遊，出去玩還要帶筆電的話會太厭世，將近一週每天睡不滿 4 小時的情況下..禮拜天甚至為了要去划獨木舟看日出只睡了兩個小時，真的覺得自己要棄賽了 QQ但是">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week8.jpg">
+<meta property="article:published_time" content="2019-09-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-09-07T13:22:58.836Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week8.jpg">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/09/07/the-F2E-2nd-week9-notebook/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/08/25/the-F2E-2nd-week7-chatroom/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive&body=Check out this article: https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished">2019-09-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/the-f2e-challenge/">the F2E challenge</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>這次前言我要碎碎念一番…<br>最近不知道在忙甚麼行程通通擠在一起，這禮拜除了工作在趕急件之外，其中兩天還去參加 Modern Web，自己也沒天生神力無法邊聽演講邊寫 code，只好默默扛著筆電跑場，回家再默默加班趕急件，六日兩天又是很久一次的大學同學出遊，出去玩還要帶筆電的話會太厭世，將近一週每天睡不滿 4 小時的情況下..禮拜天甚至為了要去划獨木舟看日出只睡了兩個小時，真的覺得自己要棄賽了 QQ<br>但是，但是…提早下午就回到家的情況下，靠著工作都沒那麼有恆心的意志力，終於勉強把這週題目刻出來，好<del>累</del>RRRRRRRRRRRRR</p>
+<!-- excerpt -->
+<p><img src="https://kakadodo.github.io/theF2EChallange/img/2nd-week8.jpg" alt="blog image" title="Week 8. Cloud Drive"></p>
+<h2 id="使用者故事"><a href="#使用者故事" class="headerlink" title="使用者故事:"></a>使用者故事:</h2><ol>
+<li>我可以在檔案管理區新增資料夾</li>
+<li>我可以上傳任何檔案，例如圖片、word、pdf、mp4</li>
+<li>我可以在資料夾裡面新增檔案，進行分類</li>
+<li>我能透過篩選器 (filter) 來尋找檔案，例如搜尋、時間排序、大小排序等等</li>
+<li>我可以將檔案打星號，以方便快速查找</li>
+</ol>
+<p>來自 edith.hsu 的<a target="_blank" rel="noopener" href="https://challenge.thef2e.com/user/1600?schedule=4140">設計稿</a>，走簡潔風真是太甘心了QQ，掃了一下這週的設計作品真是一個比一個複雜，實在是無心力應對。</p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug</li>
+<li>Vue.js</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>這週其實沒甚麼心得好分享的..完全沒用任何新技術，主要目標就是把版切出來，如果時間還充裕的情況下再去加功能，但主要功能都會牽扯到資料上傳一度很糾結，最後還是覺得至少要做到能讓人操作的程度才甘心罷手。</p>
+<p>剛好上週有追到奶綠茶的聊天室直播，想到可以跟他一樣用”模擬情境”的方式來完成使用者故事，於是一切資料上傳的流程都用簡單的圖像產生來帶過，覺得這招真心好用!<br>因為沒去處理資料上傳的 part，就有時間可以補做其他功能了，這次有做好篩選器，新增專案、資料夾、檔案，將檔案打星號等模擬流程。<br>過程中覺得最難搞的是資料夾的建立方式，設計稿會先以建立專案的形式來初始分類，之後才自由的選擇要建立資料夾或是直接塞檔案，這種模式資料夾應該要可以巢狀組合，且因為有回到上一層的按鈕，變成需要知道當前目錄位置下的前後關係，想了好久一直會被 project 這個目錄跟資料夾之間的關係給卡住，最後是想到可以用”時間旅行”的概念來達成這樣的功能，感謝最近一直讓我聽到這個概念的大神講解XD (時間旅行可以解讀成每作一個動作就記錄當下的行為，這樣就能倒退流程狀態)</p>
+<p>我的巢狀資料夾做法是，會先區別 project 跟 folder，反正 project 就是個在最頂層的包裝，會包覆裡面所有的 folder 及檔案，所以跳過它之後可以比較好判別之後的內容。除了 folder 之外就是各種類型的檔案，因為檔案類型的文件不會有巢狀的狀況發生，所以也可以當作一層過濾篩選掉，所以要特別去處理的就是 folder 到底有沒有巢狀這件事。我設定一個 <strong>children</strong> 的 property 在 folder data 中，只要是它子層的東西不管甚麼類型就是塞到 children 裡就對了。但要能夠知道當前位置的上下文關係，我有另外設定一個 <strong>parentId</strong> 的 property，它接收一組存放 id 的 array，id 其實就是從最外層開始陸續往內直到自己的祖先層 id，有了這組 array，其實就可以用最無腦的方式來遍歷每一個祖先層，直到查出自己的上一層到底是誰，這樣就可以做到即使是無限巢狀的資料夾也可以回到上一層的狀態囉!<br>parentId 的 array 要紀錄也不難，畢竟一定是從最外層開始建立文件的，所以就一樣用無腦的方式每建立一個子層資料夾時，就把自己爸爸的 parentId 一併繼承到自己身上，所以內層的資料夾就會有所有階層的祖先 id。</p>
+<p>不過還有麻煩的地方在於要能夠做檔案篩選，巢狀結構下勢必會出現未知的迴圈數要跑才能遍歷到每個資料，這時候就不能繼續無腦寫了，因為永遠都無法預料使用者到底會建立多少階層QQ<br>這部分我是先將 project 到 folder 的篩選邏輯寫出來，之後因為是 folder 對 folder 的邏輯，其實搜尋方式是相同的，可以將這部分邏輯單獨抽出來寫成一個 function，這樣就能在 function 中再度呼叫自己這個 function 達成跑未知數迴圈的功能。(當然要設讓他停止繼續迴圈的條件啦，也就是當找不到任何 children 時你就可以去一邊休息了的概念)<br>這樣的寫法就能順利完成標籤顏色的篩選及關鍵字的篩選了，即使階層再多也能跑過全部的 data。</p>
+<p>大概就是這樣吧…可以去洗洗睡了 Zzzz</p>
+<p>作品網址: <a href="https://kakadodo.github.io/theF2EChallange/cloud-drive.html">https://kakadodo.github.io/theF2EChallange/cloud-drive.html</a></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive&body=Check out this article: https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/09/02/the-F2E-2nd-week8-cloud-drive/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 8. Cloud Drive&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

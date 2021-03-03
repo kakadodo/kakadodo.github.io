@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="自從 ES6 的 Promise 出現後，原生撰寫 Ajax 變得越來越方便，而在 ES7 版本出現了寫法更簡潔的非同步方式，就是 Async 與 Await 啦!   Async、Await 最主要的特點就是可以一次執行多個 Ajax 請求，並且請求會依照撰寫的順序一一完成。 Async 的實體其實是一個 function，不過這個 function 會回傳一個 Promise 物件，如果 fu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await">
+<meta property="og:url" content="https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="自從 ES6 的 Promise 出現後，原生撰寫 Ajax 變得越來越方便，而在 ES7 版本出現了寫法更簡潔的非同步方式，就是 Async 與 Await 啦!   Async、Await 最主要的特點就是可以一次執行多個 Ajax 請求，並且請求會依照撰寫的順序一一完成。 Async 的實體其實是一個 function，不過這個 function 會回傳一個 Promise 物件，如果 fu">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-12-11T01:01:58.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES7">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/12/18/js-about-javascript-call-apply-bind/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/12/04/js-about-javascript-es6-6/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await&body=Check out this article: https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-12-11T01:01:58.000Z" itemprop="datePublished">2018-12-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/es7/" rel="tag">ES7</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>自從 ES6 的 Promise 出現後，原生撰寫 Ajax 變得越來越方便，而在 ES7 版本出現了寫法更簡潔的非同步方式，就是 Async 與 Await 啦!</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>Async、Await 最主要的特點就是可以一次執行多個 Ajax 請求，並且請求會依照撰寫的順序一一完成。</p>
+<p>Async 的實體其實是一個 function，不過這個 function 會回傳一個 Promise 物件，如果 function 有 return 內容，則回傳的 Promise 物件會取得 resolve 的內容，有發生錯誤的話，則是回傳 reject 的狀態及錯誤訊息 。也因為它是 function 的關係，等於是把非同步相關的程式碼都集中在一起，自然比以往更好做管理。</p>
+<p>而 Await 在 Async function 中扮演著非常重要的角色，它會負責控管當下 Promise 請求的進度，等到當前的 Promise 回傳完成後(不論成功或失敗)，才進行下一步。這兩者可說是共生關係~~缺一不可呀!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getAllDatas = <span class="keyword">async</span> (id1, id2)=&gt;&#123;</span><br><span class="line">  <span class="keyword">const</span> data1 = <span class="keyword">await</span> fetch(<span class="string">`https://randomuser.me/api/?id=<span class="subst">$&#123;id1&#125;</span>`</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>data.json());</span><br><span class="line">  <span class="built_in">console</span>.log(data1);</span><br><span class="line">  <span class="keyword">const</span> data2 = <span class="keyword">await</span> fetch(<span class="string">`https://randomuser.me/api/?id=<span class="subst">$&#123;id2&#125;</span>`</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>data.json());</span><br><span class="line">  <span class="built_in">console</span>.log(data1, data2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getAllDatas(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以範例來說， <code>getAllDatas()</code> 就是一個 Async function，其中 <code>async</code> 語法要寫在 function 的最開頭讓 JavaScript 知道它與一般 function 不同，function 中則直接撰寫非同步程式，執行 Ajax 的程式開頭要加上 <code>await</code> 以告知這段程式需要暫停並等待完成。使用變數存放 await 的 Ajax，回傳結果會直接傳回變數身上，因此在該 function 中就可以直接取得 data，這跟以往取資料的邏輯就不太相同了~是不是更方便!!</p>
+<p>而錯誤訊息的捕獲則是使用 <code>try catch</code> 語法來幫忙，將要執行的一系列 Ajax 行為寫在 try block 中，如果 Ajax 有設定發生錯誤要顯示的特殊訊息，則錯誤發生時， catch block 就會取得該 error 資訊，當然不特別設定 catch 也是會在錯誤時捕獲瀏覽器回應的資訊啦~</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getAllDatas = <span class="keyword">async</span> (id1, id2)=&gt;&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">// 假設把 data1 的 api 連結打錯</span></span><br><span class="line">    <span class="keyword">const</span> data1 = <span class="keyword">await</span> fetch(<span class="string">`https://randomuser.me/ap/?id=<span class="subst">$&#123;id1&#125;</span>`</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>data.json());</span><br><span class="line">    <span class="built_in">console</span>.log(data1);</span><br><span class="line">    <span class="keyword">const</span> data2 = <span class="keyword">await</span> fetch(<span class="string">`https://randomuser.me/api/?id=<span class="subst">$&#123;id2&#125;</span>`</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>data.json());</span><br><span class="line">    <span class="built_in">console</span>.log(data1, data2);</span><br><span class="line">  &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;error:&#x27;</span> + err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getAllDatas(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//error: SyntaxError: Unexpected token N in JSON at position 0</span></span><br></pre></td></tr></table></figure>
+
+<p>Async/Await 乍看可能跟 Promise.all() 很像，但其實運行方式不同，前者在執行非同步程式時是一步一步的，會等待步驟完成才繼續下一步，而 Promise.all() 則是在執行的當下就各自跑呼叫的 api，但會等到全部的 api 都回傳資訊後才一起將資料 pass 回來。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getAllDatas = <span class="keyword">async</span> ()=&gt;&#123;</span><br><span class="line">  <span class="keyword">const</span> gender = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123; res(<span class="string">&#x27;female&#x27;</span>) &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> fetch(<span class="string">`https://randomuser.me/api/?gender=<span class="subst">$&#123;gender&#125;</span>`</span>).then(<span class="function"><span class="params">data</span>=&gt;</span>data.json());</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getAllDatas();</span><br></pre></td></tr></table></figure>
+<p>從上例就可以知道， <code>data</code> 的 api 呼叫會等到 <code>gender</code> 的 setTimeout 跑完才執行，這當中就是有 Await 在控管的關係。</p>
+<p>不過 Async/Await 其實也可以搭配 Promise.all() 來達成同時呼叫 api。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">runBoth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> apis = [<span class="string">&#x27;https://randomuser.me/api/&#x27;</span>, <span class="string">&#x27;https://picsum.photos/list&#x27;</span>];</span><br><span class="line">  <span class="keyword">const</span> promise = apis.map(<span class="function"><span class="params">api</span>=&gt;</span> fetch(api).then(<span class="function"><span class="params">res</span>=&gt;</span>res.json()));</span><br><span class="line">  <span class="keyword">const</span> datas = <span class="keyword">await</span> <span class="built_in">Promise</span>.all(promise);</span><br><span class="line">  <span class="built_in">console</span>.log(datas);</span><br><span class="line">&#125;</span><br><span class="line">runBoth();</span><br></pre></td></tr></table></figure>
+<p>寫來寫去好像都行的概念XDD，還是看當下的情境來決定要用甚麼方式撰寫囉…</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await&body=Check out this article: https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/12/11/js-about-javascript-async-await/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 17.ES7 - Async 與 Await&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

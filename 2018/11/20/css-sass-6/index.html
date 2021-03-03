@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="要真正發揮 Sass 工程化的特性必定不能缺少的就是它提供的一系列表達式控制命令，像是 if 判斷、遍歷迴圈、自訂 function 等等，這些控制命令可以幫助撰寫 Sass 具有邏輯性且更省力!   @if、@else if、@elseif 需給予判斷的條件，當 if 不成立時會往下找 else if 的條件，直到都不成立跳到 else。@if 可以直接寫在選擇器中，當然也可以另外搭配 @mix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while">
+<meta property="og:url" content="https://kakadodo.github.io/2018/11/20/css-sass-6/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="要真正發揮 Sass 工程化的特性必定不能缺少的就是它提供的一系列表達式控制命令，像是 if 判斷、遍歷迴圈、自訂 function 等等，這些控制命令可以幫助撰寫 Sass 具有邏輯性且更省力!   @if、@else if、@elseif 需給予判斷的條件，當 if 不成立時會往下找 else if 的條件，直到都不成立跳到 else。@if 可以直接寫在選擇器中，當然也可以另外搭配 @mix">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-10-15-css-sass.jpg?alt=media&token=bf9f5870-7806-48db-9d36-34c6f65b9c71">
+<meta property="article:published_time" content="2018-11-20T01:00:00.000Z">
+<meta property="article:modified_time" content="2018-11-20T05:40:20.000Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="Sass&#x2F;SCSS">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-10-15-css-sass.jpg?alt=media&token=bf9f5870-7806-48db-9d36-34c6f65b9c71">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/11/27/css-sass-7/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/11/13/css-sass-5/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/11/20/css-sass-6/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&text=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&is_video=false&description=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while&body=Check out this article: https://kakadodo.github.io/2018/11/20/css-sass-6/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&name=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#if%E3%80%81-else-if%E3%80%81-else"><span class="toc-number">1.</span> <span class="toc-text">@if、@else if、@else</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for"><span class="toc-number">2.</span> <span class="toc-text">@for</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#for-i-from-begin-through-end-style-here"><span class="toc-number">2.0.1.</span> <span class="toc-text">@for $i from $begin through $end{ &#x2F;&#x2F;style here..}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-i-from-begin-to-end-style-here"><span class="toc-number">2.0.2.</span> <span class="toc-text">@for $i from $begin to $end{ &#x2F;&#x2F;style here..}</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while"><span class="toc-number">3.</span> <span class="toc-text">@while</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-11-20T01:00:00.000Z" itemprop="datePublished">2018-11-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/css/">CSS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css/" rel="tag">CSS</a>, <a class="tag-link-link" href="/tags/sass-scss/" rel="tag">Sass/SCSS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>要真正發揮 Sass 工程化的特性必定不能缺少的就是它提供的一系列表達式控制命令，像是 if 判斷、遍歷迴圈、自訂 function 等等，這些控制命令可以幫助撰寫 Sass 具有邏輯性且更省力!</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-10-15-css-sass.jpg?alt=media&token=bf9f5870-7806-48db-9d36-34c6f65b9c71" alt="blog image" title="Sass - 前端工程師應該要會的工程化 CSS"></p>
+<h2 id="if、-else-if、-else"><a href="#if、-else-if、-else" class="headerlink" title="@if、@else if、@else"></a>@if、@else if、@else</h2><p>if 需給予判斷的條件，當 if 不成立時會往下找 else if 的條件，直到都不成立跳到 else。<br>@if 可以直接寫在選擇器中，當然也可以另外搭配 @mixin 或 @for。<br>邏輯運算子 <code>==</code>、<code>&gt;</code>、<code>&lt;</code> 這種 Sass 都吃，唯獨 <code>||</code> 符號在 Sass 中要寫成 <code>or</code> 才不會跳錯。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 寫在選擇器中</span></span><br><span class="line"><span class="variable">$type</span>: monster;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="keyword">@if</span> <span class="variable">$type</span> == ocean &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125; <span class="keyword">@else</span> if <span class="variable">$type</span> == monster &#123;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">  &#125; <span class="keyword">@else</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// --------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 搭配 @mixin</span></span><br><span class="line"><span class="keyword">@mixin</span> deck(<span class="variable">$suit</span>) &#123;</span><br><span class="line">  <span class="keyword">@if</span>(<span class="variable">$suit</span> == hearts <span class="keyword">or</span> <span class="variable">$suit</span> == spades)&#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">@else</span> if(<span class="variable">$suit</span> == clovers <span class="keyword">or</span> <span class="variable">$suit</span> == diamonds)&#123;</span><br><span class="line">    <span class="attribute">color</span>:green;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">@else</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.suit</span>&#123;</span><br><span class="line">  <span class="keyword">@include</span> deck(clovers);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.suit</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="for"><a href="#for" class="headerlink" title="@for"></a>@for</h2><p>@for 寫法上會跟 JavaScript 的有些不同，@for 語法有兩種範圍設定 <code>through</code> 及 <code>to</code>。</p>
+<ul>
+<li>through: 起始值 ~ 結束值都會遍歷</li>
+<li>to: 不包含結尾值遍歷</li>
+</ul>
+<h4 id="for-i-from-begin-through-end-style-here"><a href="#for-i-from-begin-through-end-style-here" class="headerlink" title="@for $i from $begin through $end{ //style here..}"></a>@for $i from $begin <b style="color:#ff6060;">through</b> $end{ //style here..}</h4><ul>
+<li>$i: index 變數，每跑一次迴圈 $i 帶的值會改變</li>
+<li>$begin: 迴圈的起始值</li>
+<li>$end: 迴圈的結束值</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$total</span>: <span class="number">10</span>;</span><br><span class="line"><span class="variable">$step</span>: <span class="number">360deg</span> / <span class="variable">$total</span>;</span><br><span class="line"><span class="keyword">@for</span> <span class="variable">$i</span> from <span class="number">1</span> through <span class="variable">$total</span> &#123;  <span class="comment">// for 迴圈會跑 10 次，從 1 跑到 10</span></span><br><span class="line">  <span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(#&#123;$i&#125;) &#123; <span class="comment">// 分別指定到每個 .ray</span></span><br><span class="line">    <span class="attribute">background</span>: adjust-hue(blue, <span class="variable">$i</span> * <span class="variable">$step</span>);   <span class="comment">// 調整每個 .ray 的色相顏色</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#9900ff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ff00cc</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ff0033</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ff6600</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">5</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: yellow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">6</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#66ff00</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">7</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00ff33</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">8</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00ffcc</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">9</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#0099ff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ray</span><span class="selector-pseudo">:nth-child</span>(<span class="number">10</span>) &#123;</span><br><span class="line">  <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/kakadodo/58aoqzv7/embedded/html,css,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+上例如此一寫就可以產生 10 個色相慢慢偏移的顏色區塊!! 純看 Sass code 整個超乾淨啊~
+
+
+<h4 id="for-i-from-begin-to-end-style-here"><a href="#for-i-from-begin-to-end-style-here" class="headerlink" title="@for $i from $begin to $end{ //style here..}"></a>@for $i from $begin <b style="color:#ff6060;">to</b> $end{ //style here..}</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$grid_number</span>: <span class="number">6</span>;</span><br><span class="line"><span class="keyword">@for</span> <span class="variable">$i</span> from <span class="number">1</span> to <span class="variable">$grid_number</span>&#123;</span><br><span class="line">  <span class="selector-class">.grid-</span>#&#123;<span class="variable">$i</span>&#125;&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$i</span>*<span class="number">80</span> px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.grid-1</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80</span> px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.grid-2</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">160</span> px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.grid-3</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">240</span> px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.grid-4</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">320</span> px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.grid-5</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400</span> px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 不包含結尾值 6</span></span><br></pre></td></tr></table></figure>
+
+<p>CSS 有撰寫順序的權重差異，使用 @for 遍歷時的順序會影響 CSS 產生的結果，上例是從 1 跑到結尾值，編譯後的 CSS 就是從 grid-1 排到 grid-5，如果改寫成 <code>@for $i from $grid_number through 1&#123;&#125;</code> 那就會變成從 grid-6 排到 grid-1 喔!</p>
+<h2 id="while"><a href="#while" class="headerlink" title="@while"></a>@while</h2><p>在跑 @for 時會依照起始值與結束值的範圍依序遍歷，但 @while 可以更進階的改變迴圈的遍歷條件以產生特定範圍的樣式。<br>語法: <code>@while $variable condition&#123;//style and change condition here..&#125;</code></p>
+<ul>
+<li>$variable: 做為判斷條件的變數</li>
+<li>condition: while 運行的條件</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$num</span>: <span class="number">6</span>;</span><br><span class="line"><span class="keyword">@while</span> <span class="variable">$num</span> &gt; <span class="number">0</span> &#123;</span><br><span class="line">  <span class="selector-class">.item-</span>#&#123;<span class="variable">$num</span>&#125; &#123; <span class="attribute">width</span>: <span class="number">2em</span> * <span class="variable">$num</span>; &#125;</span><br><span class="line">  <span class="variable">$num</span>: <span class="variable">$num</span> - <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.item-6</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">12em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-4</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">8em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item-2</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">4em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#if%E3%80%81-else-if%E3%80%81-else"><span class="toc-number">1.</span> <span class="toc-text">@if、@else if、@else</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for"><span class="toc-number">2.</span> <span class="toc-text">@for</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#for-i-from-begin-through-end-style-here"><span class="toc-number">2.0.1.</span> <span class="toc-text">@for $i from $begin through $end{ &#x2F;&#x2F;style here..}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-i-from-begin-to-end-style-here"><span class="toc-number">2.0.2.</span> <span class="toc-text">@for $i from $begin to $end{ &#x2F;&#x2F;style here..}</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while"><span class="toc-number">3.</span> <span class="toc-text">@while</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/11/20/css-sass-6/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&text=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&is_video=false&description=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while&body=Check out this article: https://kakadodo.github.io/2018/11/20/css-sass-6/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&title=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/11/20/css-sass-6/&name=Sass - 前端工程師應該要會的工程化 CSS - @if、@else if、@else 和 @for、@while&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="使用 JavaScript 創建各種型態的資料時，資料本身已經有許多方法可使用，之前提到是因為每個創建出來的實例可以藉由 prototype 來追循到上層擁有的方法。這次要來寫的就是這些上層階級(?)啦!它們都是 JavaScript 的全域物件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件">
+<meta property="og:url" content="https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="使用 JavaScript 創建各種型態的資料時，資料本身已經有許多方法可使用，之前提到是因為每個創建出來的實例可以藉由 prototype 來追循到上層擁有的方法。這次要來寫的就是這些上層階級(?)啦!它們都是 JavaScript 的全域物件。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-06-04T00:45:37.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.014Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/06/11/the-F2E-week1-todolist/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/05/28/js-abount-javascript-bom/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件&body=Check out this article: https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件&description=&lt;p&gt;使用 JavaScript 創建各種型態的資料時，資料本身已經有許多方法可使用，之前提到是因為每個創建出來的實例可以藉由 prototype 來追循到上層擁有的方法。這次要來寫的就是這些上層階級(?)啦!它們都是 JavaScript 的全域物件。&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#String-%E8%99%95%E7%90%86%E5%AD%97%E4%B8%B2%E5%9E%8B%E5%88%A5%E8%B3%87%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">String - 處理字串型別資料</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Number-%E8%99%95%E7%90%86%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E8%B3%87%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">Number - 處理數字型別資料</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Math-%E8%99%95%E7%90%86%E6%95%B8%E5%80%BC%E5%92%8C%E8%A8%88%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">Math - 處理數值和計算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Date-%E8%99%95%E7%90%86%E6%97%A5%E6%9C%9F%E8%B3%87%E6%96%99-%E6%AF%AB%E7%A7%92%E8%87%AA-1970-1-1-%E8%B5%B7%E8%A8%88%E7%AE%97"><span class="toc-number">4.</span> <span class="toc-text">Date - 處理日期資料(毫秒自 1970&#x2F;1&#x2F;1 起計算)</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-06-04T00:45:37.000Z" itemprop="datePublished">2018-06-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>使用 JavaScript 創建各種型態的資料時，資料本身已經有許多方法可使用，之前提到是因為每個創建出來的實例可以藉由 prototype 來追循到上層擁有的方法。這次要來寫的就是這些上層階級(?)啦!它們都是 JavaScript 的全域物件。</p>
+<span id="more"></span>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<h4 id="String-處理字串型別資料"><a href="#String-處理字串型別資料" class="headerlink" title="String - 處理字串型別資料"></a>String - 處理字串型別資料</h4><ul>
+<li><code>.length</code> : 取得字串的總長度(含符號及空白)</li>
+<li><code>.toUpperCase()</code> : 將英文字串轉換成大寫模式</li>
+<li><code>.toLowerCase()</code> : 將英文字串轉換成小寫模式</li>
+<li><code>.charAt(index)</code> : 傳遞索引值作為參數，取得索引位置的字元</li>
+<li><code>.indexOf()</code> : 傳遞字元作為參數，取得索引位置(如為-1表示沒有該字元存在)</li>
+<li><code>.substring(beginIndex, endIndex)</code> : 取得開始索引值~結束索引值之間的字元(不包含結束索引值位置)</li>
+<li><code>.split(&#39;分割字元/符號&#39;)</code> : 指定一個字元/符號當作分割關鍵，分割字元的前後字串片段會存成一組陣列</li>
+<li><code>.trim()</code> : 字串開頭與結尾端移除空白字元</li>
+<li><code>.replace(&#39;原始字元&#39;,&#39;替換字元&#39;)</code> : 將字串中含有原始字元的部分換成替換字元(搭配正規式 <code>/字元/g</code> 可替換全部)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strCht = <span class="string">&#x27;只要有上班，禮拜一永遠是惡夢&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> strEng = <span class="string">&#x27;Always Fucking Hell on Monday!!!&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//.length</span></span><br><span class="line"><span class="built_in">console</span>.log(strCht.length); <span class="comment">//14，連符號都會算進去</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.toUpperCase()</span></span><br><span class="line"><span class="built_in">console</span>.log(strEng.toUpperCase()); <span class="comment">//&quot;ALWAYS FUCKING HELL ON MONDAY!!!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.toLowerCase()</span></span><br><span class="line"><span class="built_in">console</span>.log(strEng.toLowerCase()); <span class="comment">//&quot;always fucking hell on monday!!!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.charAt()</span></span><br><span class="line"><span class="built_in">console</span>.log(strCht.charAt(<span class="number">3</span>)); <span class="comment">//&quot;上&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.indexOf()</span></span><br><span class="line"><span class="built_in">console</span>.log(strCht.indexOf(<span class="string">&#x27;一&#x27;</span>)); <span class="comment">//8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.subString()</span></span><br><span class="line"><span class="built_in">console</span>.log(strCht.substring(<span class="number">6</span>)); <span class="comment">//&quot;禮拜一永遠是惡夢&quot;，第二個參數不寫的話就會切到最後</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//split()</span></span><br><span class="line"><span class="built_in">console</span>.log(strCht.split(<span class="string">&#x27;，&#x27;</span>)); <span class="comment">//[&quot;只要有上班&quot;, &quot;禮拜一永遠是惡夢&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.trim()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;  前面兩個空白，後面兩個空白  &#x27;</span>.trim()); <span class="comment">//&quot;前面兩個空白，後面兩個空白&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//.replace()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;哭哭喔&#x27;</span>.replace(<span class="string">&#x27;哭&#x27;</span> , <span class="string">&#x27;氣&#x27;</span>)); <span class="comment">//&quot;氣哭喔&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;哭哭喔&#x27;</span>.replace(<span class="regexp">/哭/g</span> , <span class="string">&#x27;氣&#x27;</span>)); <span class="comment">//&quot;氣氣喔&quot;，用正規式可以將全部相同的字元都替換掉</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Number-處理數字型別資料"><a href="#Number-處理數字型別資料" class="headerlink" title="Number - 處理數字型別資料"></a>Number - 處理數字型別資料</h4><ul>
+<li><code>isNaN()</code> : 檢查是否為數值(此方式可判斷為 NaN 的值)<br>NaN 是 not a number 的意思，這種值會出現通常是程式運算出現不可預料的錯誤時，JavaScript 的防崩潰機制，回傳 NaN 來表示這不是個數值，無法運算。但 NaN 有點難搞，它算是一個特例，任何值與它都不會相等，甚至連自己都不相等XDD<br>因此要得知結果是不是 NaN 的話，就需要用到 isNaN() 這個方法囉!</li>
+<li><code>.toFixed(num)</code> : 四捨五入至小數點後指定位數(回傳字串)</li>
+<li><code>.toPrecision(num)</code> : 四捨五入至指定的整數位數(回傳指定數字的數目，字串型態)<br>感覺好像跟 toFixed 功能差不多，但其實不一樣啊! toPrecision 會從整數開始算字數，假設數值為 33.456，而要取的字數為 3，那麼會是從整數開始往右三個字數再經過四捨五入後的結果 33.5 喔!<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// isNaN()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="number">77</span>)); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="string">&#x27;77&#x27;</span>)); <span class="comment">//false，如是數字字串，會自動轉型態</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="literal">true</span>)); <span class="comment">//false，true 可以當作數字中的 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="string">&#x27;悽悽慘慘戚戚&#x27;</span>)); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="literal">NaN</span>)); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .toFixed()</span></span><br><span class="line"><span class="keyword">var</span> floatNum = <span class="number">33.45678</span>;</span><br><span class="line"><span class="built_in">console</span>.log(floatNum.toFixed(<span class="number">2</span>)); <span class="comment">//&quot;33.46&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> floatNum.toFixed(<span class="number">2</span>)); <span class="comment">//&quot;string&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .toPrecision()</span></span><br><span class="line"><span class="built_in">console</span>.log(floatNum.toPrecision(<span class="number">3</span>)); <span class="comment">//&quot;33.5&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(floatNum.toPrecision(<span class="number">4</span>)); <span class="comment">//&quot;33.46&quot;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Math-處理數值和計算"><a href="#Math-處理數值和計算" class="headerlink" title="Math - 處理數值和計算"></a>Math - 處理數值和計算</h4><ul>
+<li><code>Math.PI</code> : 回傳 PI 常數(3.1416…)</li>
+<li><code>Math.round()</code> : 四捨五入運算</li>
+<li><code>Math.sqrt()</code> : 開根號運算</li>
+<li><code>Math.ceil()</code> : 向上取整數(取得大於或等於指定數值的整數)</li>
+<li><code>Math.floor()</code> : 向下取整數(取得小於或等於指定數值的整數)</li>
+<li><code>Math.random()</code> : 隨機產生0~1(不包含)之間的數值<br>Math.random() 與 Math.floor() 搭配可得出隨機範圍的整數，這種用法常拿來做動畫效果的數值代入。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Math.PI</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.PI); <span class="comment">//3.141592653589793</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Math.round()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.round(<span class="number">33.5</span>)); <span class="comment">//34</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Math.sqrt()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.sqrt(<span class="number">9</span>)); <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Math.ceil()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.ceil(<span class="number">99.23</span>)); <span class="comment">//100，有浮點數就會自動進位成整數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Math.floor()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.floor(<span class="number">99.63</span>)); <span class="comment">//99，會刪除浮點數且不會進位</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Math.random()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.random()); <span class="comment">//0.13712655625557457，隨機0~1的浮點數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Math.floor() + Math.random()</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">4</span>)+<span class="number">1</span>); <span class="comment">//取得1~5之間的整數</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Date-處理日期資料-毫秒自-1970-1-1-起計算"><a href="#Date-處理日期資料-毫秒自-1970-1-1-起計算" class="headerlink" title="Date - 處理日期資料(毫秒自 1970/1/1 起計算)"></a>Date - 處理日期資料(毫秒自 1970/1/1 起計算)</h4><p>建立一個 Date 物件 <code>new Date(日期)</code>，如沒帶入指定日期預設取得當下的日期時間</p>
+<ul>
+<li><code>.getDate()</code> : 回傳日期(1-31)</li>
+<li><code>.getDay()</code> : 回傳星期(0-6)，從 0 開始，0 等同於星期日</li>
+<li><code>.getFullYear()</code> : 回傳年份(4位數)</li>
+<li><code>.getHours()</code> : 回傳小時(0-23)</li>
+<li><code>.getMilliseconds()</code> : 回傳毫秒(0-999)</li>
+<li><code>.getMinutes()</code> : 回傳分鐘(0-59)</li>
+<li><code>.getMonth()</code> : 回傳月份(0-11)，從 0 開始，因此換算後記得 +1 才是正確的月份</li>
+<li><code>.getSeconds()</code> : 回傳秒數(0-59)</li>
+<li><code>.getTime()</code> : 回傳至1970/1/1之間的毫秒數</li>
+<li><code>.toDateString()</code> : 回傳具可讀性的日期字串</li>
+<li><code>.toTimeString()</code> : 回傳具可讀性的時間字串</li>
+<li><code>.toString()</code> : 回傳日期時間的字串<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(today); <span class="comment">//Mon Jun 04 2018 10:32:49 GMT+0800 (台北標準時間)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getDate()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getDate()); <span class="comment">//4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getDay()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getDay()); <span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getFullYear()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getFullYear()); <span class="comment">//2018</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getHours()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getHours()); <span class="comment">//10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getMilliseconds()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getMilliseconds()); <span class="comment">//982</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getMinutes()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getMinutes()); <span class="comment">//32</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getMonth()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getMonth()); <span class="comment">//5，但當下是6月，因此記得+1</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getMonth()+<span class="number">1</span>); <span class="comment">//6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getSeconds()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getSeconds()); <span class="comment">//49</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .getTime()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.getTime()); <span class="comment">//1528079569982</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .toDateString()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.toDateString()); <span class="comment">//Mon Jun 04 2018</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .toTimeString()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.toTimeString()); <span class="comment">//10:32:49 GMT+0800 (台北標準時間)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .toString()</span></span><br><span class="line"><span class="built_in">console</span>.log(today.toString()); <span class="comment">//Mon Jun 04 2018 10:32:49 GMT+0800 (台北標準時間)</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>通過以上方式就可以取得日期的詳細資料~而在現實中常會用到的倒數計時，就會經過上述幾個方法計算來得出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;Mon Jun 04 2018 10:32:49&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> anotherDay = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;2018/6/30&#x27;</span>); <span class="comment">//只寫日期的話，時間預設會是00:00:00</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> todayTime = today.getTime();</span><br><span class="line"><span class="keyword">var</span> anotherDayTime = anotherDay.getTime();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(todayTime, anotherDayTime); <span class="comment">//1528079569000, 1530288000000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> leftDayTime = (anotherDayTime - todayTime);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> leftDay = <span class="built_in">Math</span>.floor(leftDayTime/<span class="number">1000</span>/<span class="number">60</span>/<span class="number">60</span>/<span class="number">24</span>);</span><br><span class="line"><span class="keyword">var</span> leftHours = <span class="built_in">Math</span>.floor(((leftDayTime/<span class="number">1000</span>/<span class="number">60</span>/<span class="number">60</span>/<span class="number">24</span>) - leftDay)*<span class="number">24</span>);</span><br><span class="line"><span class="keyword">var</span> leftMinutes = <span class="built_in">Math</span>.floor((((leftDayTime/<span class="number">1000</span>/<span class="number">60</span>/<span class="number">60</span>/<span class="number">24</span>) - leftDay)*<span class="number">24</span> - leftHours)*<span class="number">60</span>);</span><br><span class="line"><span class="keyword">var</span> leftSeconds = <span class="built_in">Math</span>.floor(((((leftDayTime/<span class="number">1000</span>/<span class="number">60</span>/<span class="number">60</span>/<span class="number">24</span>) - leftDay)*<span class="number">24</span> - leftHours)*<span class="number">60</span> - leftMinutes)*<span class="number">60</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;還剩下 &#x27;</span>+leftDay+<span class="string">&#x27; 天 &#x27;</span>+leftHours+<span class="string">&#x27; 時 &#x27;</span>+leftMinutes+<span class="string">&#x27; 分 &#x27;</span>+leftSeconds+<span class="string">&#x27; 秒.&#x27;</span>);</span><br><span class="line"><span class="comment">//&quot;還剩下 25 天 13 時 27 分 11 秒.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如此一來便可得知剩餘多少時間，再搭配 setTimeout 之類的排程函式，就可以做出動態的倒數計時囉!!!!</p>
+<iframe width="100%" height="300" src="//jsfiddle.net/o7ebw8sy/4/embedded/js,result/dark/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#String-%E8%99%95%E7%90%86%E5%AD%97%E4%B8%B2%E5%9E%8B%E5%88%A5%E8%B3%87%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">String - 處理字串型別資料</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Number-%E8%99%95%E7%90%86%E6%95%B8%E5%AD%97%E5%9E%8B%E5%88%A5%E8%B3%87%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">Number - 處理數字型別資料</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Math-%E8%99%95%E7%90%86%E6%95%B8%E5%80%BC%E5%92%8C%E8%A8%88%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">Math - 處理數值和計算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Date-%E8%99%95%E7%90%86%E6%97%A5%E6%9C%9F%E8%B3%87%E6%96%99-%E6%AF%AB%E7%A7%92%E8%87%AA-1970-1-1-%E8%B5%B7%E8%A8%88%E7%AE%97"><span class="toc-number">4.</span> <span class="toc-text">Date - 處理日期資料(毫秒自 1970&#x2F;1&#x2F;1 起計算)</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件&body=Check out this article: https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/06/04/js-about-javascript-global-obj/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 8.Javascript的全域物件&description=&lt;p&gt;使用 JavaScript 創建各種型態的資料時，資料本身已經有許多方法可使用，之前提到是因為每個創建出來的實例可以藉由 prototype 來追循到上層擁有的方法。這次要來寫的就是這些上層階級(?)啦!它們都是 JavaScript 的全域物件。&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

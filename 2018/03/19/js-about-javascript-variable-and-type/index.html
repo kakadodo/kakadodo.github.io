@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="記得前年想不開決定踏入前端的領域時，最害怕的就是寫腳本語言這件事。搞懂 html 及 css 就花了一段時間，還是看在可以產生出美美的畫面才奮發去學 XD但可惜的就是再美的畫面，不能互動沒有功能就是少了點甚麼，更重要的是…不會 JavaScript 找的到工作嘛你!到頭來還是得面對啊~孩子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)">
+<meta property="og:url" content="https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="記得前年想不開決定踏入前端的領域時，最害怕的就是寫腳本語言這件事。搞懂 html 及 css 就花了一段時間，還是看在可以產生出美美的畫面才奮發去學 XD但可惜的就是再美的畫面，不能互動沒有功能就是少了點甚麼，更重要的是…不會 JavaScript 找的到工作嘛你!到頭來還是得面對啊~孩子">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-03-19T01:38:39.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/03/30/css-alink-pdf/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/03/13/css-media-print-setting/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)&body=Check out this article: https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)&description=&lt;p&gt;記得前年想不開決定踏入前端的領域時，最害怕的就是寫腳本語言這件事。搞懂 html 及 css 就花了一段時間，還是看在可以產生出美美的畫面才奮發去學 XD&lt;br&gt;但可惜的就是再美的畫面，不能互動&lt;del&gt;沒有功能&lt;/del&gt;就是少了點甚麼，更重要的是…不會 JavaScript 找的到工作嘛你!到頭來還是得面對啊~孩子&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%8A%E6%95%B8-Variable"><span class="toc-number">1.</span> <span class="toc-text">變數 (Variable)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9E%8B%E5%88%A5-Type"><span class="toc-number">2.</span> <span class="toc-text">型別(Type)</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-03-19T01:38:39.000Z" itemprop="datePublished">2018-03-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>記得前年想不開決定踏入前端的領域時，最害怕的就是寫腳本語言這件事。搞懂 html 及 css 就花了一段時間，還是看在可以產生出美美的畫面才奮發去學 XD<br>但可惜的就是再美的畫面，不能互動<del>沒有功能</del>就是少了點甚麼，更重要的是…不會 JavaScript 找的到工作嘛你!到頭來還是得面對啊~孩子</p>
+<span id="more"></span>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"><br>自己學 JavaScript 的步驟不太一樣，先從 native JavaScript 看起，後來才接觸 jQuery，印象最深刻的就是翻開歐萊禮那厚厚一本的 “深入淺出 JavaScript” ，看得我似懂非懂，好像抓到了重點，但又不知道怎麼活用，看完後只是徒增恐懼感啊!! ∑(✘Д✘๑ )<br>(不過這系列的 jQuery 倒是滿淺顯易懂的，所以應該是我慧根低…)</p>
+<p>真正有懂的感覺是在接觸線上課程的事了，真心覺得有老師的學生是幸福的!(悔恨過去的自己中–)現在的 online coding lesson 非常多，當然老師的教法也有差，找到適合自己學習曲線的課程比較重要。</p>
+<p>非常推薦 Udemy 的 <a target="_blank" rel="noopener" href="https://www.udemy.com/javascriptjs/learn/v4/overview">“JavaScript 全攻略：克服 JS 的奇怪部分”</a> 這門課，適合給對 JavaScript 有基礎概念，想要再進一步了解其原理及搞懂為何它如此奇(G)怪(Y)的捧油，講解得非常清楚好懂，上完有如拿到葵花寶典般功力大增(?)</p>
+<p>廢話完就來介紹一些 JavaScript 的小觀念吧!</p>
+<h4 id="變數-Variable"><a href="#變數-Variable" class="headerlink" title="變數 (Variable)"></a>變數 (Variable)</h4><p>變數可以把他想成是一個空的容器，這個容器你可以給他取名字、放你想要放的內容，但容器本身宣告的位置很重要，如果把它放在特定的房間( local area )裡，那就只能在那房間使用它;如果放在連接每一處的走廊上( global area )，則哪裡都可以取得它。變數一般透過宣告來定義，當然也可以不宣告直接寫變數，如果你想造成不必要的麻煩..<br>變數可分為全域變數及區域變數兩種，全域變數的特點是大家都可以取用，且會一直存於記憶體中，區域變數則只存在 function 中，當 function 執行完後，該變數也會於記憶體中消失。(function 為變數有效範圍的最小切分單位，ES6 的 let 和 const 例外)</p>
+<ul>
+<li><p>使用 var 宣告變數<br>var 宣告的變數為全域或區域要看宣告的位置是否在 function 中，如果寫在 for 迴圈或 if 判斷式中，還是會被當成全域變數喔!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="string">&#x27;我是全域變數&#x27;</span>; <span class="comment">//全域</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//我是全域變數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// function 內宣告的變數為區域變數</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showAB</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> b=<span class="string">&#x27;我是區域變數&#x27;</span>; <span class="comment">//區域</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;b: &#x27;</span>+b, <span class="string">&#x27;a: &#x27;</span>+a); <span class="comment">//區域可以取得全域的變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">showAB(); <span class="comment">//b:我是區域變數, a:我是全域變數</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//b is not defined，找不到變數b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for迴圈及 if判斷中的變數宣告皆為全域變數</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">1</span>; i++)&#123;</span><br><span class="line">  <span class="keyword">var</span> c=<span class="string">&#x27;我在for迴圈中&#x27;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;迴圈內的console: &#x27;</span>+c); <span class="comment">//迴圈內的console: 我在for迴圈中</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;迴圈外的console: &#x27;</span>+c); <span class="comment">//迴圈外的console: 我在for迴圈中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="number">2</span>&gt;<span class="number">1</span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> d=<span class="string">&#x27;我在if判斷中&#x27;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;if內的console: &#x27;</span>+d); <span class="comment">//if內的console: 我在if判斷中</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;if外的console: &#x27;</span>+d);  <span class="comment">//if外的console: 我在if判斷中</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ES6 新增兩種宣告的方式: let 與 const ( ES6 語法使用時須注意瀏覽器支援度)</p>
+<ul>
+<li>let 可當作是改良過的 var ，區域更分明、也可避免汙染全域變數，以區塊大括號<code>&#123;&#125;</code>作為變數範圍的分界，因此在 for 迴圈及 if 判斷中宣告就會是區域變數。</li>
+<li>const 則是常數，必須在宣告時就給定初始值，不能重新指定值，也不能重新宣告。(頑固老頭的概念)<br>至於何時要用 let 或 const，最簡單的辨別方式就是值的改變，像 ESlint 等程式碼檢查工具都會要求盡量用 const 來宣告，除非你的程式碼會讓這個變數的值被改變。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="string">&#x27;我是用const定義的a&#x27;</span>;</span><br><span class="line">a=<span class="string">&#x27;來啊來啊!改變我啊&#x27;</span>; <span class="comment">// TypeError，不能改變值</span></span><br><span class="line"><span class="keyword">const</span> a=<span class="string">&#x27;來啊來啊!重新宣告我啊!&#x27;</span>; <span class="comment">//SyntaxError，常數已被宣告</span></span><br><span class="line"><span class="keyword">const</span> b; <span class="comment">//SyntaxError，常數遺失初始值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for迴圈就適合用 let 來宣告變數</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">1</span>; i++)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">//0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">//i is not defined</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>除非不確定變數型別，建議都先設定變數的初始值型別如<code>var a=&quot;&quot;;//字串</code>、<code>var a=0;//數字</code></p>
+</li>
+</ul>
+<h4 id="型別-Type"><a href="#型別-Type" class="headerlink" title="型別(Type)"></a>型別(Type)</h4><p>JavaScript 是一種弱型別的語言，它對型別的要求沒那麼嚴謹，可以在過程中一再的做型別轉換。<br>主要有六種資料型別: Boolean、Null、Undefined、Number、String 跟 Object。(ES6 有新增第七種 Symbol 型別，僅此告知)</p>
+<ul>
+<li>Boolean: 布林值，也就是 true / false</li>
+<li>Null: 空值，也就是..空空的沒有值的意思..(好像解釋也沒好到哪去)</li>
+<li>Undefined: 值未定義，但不是空值喔!</li>
+<li>Number: 數值，整數、浮點數等~</li>
+<li>String: 字串，用雙引號<code>&quot;&quot;</code>框起來的內容，即使內容是數字也會視為字串型別</li>
+<li>Object: 物件，一個無底洞的型別..除了上述的基本型別外，其餘都是物件(Array、Function、DOM、BOM..)</li>
+</ul>
+<p>其中 Null 跟 Undefined 應該是最容易讓人困惑的型別，乍看之下兩者好像差不多意思，但其實完全不一樣啊~<br>Null 可以當作這個變數有被指定一個值，只是這個值叫做空值，也就是沒東西。但 Undefined 則是根本沒被指定任何值，它是一個尚未被定義的狀態。很多大神及講師都會建議變數應避免設定 undefined 而是使用 null，因為 undefined 可能會造成程式發生錯誤。</p>
+<p>要檢查型別，可使用<code>typeof(內容)</code>語法來查詢。<br>這邊也提供 Kuro 大大於 iT 鐵人賽寫的 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10190962">“重新認識 JavaScript - 物件、陣列以及型別判斷”</a> 文章，裡面有詳細介紹型別判斷與其詭異的結果原因 XD<br>有大神的介紹說明自己就不怕寫錯出糗了 :p</p>
+<p><code>typeof(null)</code>結果是 object 確實有夠莫名其妙…<br>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%8A%E6%95%B8-Variable"><span class="toc-number">1.</span> <span class="toc-text">變數 (Variable)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9E%8B%E5%88%A5-Type"><span class="toc-number">2.</span> <span class="toc-text">型別(Type)</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)&body=Check out this article: https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/03/19/js-about-javascript-variable-and-type/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 1.變數(Variable)與型別(Type)&description=&lt;p&gt;記得前年想不開決定踏入前端的領域時，最害怕的就是寫腳本語言這件事。搞懂 html 及 css 就花了一段時間，還是看在可以產生出美美的畫面才奮發去學 XD&lt;br&gt;但可惜的就是再美的畫面，不能互動&lt;del&gt;沒有功能&lt;/del&gt;就是少了點甚麼，更重要的是…不會 JavaScript 找的到工作嘛你!到頭來還是得面對啊~孩子&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

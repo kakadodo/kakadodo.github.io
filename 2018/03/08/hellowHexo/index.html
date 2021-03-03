@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="各位觀眾!!!終於讓 blog 上線了!!! (腦內開啟無限循環灑花系統 ｡:.ﾟヽ(*´∀&#96;)ﾉﾟ.:｡ )   前陣子在 Facebook 看了卡斯柏老蘇的線上直播教學使用 Hexo 打造部落格後，一直想找個時間來現學現做自己的部落格，當作自己在前端路程打滾中學到碰到被雷到的心得筆記，趁最近有點小空來嘗試一下，但是 ~~~ 果然看得容易，做得要人命。🙄 先來說說我碰到甚麼問題，下面再來寫最終">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages">
+<meta property="og:url" content="https://kakadodo.github.io/2018/03/08/hellowHexo/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="各位觀眾!!!終於讓 blog 上線了!!! (腦內開啟無限循環灑花系統 ｡:.ﾟヽ(*´∀&#96;)ﾉﾟ.:｡ )   前陣子在 Facebook 看了卡斯柏老蘇的線上直播教學使用 Hexo 打造部落格後，一直想找個時間來現學現做自己的部落格，當作自己在前端路程打滾中學到碰到被雷到的心得筆記，趁最近有點小空來嘗試一下，但是 ~~~ 果然看得容易，做得要人命。🙄 先來說說我碰到甚麼問題，下面再來寫最終">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=ad649ebb-6eaa-4d78-8bf3-c599e26cfd82">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo-2.jpg?alt=media&token=926c9207-1ba3-41c2-b0dc-048623492dad">
+<meta property="article:published_time" content="2018-03-08T06:06:01.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:07:06.134Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="GitHub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=ad649ebb-6eaa-4d78-8bf3-c599e26cfd82">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/03/13/css-media-print-setting/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/03/08/hellowHexo/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&text=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&is_video=false&description=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages&body=Check out this article: https://kakadodo.github.io/2018/03/08/hellowHexo/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&name=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Situation"><span class="toc-number">1.</span> <span class="toc-text">Situation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%BD%AE%E5%8F%8A%E7%99%BC%E5%B8%83%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">建置及發布流程</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-03-08T06:06:01.000Z" itemprop="datePublished">2018-03-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/hexo/">Hexo</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/github/" rel="tag">GitHub</a>, <a class="tag-link-link" href="/tags/hexo/" rel="tag">Hexo</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>各位觀眾!!!<br>終於讓 blog 上線了!!! (腦內開啟無限循環灑花系統 ｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡ )</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo.jpg?alt=media&token=ad649ebb-6eaa-4d78-8bf3-c599e26cfd82" alt="hello hexo image" title="建置 Hexo 及佈署到 GitHub Pages"></p>
+<p>前陣子在 Facebook 看了<a target="_blank" rel="noopener" href="https://www.facebook.com/WccCasper/">卡斯柏</a>老蘇的線上直播教學<a target="_blank" rel="noopener" href="https://www.facebook.com/WccCasper/videos/486603828402512/">使用 Hexo 打造部落格</a>後，一直想找個時間來現學現做自己的部落格，當作自己在前端路程打滾中學到碰到被雷到的心得筆記，趁最近有點小空來嘗試一下，但是 ~~~ 果然看得容易，做得要人命。🙄</p>
+<p>先來說說我碰到甚麼問題，下面再來寫最終的建置流程。</p>
+<hr>
+<h2 id="Situation"><a href="#Situation" class="headerlink" title="Situation"></a>Situation</h2><ol>
+<li>Hexo CLI 預設的 theme <strong>landscape</strong> 跟 GitHub 有衝突，推原始檔到遠端 repo 時會收到信件通知這個主題不兼容無法運作</li>
+</ol>
+<ul>
+<li>之前看教學時明明很正常，自己做就碰到這狀況，一度感到懵逼…但想想最後也會換主題所以就先隨他了</li>
+<li>後來發現用其他主題也會出現這個問題，再度爬了 Stack Overflow 查到目前的 GitHub Pages 會擋第三方的主題，如果要使用非官方支援的主題，需要將 Hexo 的靜態檔佈署到 master 上而不是 gh-pages。</li>
+</ul>
+<ol start="2">
+<li>使用 <code>$ hexo d</code> 指令佈署到 GitHub 會報錯，內容大致是顯示 bash err or 找不到這個 repo or branch 不存在 or 無權限之類的詭異警示</li>
+</ol>
+<ul>
+<li>這段就是把我搞死的大地雷!!用 Git 推送原始檔是成功的，但用 hexo 推到 gh-pages 就是會出錯，來來回回試了好幾次，重新安裝 hexo、重新建立 GitHub repo，之後又看了半天的 Stack Overflow ，終於推送成功了 (╯‵□′)╯︵┴─┴</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>要解決上述第二點的問題，首先講一下自己當下的環境配置 :</p>
+<ul>
+<li>win7 32位元的 PC(覺得公司還在用 win7 有點神奇)</li>
+<li>編輯器 vscode(終端機也用它的)</li>
+<li>GitHub 的 repo 用 https 連接</li>
+<li>還沒換掉的 landscape 主題 XDD</li>
+</ul>
+<p>一開始想說會不會是有 npm 套件不支援 32位元系統(在運行 npm install 時會有警告跳出)，但如果一開始就做這樣的假設，那我也等於 GG 了，於是先跳過這念頭。</p>
+<p>再來是 vscode 的終端機，我是設定成 bash，但之前爬文時有看別人說 vscode 打的指令可能會報錯，於是又另外開了 git bash 來推送，結果還是不行。</p>
+<p>主題雖然維持在壞掉的 landscape 但一開始推原始檔時是成功的，所以應該不是它的問題。</p>
+<p>最後就是 GitHub repo 的連接方式了!因為一直是用 https 連接，也沒發生錯誤過，這次被卡到陰後..上 Stack Overflow 查才看到有人說建議用 SSH 方式連接。但 SSH 於我如隔壁棚的霧霾…耗了超多時間才建好連接點。</p>
+<p>經過一整天的折磨後，終於用 hexo 指令推成功了!!<br>整體的結論是: 使用 SSH 作為 repo 連接方式，git bash 來輸入指令，用第三方的主題時，部落格靜態檔要發布在 master 而不是 gh-pages。</p>
+<hr>
+<h2 id="建置及發布流程"><a href="#建置及發布流程" class="headerlink" title="建置及發布流程"></a>建置及發布流程</h2><ol>
+<li><p>電腦需安裝 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a> 來執行 npm 相關套件，<a target="_blank" rel="noopener" href="https://git-scm.com/">git</a> 來執行版本控制及部落格推送。</p>
+</li>
+<li><p>安裝重點工具 Hexo CLI，建置部落格就靠它了!!詳細的操作步驟可以參考 <a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/index.html">Hexo 的官網</a>介紹，繁體中文揪甘心! CLI 建立完成後，記得另外安裝推送到遠端儲存庫的 npm 套件，這邊我是使用 <strong>hexo-deployer-git</strong> 來做 GitHub 的佈署。</p>
+</li>
+<li><p>可先運行 Hexo Server 看看網站是否正常，再針對想要調整的畫面功能來設定配置檔( Hexo CLI 產生的資料夾內的 _config.yml 檔案)，官網都有詳細介紹配置檔的設定，白癡如我也是照著官網一步一步走下去滴。</p>
+</li>
+<li><p>如要更換部落格的主題，可至官網的<a target="_blank" rel="noopener" href="https://hexo.io/themes/">主題頁面</a>尋找喜歡的版面來套用，開發者們都會提供下載安裝說明及特定功能的使用方式(例如加載 Disqus 留言板、 Google Analytics 等等..)</p>
+</li>
+<li><p>寫好部落格的文章後，就可以準備發布到網路上啦!我是使用 <a target="_blank" rel="noopener" href="https://github.com/">GitHub</a> 的 GitHub Pages 來架設 Hexo，因此需要有 GitHub 的帳號喔喔喔<del>註冊免費，功能強大，強者又多，資源又廣，好平台不用嗎?(但重點應該是它支援 Hexo 架網才對XD )<br>於 GitHub 新建一個 Repository，Repository name 和部落格的網址有關，輸入 “username”.github.io ，GitHub 會將這個儲存庫視為主站，主站的網址就會是 “username”.github.io，網域是 Github 整個有潮到</del> 但這種 name 的設定方式一個帳號只能一個，其他儲存庫的名稱則會變成這串網址後的其他路徑位置。<br>repo 建好後有兩種連接方式可選擇，這邊請選 <strong>SSH</strong> 的方式 ( git@ 開頭的)，複製連結並打開 Hexo 的配置檔，我們需要在配置檔中將 repo 的資訊寫入。</p>
+<figure class="highlight yml"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;repo</span> <span class="string">name&gt;.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  <strong>3/10 修正 branch 需設為 master，否則 GitHub 會認為是非支援的 Jekyll 主題而報錯(很重要所以打了三遍)</strong></p>
+<ol start="6">
+<li><p>下一步先來設定如何在電腦產生 SSH Key 讓我們之後可以用 SSH 連接的方式與 GitHub 溝通。打開電腦的終端機， cd 到使用者的文件夾中，執行產生 SSH Key 的指令。(&lt;&gt;表示要替換成自己的設定)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /c/users/&lt;your_name&gt;</span><br><span class="line">$ ssh-keygen -t rsa -b 4096 -C &lt;<span class="string">&quot;your_email@example.com&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180308-hello-hexo-2.jpg?alt=media&token=926c9207-1ba3-41c2-b0dc-048623492dad" alt="SSH Key 產生圖例" title="SSH Key 產生畫面"></p>
+<p>用編輯器打開剛剛產生的 id_rsa.pub 檔案，複製裡面的代碼( Public Key )，這串落落長的代碼用來讓我們的電腦可以跟 GitHub 遠端連接，可想像成是古時候的打暗號??</p>
+<blockquote>
+<p>(GitHub:今晚打老虎?)<br> (電腦:賭俠2之上海灘賭聖)<br> (等登~訪問通過!!)</p>
+</blockquote>
+<p>沒啦~我瞎掰的。<br>總之，電腦或是 GitHub 其中一端沒有這組 SSH Key 來佐證彼此之間是有協定過的話，就會被拒絕訪問的概念。<br>所以我們要到 GitHub 的個人設定中， <strong>SSH and GPG keys</strong> 這欄，點擊新增 New SSH Key ，將剛剛複製的 Public Key 貼上並儲存，這樣 GitHub 就允許有這組 Key 的電腦可以訪問它囉!<br>但光設定好 GitHub 是不夠的，也要讓電腦知道有這組 Key 要使用，因此還要針對電腦這端來設定，使用的則是 Private Key。<br>於終端機輸入以下指令來打開 SSH 代理並新增 Private Key 到 SSH 代理。(一樣在使用者文件夾那層操作唷)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start the ssh-agent in the background</span></span><br><span class="line">$ <span class="built_in">eval</span> $(ssh-agent -s)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add your SSH private key to the ssh-agent</span></span><br><span class="line">$ ssh-add ~/.ssh/id_rsa</span><br><span class="line"><span class="comment"># 如果有設定 passphrase 的這邊會要求輸入確認</span></span><br></pre></td></tr></table></figure>
+
+<p>兩邊的 Key 設定好後，就可以來測試是否有連接成功，於終端機輸入以下指令，如過程中有詢問 Yes / No 的請選擇 Yes，連接如成功會顯示這段內容: Hi “username”! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SSH 設定成功後，就可先做一次原始檔的推送啦!先推送原始檔(也就是 Hexo CLI 產生的檔案)到 repo 的 其他分支(我用 develop 分支)，再將 Hexo 生成後的部落格靜態檔推到 master ， master 才是真正存放部落格的內容喔。<br>於終端機 cd 回 hexo 的資料夾，初始化 git 並執行一次 commit，之後增加 Github repo 的連接，推送 commit 到遠端儲存庫。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本機的 git 初始化 + commit</span></span><br><span class="line">$ git init</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">&quot;git init&quot;</span></span><br><span class="line"><span class="comment"># 增加 repo 連結，推到遠端儲存庫</span></span><br><span class="line">$ git remote add origin git@github.com:&lt;username&gt;/&lt;repo name&gt;.git</span><br><span class="line">$ git push -u origin develop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>成功推上去後，回 GitHub 應該就會看到剛剛推送的紀錄，接下來就剩部落格的推送了，推送之前要記得先將 CLI 的檔案產生成一般網頁靜態檔，使用 Hexo 指令 <code>$ hexo g</code> 生成靜態檔(存放於 Public 資料夾)，之後便可執行 <code>$ hexo d</code> 將靜態檔佈署到 GitHub 的 master 了! 於瀏覽器輸入網址 “username”.github.io 就會連到我們辛辛苦苦建好的部落格了!!我的老天鵝啊~</p>
+</li>
+</ol>
+<hr>
+<p>呼，就這樣我的第一篇終於完成了!原來認真的寫一篇有內容的部落格會這麼累😵<br>覺得更加敬佩網路上的開發者大大了<del>寫部落格又是一門學問吶!<br>BTW，這篇的標題原本設定為【第一次用 Hexo 就上手】，但果然是我想太美</del> 哈哈</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Situation"><span class="toc-number">1.</span> <span class="toc-text">Situation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%BD%AE%E5%8F%8A%E7%99%BC%E5%B8%83%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">建置及發布流程</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/03/08/hellowHexo/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&text=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&is_video=false&description=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages&body=Check out this article: https://kakadodo.github.io/2018/03/08/hellowHexo/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&title=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/03/08/hellowHexo/&name=第一次用 Hexo 就搞死我 - 建置 Hexo 及佈署到 GitHub Pages&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

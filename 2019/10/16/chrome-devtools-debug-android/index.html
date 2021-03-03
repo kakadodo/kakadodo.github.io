@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前陣子被多語系檢查搞到心累，Chrome 雖然可以模擬手機尺寸來查看，但裝置上的呈現可能還是有誤差..明明瀏覽器模擬的畫面是 OK 的，手機打開還是跑版了!!礙於手機沒有 devtools 功能只能自己盲改，前後來回修改、上版再檢查，人生的美好時光就是這樣消逝掉的 XD想到之前公司在測平板版面時，自己有用過 Chrome 的 Android 遠程調試工具來 debug，照著以前的模式操作電腦卻始終">
+<meta property="og:type" content="article">
+<meta property="og:title" content="來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)">
+<meta property="og:url" content="https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="前陣子被多語系檢查搞到心累，Chrome 雖然可以模擬手機尺寸來查看，但裝置上的呈現可能還是有誤差..明明瀏覽器模擬的畫面是 OK 的，手機打開還是跑版了!!礙於手機沒有 devtools 功能只能自己盲改，前後來回修改、上版再檢查，人生的美好時光就是這樣消逝掉的 XD想到之前公司在測平板版面時，自己有用過 Chrome 的 Android 遠程調試工具來 debug，照著以前的模式操作電腦卻始終">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android.jpg?alt=media&token=be192c38-22aa-4178-a06f-2086cbf85ce2">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-1.jpg?alt=media&token=ea30ad0b-5531-4e73-a70b-95d84726da73">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-2.jpg?alt=media&token=ab5d37b9-f382-43d1-99a2-705326240345">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-3.jpg?alt=media&token=e5ac1d58-d934-407a-a4a4-d70dd61eab3a">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-4.jpg?alt=media&token=fe9bcbc5-5b2a-443c-a12f-639d348a2fcf">
+<meta property="article:published_time" content="2019-10-16T13:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:32:15.353Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android.jpg?alt=media&token=be192c38-22aa-4178-a06f-2086cbf85ce2">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2020/05/24/firebase-auth-social-login/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/09/07/the-F2E-2nd-week9-notebook/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&text=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&is_video=false&description=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)&body=Check out this article: https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&name=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%BA%96%E5%82%99"><span class="toc-number">1.</span> <span class="toc-text">前置準備:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%BA%96%E5%82%99%E4%B8%AD%E7%9A%84%E9%96%8B%E5%95%9F%E9%96%8B%E7%99%BC%E4%BA%BA%E5%93%A1%E9%81%B8%E9%A0%85%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">前置準備中的開啟開發人員選項操作:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">操作說明:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-10-16T13:00:00.000Z" itemprop="datePublished">2019-10-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/web-others/">Web Others</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>前陣子被多語系檢查搞到心累，Chrome 雖然可以模擬手機尺寸來查看，但裝置上的呈現可能還是有誤差..明明瀏覽器模擬的畫面是 OK 的，手機打開還是跑版了!!<br>礙於手機沒有 devtools 功能只能自己盲改，前後來回修改、上版再檢查，人生的美好時光就是這樣消逝掉的 XD<br>想到之前公司在測平板版面時，自己有用過 Chrome 的 Android 遠程調試工具來 debug，照著以前的模式操作電腦卻始終偵測不到裝置，經過幾番折磨當了兩個晚上的鍵盤偵探後，終於順利讓我成功了!故有此篇操作說明的誕生~~希望這篇廢廢的操作說明文也能幫助到有這問題的捧油!</p>
+<!-- excerpt -->
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android.jpg?alt=media&token=be192c38-22aa-4178-a06f-2086cbf85ce2" alt="blog image" title="來用 Chrome Devtools 遠程調試 Android 設備"></p>
+<p>Google 本身有一份如何使用<a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/remote-debugging/#enable_usb_debugging_on_your_android_device">遠程調試</a>的說明文章，裡面有提到各作業系統的操作說明，因為我是使用 Windows 系統，所以接下來的操作說明是 base 在 Windows 的方式喔! ( Mac 跟 Linux 反而沒那麼麻煩的樣子..🤔)<br>說明文章有提到如果是非 Google 自家的行動裝置，需要安裝 OEM USB drivers，而且 OEM 會根據電腦廠牌的不同需要自行去廠牌的官網下載對應的驅動程式，這時問題就來了~我的筆電是 DELL 的，但在 DELL 的支援網站怎—-麼—-找—-就是找不到 OEM USB drivers 的驅動程式…難不成就要因此放棄了嗎?!!?!?(大哭</p>
+<p>事實證明，只要有心(不讓自己加班)，一定能找到第二種解決方案 XDD<br>這個解法是使用 Android 提供的 SDK 工具包，讓電腦可以偵測到裝置並啟動連線，之後就能順利在 Chrome 感應到連接的裝置啦!</p>
+<h2 id="前置準備"><a href="#前置準備" class="headerlink" title="前置準備:"></a>前置準備:</h2><ol>
+<li>於 Android Studio 下載 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/platform-tools">platform-tools</a> 壓縮檔並解壓縮(廢話)。</li>
+<li>一台 Android 裝置，版本系統至少 4.0 以上，並且安裝 Android 版的 Chrome 瀏覽器及開啟 Android 開發人員選項。</li>
+<li>一條具有傳輸功能的電纜線。(本來對這句感到疑惑，但居然真的有純充電用的電纜線我也是醉了..)</li>
+<li>電腦的 Chrome 版本至少 32 以上。</li>
+</ol>
+<h3 id="前置準備中的開啟開發人員選項操作"><a href="#前置準備中的開啟開發人員選項操作" class="headerlink" title="前置準備中的開啟開發人員選項操作:"></a>前置準備中的開啟開發人員選項操作:</h3><p>要知道裝置有沒有開啟開發人員選項很簡單，打開<strong>設定</strong>掃過一遍，如果沒有看到”開發人員選項”這幾個字，就表示沒開啟啦 XDD<br>開啟的方式也滿有趣的，有機關破解的概念。<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-1.jpg?alt=media&token=ea30ad0b-5531-4e73-a70b-95d84726da73" alt="blog image" title="來用 Chrome Devtools 遠程調試 Android 設備"></p>
+<p>前往設定-&gt;關於裝置-&gt;軟體資訊-&gt;版本號碼，有些廠牌手機會有提示字在版本號碼下，會說連按 n 次可開啟開發人員模式，有些可能路徑的名稱會稍有不同，但大概看一下都會設定在版本號碼這個區塊，連按幾次後會看到有提示框出現”剩下 n 個步驟啟用開發人員選項”，滿足連按的次數後就會跳出提示框”您已啟用開發人員選項”，這時再回到設定頁面就可以看到原本不存在的開發人員選項功能囉。</p>
+<h2 id="操作說明"><a href="#操作說明" class="headerlink" title="操作說明:"></a>操作說明:</h2><p>首先用電纜線連接裝置到電腦，然後在電腦使用 command line 進入解壓縮後的 platform-tools 目錄，並輸入指令 <code>./adb devices</code>，等待一段時間後，可以看到顯示偵測到裝置並啟動的訊息，這樣就表示電腦與裝置有正式連接了。<br>接下來於裝置前往設定-&gt;開發人員選項-&gt;開啟開發人員模式及使用 USB 偵錯，會跳出下圖的提示訊息，都選擇確認後，就能使用 Chrome 來遠程調試了!<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-2.jpg?alt=media&token=ab5d37b9-f382-43d1-99a2-705326240345" alt="blog image" title="來用 Chrome Devtools 遠程調試 Android 設備"></p>
+<p>先在裝置中使用 Chrome 打開要偵測的網頁畫面，然後回到電腦打開 Chrome 的 Devtools，照著下圖的說明開啟 <strong>Remote devices</strong> 面板，等待一段時間，可以看到面板中出現偵測到的裝置型號及裝置目前使用 Chrome 開啟的頁面 URL，點擊 URL 旁邊的 <strong>inspect</strong> 按鈕就能開啟裝置映射後的 debug 頁面。<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-3.jpg?alt=media&token=e5ac1d58-d934-407a-a4a4-d70dd61eab3a" alt="blog image" title="來用 Chrome Devtools 遠程調試 Android 設備"><br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20191016-chrome-devtools-debug-android-4.jpg?alt=media&token=fe9bcbc5-5b2a-443c-a12f-639d348a2fcf" alt="blog image" title="來用 Chrome Devtools 遠程調試 Android 設備"><br>看到這特殊的畫面有沒有很感動!!!裝置的頁面即時反應在電腦上，並且可以查看網頁結構當然也可以在裡面動手腳啦!改變後的畫面會同時反應回裝置身上~這樣就能即時測試調整裝置的版面了!!上圖做了個簡單的範例更換 Google 的 logo 圖，就是這麼簡單 :D</p>
+<p>雖然步驟比 Google 說明的複雜，但能解決的方法就是好方法 XD<br>至於 ios 系列的裝置..沒有 Mac 系統的話還是繼續盲改吧!哀~</p>
+<p>以上內容如有勘誤，還請不吝告知 🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%BA%96%E5%82%99"><span class="toc-number">1.</span> <span class="toc-text">前置準備:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%BA%96%E5%82%99%E4%B8%AD%E7%9A%84%E9%96%8B%E5%95%9F%E9%96%8B%E7%99%BC%E4%BA%BA%E5%93%A1%E9%81%B8%E9%A0%85%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">前置準備中的開啟開發人員選項操作:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">操作說明:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&text=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&is_video=false&description=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)&body=Check out this article: https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&title=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/10/16/chrome-devtools-debug-android/&name=來用 Chrome Devtools 遠程調試 Android 設備(Windows 作業系統)&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

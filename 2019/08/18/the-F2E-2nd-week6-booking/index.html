@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="有 API 串接的題目了!!!灑花~   使用者故事: 要幫一間旅館設計訂房流程 不需進行會員註冊，只需填寫姓名、電話、預約起迄時間等三個欄位，就可進行訂房。 可以觀看該房型詳細資訊，例如旅館描述、平日價格(一~四)、假日價格(五~日)、checkIn 時間、其他服務。 客戶可以用日曆方式，瀏覽未來 90 天已預約與尚未預約的時段。 客戶在選擇預約日期時，會即時顯示訂房價格總價 若預約失敗，會回傳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking">
+<meta property="og:url" content="https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="有 API 串接的題目了!!!灑花~   使用者故事: 要幫一間旅館設計訂房流程 不需進行會員註冊，只需填寫姓名、電話、預約起迄時間等三個欄位，就可進行訂房。 可以觀看該房型詳細資訊，例如旅館描述、平日價格(一~四)、假日價格(五~日)、checkIn 時間、其他服務。 客戶可以用日曆方式，瀏覽未來 90 天已預約與尚未預約的時段。 客戶在選擇預約日期時，會即時顯示訂房價格總價 若預約失敗，會回傳">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week6.jpg">
+<meta property="article:published_time" content="2019-08-18T14:00:00.000Z">
+<meta property="article:modified_time" content="2019-08-18T16:30:23.119Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week6.jpg">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/08/25/the-F2E-2nd-week7-chatroom/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/08/03/the-F2E-2nd-week4-crypto-pay/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking&body=Check out this article: https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-08-18T14:00:00.000Z" itemprop="datePublished">2019-08-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/the-f2e-challenge/">the F2E challenge</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>有 API 串接的題目了!!!灑花~</p>
+<!-- excerpt -->
+<p><img src="https://kakadodo.github.io/theF2EChallange/img/2nd-week6.jpg" alt="blog image" title="Week 6. Booking"></p>
+<h2 id="使用者故事"><a href="#使用者故事" class="headerlink" title="使用者故事:"></a>使用者故事:</h2><ol>
+<li>要幫一間旅館設計訂房流程</li>
+<li>不需進行會員註冊，只需填寫姓名、電話、預約起迄時間等三個欄位，就可進行訂房。</li>
+<li>可以觀看該房型詳細資訊，例如旅館描述、平日價格(一~四)、假日價格(五~日)、checkIn 時間、其他服務。</li>
+<li>客戶可以用日曆方式，瀏覽未來 90 天已預約與尚未預約的時段。</li>
+<li>客戶在選擇預約日期時，會即時顯示訂房價格總價</li>
+<li>若預約失敗，會回傳訊息讓客戶知曉，失敗原因項目如下: 預訂 90 天後、預約時間已被人預訂、預約的是過去時間，例如昨天</li>
+</ol>
+<p>來自 Zoey 的<a target="_blank" rel="noopener" href="https://challenge.thef2e.com/user/1461?schedule=3862">設計稿</a>，金色配暗色調讓旅店很有高級感 🥰</p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug</li>
+<li>Vue.js</li>
+<li><a target="_blank" rel="noopener" href="https://element.eleme.io/">Element UI</a> (Vue 的 UI 組件庫)</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>感謝六角學院花時間心力開發 API，果然成品有串後端資料看起來就是不一樣 QQ<br>這次的題目雖然大眾化，但實際寫起來要注意的細節還真是不少..<br>在 API 呼叫這塊卡了好久，怎麼 call 都跳錯誤，好不容易終於 get 到資料了，要 post 時又繼續碰雷，實在是哭x。<br>碰雷的過程就不提了..下面放上最終可以運作的 code 就好。<br>我是使用 axios 來執行 Ajax，axios 可以預先定義要丟給後端的 Headers，這樣實際呼叫時就不怕忘記要附上的參數囉!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始創建 axios 實例</span></span><br><span class="line"><span class="built_in">this</span>.axios = axios.create(&#123;</span><br><span class="line">  baseURL: <span class="string">&#x27;https://challenge.thef2e.com/api/thef2e2019/stage6&#x27;</span>,</span><br><span class="line">  timeout: <span class="number">5000</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    Acctept: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">    Authorization: <span class="string">&#x27;Bearer xxxxxxxxxxxxx&#x27;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 用實例真正呼叫 api</span></span><br><span class="line"><span class="built_in">this</span>.axios.get(<span class="string">&#x27;/rooms&#x27;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.data.success) &#123;</span><br><span class="line">    <span class="built_in">this</span>.roomsInfo = res.data.items;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>因為有設定好 baseUrl，實際呼叫時只要填入正確的路徑即可，且 Headers 的資訊都幫你綁好好一起傳送過去了~超方便呀!!<br>post 的部分則需要加工一下，因為後端接收的格式無法用 JSON 物件直接傳入(我也搞不懂為何)，最後是包裝成 formData 後才送出成功。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bodyFormData = <span class="keyword">new</span> FormData();</span><br><span class="line">bodyFormData.append(<span class="string">&#x27;name&#x27;</span>, <span class="built_in">this</span>.formBooking.name);</span><br><span class="line">bodyFormData.append(<span class="string">&#x27;tel&#x27;</span>, <span class="built_in">this</span>.formBooking.tel);</span><br><span class="line"><span class="built_in">this</span>.bookingTotalDates.forEach(<span class="function">(<span class="params">date, i</span>) =&gt;</span> &#123;</span><br><span class="line">  bodyFormData.append(<span class="string">`date[<span class="subst">$&#123;i&#125;</span>]`</span>, date);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">this</span>.axios.post(<span class="string">`/room/<span class="subst">$&#123;id&#125;</span>`</span>, bodyFormData, &#123;</span><br><span class="line">  headers: &#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;multipart/form-data&#x27;</span> &#125;</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (res.data.success) &#123;</span><br><span class="line">    <span class="comment">// do something after success</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>其中 date 的格式又比較特殊，多個日期的話需要用 array 的形式來傳遞，好險有想出來要怎麼寫 = =<br>而且這時才發現，Element UI 的 datePicker 回傳的值只有開始日及結束日，中間不會自動幫你補齊涵蓋的天數，但實際傳到後端時是需要全部提供的..所以還要另外轉換一包有完整日期的資料才行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 這個方法會藉由 booking 的開始日及總共訂的天數來得出全部天數的日期</span></span><br><span class="line"><span class="comment">// 日期需要轉換格式符合後端要求</span></span><br><span class="line"><span class="function"><span class="title">bookingTotalDates</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> startDate = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">this</span>.formDate[<span class="number">0</span>]).getTime();</span><br><span class="line">  <span class="keyword">let</span> dates = [<span class="built_in">this</span>.formDate[<span class="number">0</span>]];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="built_in">this</span>.bookingTotalDays; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> dayTime = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>;</span><br><span class="line">    <span class="keyword">let</span> newDay = <span class="keyword">new</span> <span class="built_in">Date</span>(startDate + (dayTime * i));</span><br><span class="line">    <span class="keyword">const</span> year = newDay.getFullYear();</span><br><span class="line">    <span class="keyword">const</span> month = (newDay.getMonth() + <span class="number">1</span>).toString().padStart(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">const</span> date = (newDay.getDate()).toString().padStart(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    dates.push(<span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>-<span class="subst">$&#123;date&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dates;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>滿心歡喜地做完後，想說來看看 RWD 要不要調整，不看還好，一看又是個無窮火海的改 code 地獄 XDDD</p>
+<p>UI 框架會使用 Element UI 就是看在它的 dateRangePicker 還滿符合設計需求的，之前公司專案有使用過還算順手想說這次就拿來用，結果 dateRangePicker 在小螢幕的畫面給我直接破版 Q_Q (說好的響應式呢……)<br>最後的解法是在小螢幕尺寸把 dateRangePicker 拆成兩個單一日期選擇器來操作，因為 data 綁定的形式不同，要再針對兩個單一日期選擇器綁定別的 v-modal，日期驗證及即時顯示價錢變動也要改成兩邊的 data 都要顧。<br>做完，假日也掰了(遠目)<br>但 Element UI 還是滿好用的啦，組件功能很多，提供的客製化也有一定程度，下個 prop 值就可以把組件外觀做大調整，尤其是 table 組件可以調整的形式非~~常多!<br>form 表單也有提供驗證功能，擺我一道的 datePicker 也有提供 disabled 特定日期的自訂函式，總結來說，可以解決問題的框架就是好框架 XDDD</p>
+<p>作品網址: <a href="https://kakadodo.github.io/theF2EChallange/booking.html">https://kakadodo.github.io/theF2EChallange/booking.html</a></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking&body=Check out this article: https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/08/18/the-F2E-2nd-week6-booking/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 6. Booking&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

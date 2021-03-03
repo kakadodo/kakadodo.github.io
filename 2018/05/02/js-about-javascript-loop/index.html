@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="勞工節放完啦，又是寶寶心悶的開始~~人森就跟迴圈一樣，過了一個假日就開始期待下一個假日━(ﾟ∀ﾟ)━( ﾟ∀)━( ﾟ)━( )━( )━(ﾟ)━(∀ﾟ)━(ﾟ∀ﾟ)━">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)">
+<meta property="og:url" content="https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="勞工節放完啦，又是寶寶心悶的開始~~人森就跟迴圈一樣，過了一個假日就開始期待下一個假日━(ﾟ∀ﾟ)━( ﾟ∀)━( ﾟ)━( )━( )━(ﾟ)━(∀ﾟ)━(ﾟ∀ﾟ)━">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-05-02T00:56:44.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.014Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/05/09/js-about-javascript-this/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/04/25/js-about-javascript-object/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)&body=Check out this article: https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)&description=&lt;p&gt;勞工節放完啦，又是寶寶心悶的開始~~&lt;br&gt;人森就跟迴圈一樣，過了一個假日就開始期待下一個假日&lt;br&gt;━(ﾟ∀ﾟ)━( ﾟ∀)━( ﾟ)━( )━( )━(ﾟ)━(∀ﾟ)━(ﾟ∀ﾟ)━&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#for-%E8%BF%B4%E5%9C%88"><span class="toc-number">1.</span> <span class="toc-text">for 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-%E8%BF%B4%E5%9C%88"><span class="toc-number">2.</span> <span class="toc-text">while 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#do-while-%E8%BF%B4%E5%9C%88"><span class="toc-number">3.</span> <span class="toc-text">do while 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-in-%E8%BF%B4%E5%9C%88"><span class="toc-number">4.</span> <span class="toc-text">for in 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%B4%E5%9C%88%E7%9A%84%E5%A5%BD%E5%B9%AB%E6%89%8B-break%E3%80%81continue"><span class="toc-number">5.</span> <span class="toc-text">迴圈的好幫手: break、continue</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-05-02T00:56:44.000Z" itemprop="datePublished">2018-05-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>勞工節放完啦，又是寶寶心悶的開始~~<br>人森就跟迴圈一樣，過了一個假日就開始期待下一個假日<br>━(ﾟ∀ﾟ)━( ﾟ∀)━( ﾟ)━( )━( )━(ﾟ)━(∀ﾟ)━(ﾟ∀ﾟ)━</p>
+<span id="more"></span>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>JavaScript 中有不少迴圈的應用，之前 Array 篇有好幾種方法就是迴圈的進階版，可以更簡潔的表達 code 的目的及生成出想要的結果，不過今天要寫的是最早開始就存在的迴圈功能。元老級還是有一定地位的!!</p>
+<h4 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h4><p>由一組小括號和大括號組成，對迴圈來說最重要的就是條件，如果條件沒設好可能會陷入無窮迴圈，然後就迎接瀏覽器 GG。(想試試看的人可以不要放條件更新..)<br>首先小括號<code>()</code>中會塞入三項內容:</p>
+<ol>
+<li>初始化條件 <code>(var i=0)</code></li>
+<li>條件判斷 <code>(i&lt;3)</code></li>
+<li>條件更新 <code>(i++)</code></li>
+</ol>
+<p>大括號<code>&#123;&#125;</code>中則是寫入每跑一次迴圈要執行的內容，實際執行 for 迴圈的順序如下:<br>(1)宣告初始化值 -&gt; (2)判斷是否符合條件限制 -&gt; (3)執行內容 -&gt; (4)條件更新 -&gt; (2)判斷是否符合條件限制 -&gt; (3) -&gt; (4)…..直到(2)的結果不符合時結束迴圈</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)&#123;</span><br><span class="line">  <span class="comment">//執行內容</span></span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//結果會顯示 0,1,2，而 i 最後的值會是 3</span></span><br></pre></td></tr></table></figure>
+<p>以上例來說，<code>i&lt;3</code>可知道迴圈要跑的次數，確保 i 在初始化是 0 時，最多只會跑 3 次。但如果資料是動態載入或新增而無法確定總共有幾筆，就要依靠陣列的 length 屬性啦!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]; <span class="comment">//原本有5筆資料</span></span><br><span class="line">data.push(<span class="number">11</span>); <span class="comment">//但之後有動態新增筆數</span></span><br><span class="line">data = data.concat([<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>]); <span class="comment">//或是合併了其他來源的資料</span></span><br><span class="line"><span class="comment">//這時想要顯示陣列所有的資料出來...</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt; data.length; i++)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//1,3,5,7,9,11,2,4,6</span></span><br><span class="line"><span class="comment">//結果照樣一把抓~因為有 length 這個屬性可以得知陣列的確切長度</span></span><br></pre></td></tr></table></figure>
+
+<p>for 迴圈的次數更新可以<code>++</code>，當然也可以<code>--</code>，使用<code>--</code>可做到資料反序呈現。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>];</span><br><span class="line"><span class="comment">//初始化的i值為總長度-1(可找到陣列的最後一筆index)</span></span><br><span class="line"><span class="comment">//i的判斷條件改為&gt;=0，這樣當i變為-1時條件不成立就會結束迴圈</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=data.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//結果為 9,7,5,3,1</span></span><br></pre></td></tr></table></figure>
+<p>迴圈不是 function，因此在裡面宣告的變數實際上是全域變數，使用上要小心變數被其他迴圈或函式汙染。若使用 ES6 的 let 宣告，變數會只存在於迴圈中。</p>
+<h4 id="while-迴圈"><a href="#while-迴圈" class="headerlink" title="while 迴圈"></a>while 迴圈</h4><p>跟 for 迴圈很像，兩者都可以達成相同的結果，一樣有初始化條件、條件判斷、條件更新，只差在放置的位置不同。初始化條件寫在迴圈外，while 的小括號<code>()</code>中寫入條件判斷，當條件為 true 時，會不斷執行大括號<code>&#123;&#125;</code>中的內容，直到條件為 false 結束迴圈。而條件更新則是一起寫在大括號中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(num&lt;<span class="number">5</span>)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(num);</span><br><span class="line">  num ++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//結果為 0,1,2,3,4,num值是6</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="do-while-迴圈"><a href="#do-while-迴圈" class="headerlink" title="do while 迴圈"></a>do while 迴圈</h4><p>與 while 不同的是，不論初始條件值為何，都會先執行一次 do 裡面的內容，才做條件判斷。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(num);</span><br><span class="line">&#125;<span class="keyword">while</span>(num&lt;<span class="number">5</span>);</span><br><span class="line"><span class="comment">//還是有印出num是6，即使while的條件是num&lt;5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="for-in-迴圈"><a href="#for-in-迴圈" class="headerlink" title="for in 迴圈"></a>for in 迴圈</h4><p>之前的 Object 篇有提到，for in 可以用在跑遍物件的每個屬性，當然它也可以用在陣列上，但要注意該陣列是否有另外設定過屬性，因為 for in 的特性就是會把每個屬性都抓出來，此時遍歷出來的結果就會包含陣列設定的屬性跟值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">//arr可能因其他套件而增加了屬性的設定</span></span><br><span class="line">arr.test = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;array長度: &#x27;</span>+arr.length);</span><br><span class="line"><span class="keyword">for</span> (num <span class="keyword">in</span> arr)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;屬性: &#x27;</span>+num);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;值: &#x27;</span>+arr[num]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//結果: &quot;array長度: 3&quot;,&quot;屬性: 0&quot;,&quot;值: 1&quot;,&quot;屬性: 1&quot;,&quot;值: 2&quot;,&quot;屬性: 2&quot;,&quot;值: 3&quot;,&quot;屬性: test&quot;,&quot;值: test&quot;</span></span><br><span class="line"><span class="comment">//除了原本的 array 內容外，連 array 設定的屬性也會一併抓出來</span></span><br></pre></td></tr></table></figure>
+<p>為避免發生不可預料的狀況，一般還是用 for in 跑 Object，而 Array 則使用 for 或其他後期新增的方法較安全。</p>
+<h4 id="迴圈的好幫手-break、continue"><a href="#迴圈的好幫手-break、continue" class="headerlink" title="迴圈的好幫手: break、continue"></a>迴圈的好幫手: break、continue</h4><p>在跑迴圈時，可能會遇到想要在某個條件下就把迴圈終止掉，或者某個條件下要略過迴圈執行的內容並直接跑下一次迴圈，這時就會用到上述兩種語法。</p>
+<ul>
+<li>break: 顧名思義就是斷/結束的意思，只要在迴圈中加入 break，即使條件還在符合範圍內，也會終止整個迴圈。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(i == <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//結果只顯示0，因為當i變1時就觸發break結束迴圈，break之後的內容也不會再跑了</span></span><br></pre></td></tr></table></figure></li>
+<li>continue: 也是很直覺的命名，可以在迴圈的判斷式中加入 continue， 當判斷式成立時，continue 後的語法會被略過，並進入下一回迴圈。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(i == <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//結果顯示0跟2，1因為 continue 的關係被略過了，但迴圈依然有全部跑完</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#for-%E8%BF%B4%E5%9C%88"><span class="toc-number">1.</span> <span class="toc-text">for 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-%E8%BF%B4%E5%9C%88"><span class="toc-number">2.</span> <span class="toc-text">while 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#do-while-%E8%BF%B4%E5%9C%88"><span class="toc-number">3.</span> <span class="toc-text">do while 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-in-%E8%BF%B4%E5%9C%88"><span class="toc-number">4.</span> <span class="toc-text">for in 迴圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%B4%E5%9C%88%E7%9A%84%E5%A5%BD%E5%B9%AB%E6%89%8B-break%E3%80%81continue"><span class="toc-number">5.</span> <span class="toc-text">迴圈的好幫手: break、continue</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)&body=Check out this article: https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/05/02/js-about-javascript-loop/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 4.迴圈(Loop)&description=&lt;p&gt;勞工節放完啦，又是寶寶心悶的開始~~&lt;br&gt;人森就跟迴圈一樣，過了一個假日就開始期待下一個假日&lt;br&gt;━(ﾟ∀ﾟ)━( ﾟ∀)━( ﾟ)━( )━( )━(ﾟ)━(∀ﾟ)━(ﾟ∀ﾟ)━&lt;/p&gt;"
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

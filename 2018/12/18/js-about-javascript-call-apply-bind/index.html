@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="JavaScript 中使用到 this 是很常見的事情，但偶爾我們會需要用到一些”偷吃步”的方式來達成某些功能，這時候可能就需要將 this 的對象重新指向..   通常會改變 this 的對象可能是某個物件中的方法我們想要在別處來調用，但因為物件的 this 會指向物件本身，如果別的物件想要使用的話，就會需要將 this 的指向改變到自己身上，這時就會借用到 Function prototyp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind">
+<meta property="og:url" content="https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="JavaScript 中使用到 this 是很常見的事情，但偶爾我們會需要用到一些”偷吃步”的方式來達成某些功能，這時候可能就需要將 this 的對象重新指向..   通常會改變 this 的對象可能是某個物件中的方法我們想要在別處來調用，但因為物件的 this 會指向物件本身，如果別的物件想要使用的話，就會需要將 this 的指向改變到自己身上，這時就會借用到 Function prototyp">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-12-18T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/12/25/js-about-javascript-IIFE/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/12/11/js-about-javascript-async-await/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind&body=Check out this article: https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-prototype-call"><span class="toc-number">1.</span> <span class="toc-text">Function.prototype.call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-prototype-apply"><span class="toc-number">2.</span> <span class="toc-text">Function.prototype.apply</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-prototype-bind"><span class="toc-number">3.</span> <span class="toc-text">Function.prototype.bind</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-12-18T01:00:00.000Z" itemprop="datePublished">2018-12-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>JavaScript 中使用到 this 是很常見的事情，但偶爾我們會需要用到一些”偷吃步”的方式來達成某些功能，這時候可能就需要將 this 的對象重新指向..</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>通常會改變 this 的對象可能是某個物件中的方法我們想要在別處來調用，但因為物件的 this 會指向物件本身，如果別的物件想要使用的話，就會需要將 this 的指向改變到自己身上，這時就會借用到 Function prototype 內建的三種方法: <strong>call、apply、bind</strong>。</p>
+<p>這三種方法其實目的都差不多，為的就是要達成 this 被重新指向，不過他們還是各有不同之處，主要是看我們在怎樣的情境來使用。<br>而寫法上也很簡單，只要呼叫原本要調用的函式，再於函式的後方加上 call / apply / bind 的方法並帶入新的 this 及相關參數即可。</p>
+<h2 id="Function-prototype-call"><a href="#Function-prototype-call" class="headerlink" title="Function.prototype.call"></a>Function.prototype.call</h2><p>使用 call 的時機有以下幾種:</p>
+<ul>
+<li>重新指定 this 對象的同時調用函式</li>
+<li>可接受多個參數值(除了第一個參數一定是放 this 對象，之後看有幾個參數就塞入幾個)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tom = &#123;</span><br><span class="line">  firstName: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">  lastName: <span class="string">&#x27;Li&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">fullName</span>(<span class="params">job1, job2</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.firstname&#125;</span> <span class="subst">$&#123;<span class="built_in">this</span>.lastname&#125;</span> is a <span class="subst">$&#123;job1&#125;</span>, also is a <span class="subst">$&#123;job2&#125;</span>.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ben = &#123;</span><br><span class="line">  firstname: <span class="string">&#x27;Ben&#x27;</span>,</span><br><span class="line">  lastname: <span class="string">&#x27;Liu&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 .call() 讓 Ben 也能調用 Tom 的 fullName 方法，且該方法會立即執行</span></span><br><span class="line">tom.fullName.call(ben, <span class="string">&#x27;doctor&#x27;</span>, <span class="string">&#x27;professor&#x27;</span>);</span><br><span class="line"><span class="comment">// 輸出: Ben Liu is a doctor, also is a professor.</span></span><br></pre></td></tr></table></figure>
+<p>這樣一來，即使 ben 沒有 fullName 這個方法，依然可以使用啦! 且有多個參數帶入時，使用 call 就能一一的帶入要用的參數，它會自動對應 function 的參數位置。</p>
+<h2 id="Function-prototype-apply"><a href="#Function-prototype-apply" class="headerlink" title="Function.prototype.apply"></a>Function.prototype.apply</h2><p>使用 apply 的時機有以下幾種:</p>
+<ul>
+<li>重新指定 this 對象的同時調用函式</li>
+<li>固定為兩個參數值(第一個參數為 this 對象，第二個參數則放剩餘要帶的參數，如有多個參數則以 array 的格式帶入)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tom = &#123;</span><br><span class="line">  firstName: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">  lastName: <span class="string">&#x27;Li&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">fullName</span>(<span class="params">job1, job2</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.firstname&#125;</span> <span class="subst">$&#123;<span class="built_in">this</span>.lastname&#125;</span> is a <span class="subst">$&#123;job1&#125;</span>, also is a <span class="subst">$&#123;job2&#125;</span>.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ben = &#123;</span><br><span class="line">  firstname: <span class="string">&#x27;Ben&#x27;</span>,</span><br><span class="line">  lastname: <span class="string">&#x27;Liu&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 .apply() 讓 Ben 也能調用 Tom 的 fullName 方法，且該方法會立即執行</span></span><br><span class="line">tom.fullName.apply(ben, [<span class="string">&#x27;doctor&#x27;</span>, <span class="string">&#x27;professor&#x27;</span>]);</span><br><span class="line"><span class="comment">// 輸出: Ben Liu is a doctor, also is a professor.</span></span><br></pre></td></tr></table></figure>
+可以看出 call 跟 aplly 的差異只在於參數帶入的方式不同而已~兩種都會在重新指定 this 的同時調用該 function。</li>
+</ul>
+<h2 id="Function-prototype-bind"><a href="#Function-prototype-bind" class="headerlink" title="Function.prototype.bind"></a>Function.prototype.bind</h2><p>最後一個 bind 就跟上面兩個執行模式不同了!上方有一直提到使用 call 跟 apply 會在重新指定的同時立即調用函式，但是 bind 則是先重新指定 this 對象，之後再於想要調用的時機調用即可，也因為它會分成兩個步驟執行，因此參數其實可以分批帶入喔!</p>
+<p>使用 apply 的時機有以下幾種:</p>
+<ul>
+<li>先重新指定 this，再於適當時機調用</li>
+<li>參數可以批次帶入<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tom = &#123;</span><br><span class="line">  firstName: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">  lastName: <span class="string">&#x27;Li&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">fullName</span>(<span class="params">job1, job2</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.firstname&#125;</span> <span class="subst">$&#123;<span class="built_in">this</span>.lastname&#125;</span> is a <span class="subst">$&#123;job1&#125;</span>, also is a <span class="subst">$&#123;job2&#125;</span>.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ben = &#123;</span><br><span class="line">  firstname: <span class="string">&#x27;Ben&#x27;</span>,</span><br><span class="line">  lastname: <span class="string">&#x27;Liu&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 .bind() 讓 Ben 也能調用 Tom 的 fullName 方法，首先先改變 this 對象並且只帶入一個參數</span></span><br><span class="line"><span class="keyword">const</span> benFullName = tom.fullName.bind(ben, <span class="string">&#x27;doctor&#x27;</span>);</span><br><span class="line"><span class="comment">// 呼叫已經充新綁定 this 的函式，並且帶入剩餘的參數</span></span><br><span class="line">benFullName(<span class="string">&#x27;professor&#x27;</span>);</span><br><span class="line"><span class="comment">// 輸出: Ben Liu is a doctor, also is a professor.</span></span><br></pre></td></tr></table></figure>
+bind 的用法其實還滿常見的，很多函式庫都會利用 bind 可以先綁定再執行的運作模式來達成許多功能。bind 可以達成分批帶參數的原理也不難理解，呼叫 bind 時，如果有帶入任何參數，則該參數會被 bind 視為接下來產生的 function 的定值，因此之後再呼叫新產生的 funciton 時，原本設定的參數值就已經是該 function 的預設值囉!以上面的範例解讀的話會像這樣:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 呼叫 bind 並且指定 this 對象跟帶入一個參數值</span></span><br><span class="line"><span class="keyword">const</span> benFullName = tom.fullName.bind(ben, <span class="string">&#x27;doctor&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 因此新產生的 benFullName 內部結構應該會是這樣</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">benFullName</span>(<span class="params">obj2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> obj1 = <span class="string">&#x27;doctor&#x27;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.firstname&#125;</span> <span class="subst">$&#123;<span class="built_in">this</span>.lastname&#125;</span> is a <span class="subst">$&#123;job1&#125;</span>, also is a <span class="subst">$&#123;job2&#125;</span>.`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以之後再執行 benFullName 時，只要補上剩餘的參數即可! 這種方式就能更靈活的產生不同結果</span></span><br><span class="line">benFullName(<span class="string">&#x27;professor&#x27;</span>); <span class="comment">// Ben Liu is a doctor, also is a professor.</span></span><br><span class="line">benFullName(<span class="string">&#x27;sales&#x27;</span>); <span class="comment">// Ben Liu is a doctor, also is a sales.</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>這三大改變 this 的神器非常之好用!!!雖然平常要用可能需要想一下使用時機 哈哈<br>個人最常使用到的其實是 apply 方法!在將 nodelist 或 HTMLCollection 改變成真正的 array 時很方便。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假設有好幾個 button 並且一次選取它們，此時 btns 其實是一組 HTMLCollection (類陣列但不是真的陣列)</span></span><br><span class="line"><span class="keyword">let</span> btns = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;button&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 短短一行，就變成真的 array 了 XDDD</span></span><br><span class="line">btns = <span class="built_in">Array</span>.apply(<span class="literal">null</span>, btns);</span><br></pre></td></tr></table></figure>
+
+<p>另外也有大神介紹 “迂迴式展開二維陣列” 的方法，算是不使用 ES6 展開語法前提下的替代方案~</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myArray = [[<span class="number">1</span>, <span class="number">2</span>],[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]];</span><br><span class="line"><span class="keyword">var</span> myNewArray = [].concat.apply([], myArray);</span><br><span class="line"><span class="built_in">console</span>.log(myNewArray); <span class="comment">// [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+<p>雖然可以很簡潔的完成二維陣列展開成一維陣列，但看得有點痛苦啊 =”=</p>
+<p>更甚至可以利用 call 跟 apply 來做建構式的重構，由於 call 跟 apply 會立即執行，因此可在建立 B 建構式的物件時，先執行 A 建構式，並重新指定 this 對象，這樣 A 建構式的特性就會變成 B 建構式物件的特性，兩個建構式之間是沒有繼承關係喔!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原始的 Car 建構式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Car</span>(<span class="params">make, model, year</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.make = make;</span><br><span class="line">  <span class="built_in">this</span>.model = model;</span><br><span class="line">  <span class="built_in">this</span>.year = year;</span><br><span class="line">  <span class="built_in">this</span>.wheel = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 要利用 Car 來產生 Motobike 建構式，但兩者之間又不算繼承的關係!</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Motobike</span>(<span class="params">make, model, year</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 使用 call 的寫法</span></span><br><span class="line">  Car.call(<span class="built_in">this</span>, make, model, year);</span><br><span class="line">  <span class="comment">// 使用 apply 的寫法(直接取用 arguments，等於一次取得所有參數)</span></span><br><span class="line">  Car.apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  <span class="comment">// 另外設定自己的屬性值</span></span><br><span class="line">  <span class="built_in">this</span>.wheel = <span class="number">2</span>;</span><br><span class="line">  <span class="built_in">this</span>.fuel = <span class="number">92</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vespa = <span class="keyword">new</span> Motobike(<span class="string">&#x27;VESPA&#x27;</span>, <span class="string">&#x27;GTV&#x27;</span>, <span class="number">1951</span>);</span><br><span class="line"><span class="comment">// &#123;make: &quot;VESPA&quot;, model: &quot;GTV&quot;, year: 1951, wheel: 2, fuel: 92&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-prototype-call"><span class="toc-number">1.</span> <span class="toc-text">Function.prototype.call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-prototype-apply"><span class="toc-number">2.</span> <span class="toc-text">Function.prototype.apply</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-prototype-bind"><span class="toc-number">3.</span> <span class="toc-text">Function.prototype.bind</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind&body=Check out this article: https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/12/18/js-about-javascript-call-apply-bind/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 18.三種重新指向 this 的方法 - call、apply、bind&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

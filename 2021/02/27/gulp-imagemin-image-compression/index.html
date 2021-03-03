@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="最近一直在搞官網的 lighthouse 調適調到懷疑人生…舉例來說圖片檔雖然沒有轉換成 webp 格式，好歹也用各種工具把尺寸壓到小到不能再小了，一跑測試還是建議你圖片尺寸可以更小😑 是機器就可以不 care 畫質的嘛!!    web.dev 對圖片優化的建議:圖片的檔案大小主要會影響 lighthouse 的 performance 評分，假設你的網站頁面是第一屏佔有巨大 banner ，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp 4 x Imagemin 自動化圖片壓縮">
+<meta property="og:url" content="https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="最近一直在搞官網的 lighthouse 調適調到懷疑人生…舉例來說圖片檔雖然沒有轉換成 webp 格式，好歹也用各種工具把尺寸壓到小到不能再小了，一跑測試還是建議你圖片尺寸可以更小😑 是機器就可以不 care 畫質的嘛!!    web.dev 對圖片優化的建議:圖片的檔案大小主要會影響 lighthouse 的 performance 評分，假設你的網站頁面是第一屏佔有巨大 banner ，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression.jpg?alt=media&token=f976fcf8-4c94-4200-aa95-c35cb929fedc">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression1.jpg?alt=media&token=90156609-3a2c-4e33-8b09-30796a621de6">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression2.jpg?alt=media&token=b4bed53f-9573-4d99-b9e5-dcd1d11a6b3b">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression3.jpg?alt=media&token=ad05d280-a0ba-4d92-83a6-d9ba04379ad8">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression4.jpg?alt=media&token=7138ae9c-e14d-43ac-816c-3a7cf45a91fa">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression5.jpg?alt=media&token=d6b38467-e5b5-4b46-a3e2-040ea5b4acd7">
+<meta property="article:published_time" content="2021-02-27T07:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-27T14:08:47.790Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression.jpg?alt=media&token=f976fcf8-4c94-4200-aa95-c35cb929fedc">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>Gulp 4 x Imagemin 自動化圖片壓縮</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2020/05/24/firebase-auth-social-login/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&text=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&is_video=false&description=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=Gulp 4 x Imagemin 自動化圖片壓縮&body=Check out this article: https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&name=Gulp 4 x Imagemin 自動化圖片壓縮&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web-dev-%E5%B0%8D%E5%9C%96%E7%89%87%E5%84%AA%E5%8C%96%E7%9A%84%E5%BB%BA%E8%AD%B0"><span class="toc-number">1.</span> <span class="toc-text">web.dev 對圖片優化的建議:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gulp-4-x-Imagemin"><span class="toc-number">2.</span> <span class="toc-text">Gulp 4 x Imagemin:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Gulp 4 x Imagemin 自動化圖片壓縮
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-27T07:00:00.000Z" itemprop="datePublished">2021-02-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/web-others/">Web Others</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>最近一直在搞官網的 lighthouse 調適調到懷疑人生…舉例來說圖片檔雖然沒有轉換成 webp 格式，好歹也用各種工具把尺寸壓到小到不能再小了，一跑測試還是建議你圖片尺寸可以更小😑 是機器就可以不 care 畫質的嘛!!</p>
+<!-- excerpt -->
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression.jpg?alt=media&token=f976fcf8-4c94-4200-aa95-c35cb929fedc" alt="blog image" title="Gulp 4 x Imagemin 自動化圖片壓縮"></p>
+<h2 id="web-dev-對圖片優化的建議"><a href="#web-dev-對圖片優化的建議" class="headerlink" title="web.dev 對圖片優化的建議:"></a>web.dev 對圖片優化的建議:</h2><p>圖片的檔案大小主要會影響 lighthouse 的 performance 評分，假設你的網站頁面是第一屏佔有<strong>巨大</strong> banner ，該 banner 又被視為是最大內容的話就要更注意會不會影響 <a target="_blank" rel="noopener" href="https://web.dev/lighthouse-largest-contentful-paint/">LCP(Largest Contentful Paint)</a> 分數，LCP 是目前 <a target="_blank" rel="noopener" href="https://web.dev/vitals/">Web Vitals</a> 的評斷標準之一，而且權重還特大(比重 25%)，非常容易造成 performace 分數降低。(當然也有其他因素會影響到 LCP，但圖片本身載入速度佔了一大部分)</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression1.jpg?alt=media&token=90156609-3a2c-4e33-8b09-30796a621de6" alt="blog image" title="Gulp 4 x Imagemin 自動化圖片壓縮"></p>
+<p>跟圖片有關的評分內容如下:</p>
+<ul>
+<li>Properly size images</li>
+<li>Defer offscreen images</li>
+<li>Efficiently encode images</li>
+<li>Serve images in next-gen formats</li>
+</ul>
+<p>其中第三項跟第四項讓我困擾到不行，Efficiently encode images 官方說會將網站上所有圖片作 85% 壓縮品質後與原圖比較，如果潛在節省量超過 4KiB，就會建議你要作壓縮，但畢竟還是要考慮產品讓人看到的畫面…壓到會失真那種叫我怎麼接受😂，next-gen formats 則是要你轉換圖片格式成 JPEG 2000, JPEG XR, WebP，雖然 webp 支援度已經越來越好了，但還是有主力的瀏覽器沒完全支援(我沒說是 Safari 喔)，加上其他執行因素影響，還是決定先維持一般圖片格式。如果專案單純好改的話，用 webp 作主要格式之一是很推的~ kb 數跟 jpg png 差<del>很</del>大!</p>
+<h2 id="Gulp-4-x-Imagemin"><a href="#Gulp-4-x-Imagemin" class="headerlink" title="Gulp 4 x Imagemin:"></a>Gulp 4 x Imagemin:</h2><p>廢話了一堆該來寫主題了，imagemin 是 web.dev 推薦的圖片壓縮工具之一，不過他跟其他線上壓縮工具不同，沒有 GUI 介面，而是用來搭配專案或是自己另外建 CLI 來執行圖片壓縮的工具。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression2.jpg?alt=media&token=b4bed53f-9573-4d99-b9e5-dcd1d11a6b3b" alt="blog image" title="Gulp 4 x Imagemin 自動化圖片壓縮"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/imagemin/imagemin">Imagemin</a> 提供了多種圖片格式的壓縮，webp 也有支援轉換喔!壓縮方式也有分成有損跟無損格式，當然也可以設定很多細部的參數去作壓縮調整。<br>安裝方式可以用官方出的 CLI 或是寫 Node script 運行，也可以搭配 Webpack, Gulp 等打包、自動化工具去處理，這篇就是要來寫跟 <a target="_blank" rel="noopener" href="https://gulpjs.com/">Gulp</a> 搭配的方式啦!</p>
+<p>以下是我有用到的 npm 套件:</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 讓電腦可以直接呼叫 gulp 指令 --&gt;</span><br><span class="line">npm install --global gulp-cli</span><br><span class="line"></span><br><span class="line">npm install --save-dev gulp gulp-imagemin gulp-webp gulp-clean gulp-load-plugins</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression3.jpg?alt=media&token=ad05d280-a0ba-4d92-83a6-d9ba04379ad8" alt="blog image" title="Gulp 4 x Imagemin 自動化圖片壓縮"></p>
+<ul>
+<li>gulp-cli、gulp: 核心跟 cli 工具</li>
+<li>gulp-imagemin: gulp 用的 imagemin 版本</li>
+<li>gulp-webp: 裝不裝看個人~因為 gulp-imagemin 沒有含蓋 webp，所以是別的套件，不過該套件在 options 設定上是同 imagemin 的。</li>
+<li>gulp-clean: 可選，用途是可以在每次 run 指令時先幫你清空資料夾</li>
+<li>gulp-load-plugins: 也是可選，用途是前綴有 <code>gulp-</code> 的套件，在寫 <code>gulpfile.js</code> 時可以省略 require (懶人專用 😂)</li>
+</ul>
+<p>安裝完後建立 gulpfile.js，這隻檔案是 gulp 運行的入口點，要跑自動化的設定都會寫在裡面，另外文章裡會特別註明 Gulp 4 是因為跟以前版本的寫法有點不同，所以這邊的程式碼是用 4 版的寫法:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; src, dest, series &#125; = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"><span class="comment">//有 gulp 前綴的插件不用宣告的功能</span></span><br><span class="line"><span class="keyword">const</span> $ = <span class="built_in">require</span>(<span class="string">&#x27;gulp-load-plugins&#x27;</span>)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// clean 輸出資料夾</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clean</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src([<span class="string">&#x27;./imagemin/dist&#x27;</span>], &#123;</span><br><span class="line">    allowEmpty: <span class="literal">true</span>,</span><br><span class="line">    read: <span class="literal">false</span>,</span><br><span class="line">  &#125;).pipe($.clean());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 圖片一般格式壓縮</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imageMin</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">&#x27;./imagemin/src/*&#x27;</span>)</span><br><span class="line">    .pipe(</span><br><span class="line">      $.imagemin([</span><br><span class="line">        $.imagemin.gifsicle(&#123; <span class="attr">interlaced</span>: <span class="literal">true</span> &#125;),</span><br><span class="line">        $.imagemin.mozjpeg(&#123; <span class="attr">quality</span>: <span class="number">85</span>, <span class="attr">progressive</span>: <span class="literal">true</span> &#125;),</span><br><span class="line">        $.imagemin.optipng(&#123; <span class="attr">optimizationLevel</span>: <span class="number">5</span> &#125;),</span><br><span class="line">        $.imagemin.svgo(&#123;</span><br><span class="line">          plugins: [&#123; <span class="attr">removeViewBox</span>: <span class="literal">true</span> &#125;, &#123; <span class="attr">cleanupIDs</span>: <span class="literal">false</span> &#125;],</span><br><span class="line">        &#125;),</span><br><span class="line">      ])</span><br><span class="line">    )</span><br><span class="line">    .pipe(dest(<span class="string">&#x27;./imagemin/dist&#x27;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 圖片轉換 webp + 壓縮，webp 我選擇另外有需要再獨立執行</span></span><br><span class="line"><span class="built_in">exports</span>.webp =  <span class="function"><span class="keyword">function</span> <span class="title">webp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">&#x27;./imagemin/src/*&#x27;</span>)</span><br><span class="line">    .pipe($.webp(&#123;<span class="attr">quality</span>: <span class="number">50</span>&#125;))</span><br><span class="line">    .pipe(dest(<span class="string">&#x27;./imagemin/dist/webp&#x27;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 導出任務，series 表示任務會依照給定順序一步一步執行</span></span><br><span class="line"><span class="built_in">exports</span>.default = series(clean, imageMin);</span><br></pre></td></tr></table></figure>
+<p>imagemin options 的相關設定可以直接參考官方 API，再來只要準備要壓縮的圖檔到指定資料夾跟呼叫指令就完成啦!上面寫了兩個執行任務，實際呼叫會用以下寫法:</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 執行 default 任務，也就是先 clean 再作 imageMin --&gt;</span><br><span class="line"><span class="meta">$</span><span class="bash"> gulp</span></span><br><span class="line"></span><br><span class="line">&lt;!-- 執行 webp 任務 --&gt;</span><br><span class="line"><span class="meta">$</span><span class="bash"> gulp webp</span></span><br></pre></td></tr></table></figure>
+<p>執行完後就可以看到 dist 資料夾中出現所有壓縮後的圖片了~~是不是 hen 方便?<br>還是要記得多測幾次畫質的設定，不一定每張圖片都適合同樣的畫質壓縮，難免需要人工檢查一下啦</p>
+<p>反正都要寫這篇文章了乾脆拿部落格圖片來優化一下，發現之前真的是沒在 care 大小 😂</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression4.jpg?alt=media&token=7138ae9c-e14d-43ac-816c-3a7cf45a91fa" alt="blog image" title="Gulp 4 x Imagemin 自動化圖片壓縮"><br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2021-02-27-gulp-imagemin-image-compression5.jpg?alt=media&token=d6b38467-e5b5-4b46-a3e2-040ea5b4acd7" alt="blog image" title="Gulp 4 x Imagemin 自動化圖片壓縮"><br>這張真的太扯..我到底怎麼會讓它原本是 566 kb 的</p>
+<p>以上內容如有勘誤，還請不吝告知 🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web-dev-%E5%B0%8D%E5%9C%96%E7%89%87%E5%84%AA%E5%8C%96%E7%9A%84%E5%BB%BA%E8%AD%B0"><span class="toc-number">1.</span> <span class="toc-text">web.dev 對圖片優化的建議:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gulp-4-x-Imagemin"><span class="toc-number">2.</span> <span class="toc-text">Gulp 4 x Imagemin:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&text=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&is_video=false&description=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=Gulp 4 x Imagemin 自動化圖片壓縮&body=Check out this article: https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&title=Gulp 4 x Imagemin 自動化圖片壓縮"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2021/02/27/gulp-imagemin-image-compression/&name=Gulp 4 x Imagemin 自動化圖片壓縮&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="標題取這樣應該會有人想說誰不知道 border-radius 吧! XDborder-radius 是 CSS 中很常使用到的屬性之一，除了可以讓矩形的外觀具有圓角外，更可以改變成圓形，但其實它可以讓矩形”不只是”變成圓型喔!!這篇會記錄比較不一樣的用法~   網路上雖然有很多關於 border-radius 的說明文章，但大多只點到怎麼改變矩形四個角的弧度數值而以，自己當初在學 CSS 時，有實">
+<meta property="og:type" content="article">
+<meta property="og:title" content="好加在有 CSS - 你可能不知道的 Border Radius">
+<meta property="og:url" content="https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="標題取這樣應該會有人想說誰不知道 border-radius 吧! XDborder-radius 是 CSS 中很常使用到的屬性之一，除了可以讓矩形的外觀具有圓角外，更可以改變成圓形，但其實它可以讓矩形”不只是”變成圓型喔!!這篇會記錄比較不一樣的用法~   網路上雖然有很多關於 border-radius 的說明文章，但大多只點到怎麼改變矩形四個角的弧度數值而以，自己當初在學 CSS 時，有實">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-1.jpg?alt=media&token=4b959606-922f-462a-8306-27753373bc3c">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-2.jpg?alt=media&token=bbcd5c19-a094-4c83-a77d-9758f030b8cc">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-3.jpg?alt=media&token=5a5ddac3-03a0-47ee-a077-e8fe6d431e4e">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-4.jpg?alt=media&token=475a19b7-b449-48a8-842c-bf6874550064">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-5.jpg?alt=media&token=d6b79754-2415-4700-8f07-a58f2e2f1d6f">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-6.jpg?alt=media&token=7e0f3a6d-605c-497f-b749-686ccf7d3166">
+<meta property="article:published_time" content="2019-01-22T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:26:09.554Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>好加在有 CSS - 你可能不知道的 Border Radius</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/03/12/js-jsunderground-1f/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/01/15/css-about-css-flex-2/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&text=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&is_video=false&description=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=好加在有 CSS - 你可能不知道的 Border Radius&body=Check out this article: https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&name=好加在有 CSS - 你可能不知道的 Border Radius&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        好加在有 CSS - 你可能不知道的 Border Radius
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-22T01:00:00.000Z" itemprop="datePublished">2019-01-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/css/">CSS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css/" rel="tag">CSS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>標題取這樣應該會有人想說誰不知道 border-radius 吧! XD<br>border-radius 是 CSS 中很常使用到的屬性之一，除了可以讓矩形的外觀具有圓角外，更可以改變成圓形，但其實它可以讓矩形”不只是”變成圓型喔!!這篇會記錄比較不一樣的用法~</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b" alt="blog image" title="好加在有 CSS"></p>
+<p>網路上雖然有很多關於 border-radius 的說明文章，但大多只點到怎麼改變矩形四個角的弧度數值而以，自己當初在學 CSS 時，有實體課程的老師教到可以利用 border-radius 做出”蛋型”外觀，整個神奇到不行啊!!!要產生出這種形狀，屬性上的設定方式會跟原本的寫法不太一樣，那時覺得有點深奧因此學完過一陣子就還給老師了 XDDD 這陣子回來摸 CSS 想到有這招可以用，乾脆來重新研究一番。</p>
+<p>border-radius 到底是怎麼產生的呢?為何設定一個值就可以讓直角變成有弧度的角?弧度又是依據甚麼方式計算來的?</p>
+<p>我們可以想像在設定 radius 時會在矩形的四個角分別畫出一個圓，這個圓會因為半徑不同而形成正圓或是橢圓，最貼近邊角的弧形就是最後會得到的邊角弧度。</p>
+<p>以 <code>border-radius: 15px;</code> 為例:<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-1.jpg?alt=media&token=4b959606-922f-462a-8306-27753373bc3c" alt="blog image" title="好加在有 CSS - boder-radius"><br>當 radius 只設定一個值時表示四個角的 x, y 半徑是一樣的，因此產生出來的圓角是相同且對稱。這樣看的話其實設定四個角的數值會產生的圖型就不難想像了吧!</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-2.jpg?alt=media&token=bbcd5c19-a094-4c83-a77d-9758f030b8cc" alt="blog image" title="好加在有 CSS - boder-radius"></p>
+<p>設定兩個數值的話彼此是對角的為同一組，左上對右下、右上對左下的概念，以 <code>border-radius: 30% 50%</code> 為例:<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-3.jpg?alt=media&token=5a5ddac3-03a0-47ee-a077-e8fe6d431e4e" alt="blog image" title="好加在有 CSS - boder-radius"></p>
+<p>這幾種用法已經能產生不規則且形狀較特別的圖型了(多少能拿出來嚇唬老闆)，不過 border-radius 真正厲害的地方不只這樣而已啊!!!上面的設定方式可以觀察的出來畫出來的圓都是正圓，因為 x、y 其實是取相同的 radius。border-radius 其實有提供另外一種設定方式，可以分別指定每個角的 x 跟 y 半徑值喔!</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">border-radius</span>: x1 x2 x3 x4 / y1 y2 y3 y4;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-4.jpg?alt=media&token=475a19b7-b449-48a8-842c-bf6874550064" alt="blog image" title="好加在有 CSS - boder-radius"><br>要分別設定 x、y 半徑中間會使用 <code>/</code> 符號區隔，前方寫四個角的水平半徑，後方則是四個角的垂直半徑，指定順序都是順時針方向。當然這種設定一樣可以簡寫:</p>
+<ul>
+<li><code>border-radius: x / y;</code>: 四個角的 x 跟四個角的 y 都相同。</li>
+<li><code>border-radius: x1 x2 / y1 y2;</code>: x1、y1 為左上及右下角，x2、y2 為右上及左下角。</li>
+<li><code>border-radius: x1 x2 x3 / y1 y2 y3;</code>: x1、y1 為左上角，x2、y2 為右上及左下角，x3、y3 為右下角。</li>
+<li><code>border-radius: x1 x2 x3 x4 / y1 y2 y3 y4;</code>: 四個角 x、y 都各自設定。</li>
+</ul>
+<p>由於 x 半徑及 y 半徑都能各別設定，產生出來的圓就不會只侷限在正圓了，這種設定方式非常適合搭配 <code>%</code> 單位，只要知道每個半徑在自己的邊長上佔的比例為多少，就可以輕鬆寫出想要的圖型喔!矩形一邊的邊長全長為 100 %，所以只要屬於同一邊長的兩個值加總起來等於 100%，就會是弧度漂亮沒有直線的圓。<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-5.jpg?alt=media&token=d6b79754-2415-4700-8f07-a58f2e2f1d6f" alt="blog image" title="好加在有 CSS - boder-radius"></p>
+<p>蛋型就是靠這種方式達成的啦~~不過矩形本體最好是長方型會比較像喔~正方型會變成像徽章的感覺。<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190122-css-about-css-border-radius-6.jpg?alt=media&token=7e0f3a6d-605c-497f-b749-686ccf7d3166" alt="blog image" title="好加在有 CSS - boder-radius"></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&text=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&is_video=false&description=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=好加在有 CSS - 你可能不知道的 Border Radius&body=Check out this article: https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&title=好加在有 CSS - 你可能不知道的 Border Radius"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/01/22/css-about-css-border-radius/&name=好加在有 CSS - 你可能不知道的 Border Radius&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

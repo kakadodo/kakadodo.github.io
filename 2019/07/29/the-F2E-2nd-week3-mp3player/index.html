@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="好喜歡這關呀~~做出來很有成就感! XD   使用者故事: 我可以透過介面看到專輯裡的音樂列表 我可以點擊音樂列表裡面的任一首音樂，進行播放 音樂控制: 切換下一首 &#x2F; 切換上一首 &#x2F; 拖動音樂時間軸 &#x2F; 暫停.開始切換 &#x2F; 音量控制 &#x2F; 單曲重複播放 &#x2F; 隨機播放 &#x2F; 重複播放 廣告機制: 隨機在音樂結束切換時，顯示佔板廣告，引導訂閱  來自 Miss_Y 的設計稿，自己意外的充滿少女心喜歡可愛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player">
+<meta property="og:url" content="https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="好喜歡這關呀~~做出來很有成就感! XD   使用者故事: 我可以透過介面看到專輯裡的音樂列表 我可以點擊音樂列表裡面的任一首音樂，進行播放 音樂控制: 切換下一首 &#x2F; 切換上一首 &#x2F; 拖動音樂時間軸 &#x2F; 暫停.開始切換 &#x2F; 音量控制 &#x2F; 單曲重複播放 &#x2F; 隨機播放 &#x2F; 重複播放 廣告機制: 隨機在音樂結束切換時，顯示佔板廣告，引導訂閱  來自 Miss_Y 的設計稿，自己意外的充滿少女心喜歡可愛">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week3.jpg">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190729-the-F2E-2nd-week3-mp3player-1.png?alt=media&token=8f191f9a-da72-42e0-911d-6a386c23970d">
+<meta property="article:published_time" content="2019-07-29T07:00:00.000Z">
+<meta property="article:modified_time" content="2019-07-29T09:26:31.249Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week3.jpg">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/08/03/the-F2E-2nd-week5-90sec-game/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/07/23/the-F2E-2nd-week2-free-cell/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player&body=Check out this article: https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-29T07:00:00.000Z" itemprop="datePublished">2019-07-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/the-f2e-challenge/">the F2E challenge</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>好喜歡這關呀~~做出來很有成就感! XD</p>
+<!-- excerpt -->
+<p><img src="https://kakadodo.github.io/theF2EChallange/img/2nd-week3.jpg" alt="blog image" title="Week 3. MP3 Player"></p>
+<h2 id="使用者故事"><a href="#使用者故事" class="headerlink" title="使用者故事:"></a>使用者故事:</h2><ol>
+<li>我可以透過介面看到專輯裡的音樂列表</li>
+<li>我可以點擊音樂列表裡面的任一首音樂，進行播放</li>
+<li>音樂控制: 切換下一首 / 切換上一首 / 拖動音樂時間軸 / 暫停.開始切換 / 音量控制 / 單曲重複播放 / 隨機播放 / 重複播放</li>
+<li>廣告機制: 隨機在音樂結束切換時，顯示佔板廣告，引導訂閱</li>
+</ol>
+<p>來自 Miss_Y 的<a target="_blank" rel="noopener" href="https://challenge.thef2e.com/user/3115?schedule=3149">設計稿</a>，自己意外的充滿少女心喜歡可愛的漫畫元素 🥰</p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug (html模板語言)</li>
+<li>SCSS (css預處理語言)</li>
+<li>Vue.js</li>
+<li>Youtube IFrame Player API</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>這次主要分享的是首次接觸的 Youtube IFrame Player API，也就是我的音樂播放來源啦!事前搜尋了可以用的線上音樂檔，突然想到 Youtube 應該有 API 可以使用，果不其然找到了一個不需要依賴 API KEY 就能使用的 IFrame Player API。</p>
+<p>以往要播放 Youtube 影片都是單純的在網頁上置入 iframe 連結，讓使用者自己點擊觀看，這次比較不一樣，需要在背後控制 Youtube 播放器，使用者看到的是另外設計出來的 MP3 播放器。</p>
+<p>Youtube 本身提供兩種 API，一是這次使用的 <a target="_blank" rel="noopener" href="https://developers.google.com/youtube/iframe_api_reference">IFrame Player API</a>，二是 <a target="_blank" rel="noopener" href="https://developers.google.com/youtube/v3/getting-started">Youtube Data API</a>，比較偏向於讓開發者可以在自己的應用程式中直接上傳影片、編輯清單等功能。</p>
+<p>IFrame Player API 可以做到的是讓開發者用 JavaScript 操控 Youtube 播放器，也就是自己建立按鈕來操控撥放器要播放或暫停等 Youtube 播放器本身有的功能。</p>
+<p>使用方式也不難，API 文件把語法都寫出來了，以下為基本建立一個可控制的 Youtube IFrame 播放器:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 創建一個可辨識 id 的 div</span></span><br><span class="line"><span class="comment">  瀏覽器載入 IFrame Player API 後</span></span><br><span class="line"><span class="comment">  會將 div 替換為 iframe 標籤 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;player&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需於網頁載入後，動態產生 IFrame Player API 的 script tag</span></span><br><span class="line"><span class="keyword">var</span> tag = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">tag.src = <span class="string">&quot;https://www.youtube.com/iframe_api&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> firstScriptTag = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;script&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 當網頁載入 script tag 後，會於完成時自動呼叫 onYouTubeIframeAPIReady 這個 callback</span></span><br><span class="line"><span class="comment">// callback 中建立 Youtube Player，並設定播放屬性</span></span><br><span class="line"><span class="keyword">var</span> player;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onYouTubeIframeAPIReady</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  player = <span class="keyword">new</span> YT.Player(<span class="string">&#x27;player&#x27;</span>, &#123;</span><br><span class="line">    height: <span class="string">&#x27;390&#x27;</span>,</span><br><span class="line">    width: <span class="string">&#x27;640&#x27;</span>,</span><br><span class="line">    videoId: <span class="string">&#x27;M7lc1UVf-VE&#x27;</span>,</span><br><span class="line">    events: &#123;</span><br><span class="line">      <span class="string">&#x27;onStateChange&#x27;</span>: onPlayerStateChange</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用 Web Server 打開網頁後，就會看到一個 Youtube 播放器囉!<br>播放屬性當中的 <code>videoId</code> 非常重要，需要先知道要播放的影片 id 為何，這塊我是使用密技 - 土法煉鋼，自己整理了幾個想要使用的影片 id 😂<br>Youtube 影片的 id 也很好找，就在影片所在的網址連結中<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190729-the-F2E-2nd-week3-mp3player-1.png?alt=media&token=8f191f9a-da72-42e0-911d-6a386c23970d" alt="blog image" title="Week 3. MP3 Player"></p>
+<p>接下來其實就是對這個 player 做後續操控啦!像是播放、暫停、換影片來源等，API 文件寫得很清楚，下方列出這個專案我有用到的功能:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 載入影片資源: 分成 load 跟 cue，差別在於載入後要不要自動播放</span></span><br><span class="line"><span class="comment">// 除了 videoId 外其餘為可選填內容</span></span><br><span class="line">player.loadVideoById(&#123;</span><br><span class="line">  videoId:<span class="built_in">String</span>,</span><br><span class="line">  startSeconds:<span class="built_in">Number</span>,</span><br><span class="line">  endSeconds:<span class="built_in">Number</span>,</span><br><span class="line">  suggestedQuality:<span class="built_in">String</span>&#125;);</span><br><span class="line"></span><br><span class="line">player.cueVideoById(</span><br><span class="line">  videoId:<span class="built_in">String</span>,</span><br><span class="line">  startSeconds:<span class="built_in">Number</span>,</span><br><span class="line">  endSeconds:<span class="built_in">Number</span>,</span><br><span class="line">  suggestedQuality:<span class="built_in">String</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 播放器開始播放、暫停</span></span><br><span class="line">player.playVideo();</span><br><span class="line">player.pauseVideo();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 播放器從指定秒數開始播放，以秒為單位</span></span><br><span class="line"><span class="comment">// allowSeekAhead 意思是要不要允許指定到還未載入的秒數時另外向服務器請求資源</span></span><br><span class="line">player.seekTo(seconds:<span class="built_in">Number</span>, <span class="attr">allowSeekAhead</span>:<span class="built_in">Boolean</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 設定播放器音量、取得播放器音量，範圍 0~100</span></span><br><span class="line">player.setVolume(volume:<span class="built_in">Number</span>);</span><br><span class="line">player.getVolume();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得播放當下秒數</span></span><br><span class="line">player.getCurrentTime();</span><br></pre></td></tr></table></figure>
+
+<p>初始化產生播放器時我有設定 event 監聽 <code>onStateChange</code>，會在播放器狀態改變時(ex.載入資源、開始播放、暫停等) 觸發，可取得參數 <code>e.data</code>，data 有幾種數字分別代表當前的狀態:</p>
+<ul>
+<li>-1 (unstarted)</li>
+<li>0 (ended) === YT.PlayerState.ENDED</li>
+<li>1 (playing) === YT.PlayerState.PLAYING</li>
+<li>2 (paused) === YT.PlayerState.PAUSED</li>
+<li>3 (buffering) === YT.PlayerState.BUFFERING</li>
+<li>5 (video cued) === YT.PlayerState.CUED</li>
+</ul>
+<p>可以藉由上述這幾個數值來比對是否等於 YT(Youtube Player 的全域變數) 設定的狀態值，進而做後續的判斷操控。</p>
+<p>額外一提，除了單影片資源載入外，其實也可以載入 Youtube 的 <strong>播放清單</strong>，API 有提供針對播放清單的操作功能，但這次 UI 素材需求的關係，我還是自己整理一份播放清單 json 檔來使用。</p>
+<p>總結下來，Youtube IFrame Player API 非常好用~唯一的缺點就是哪天影片資源被砍掉就 GG 了，哈哈!</p>
+<p>作品網址: <a href="https://kakadodo.github.io/theF2EChallange/mp3player.html">https://kakadodo.github.io/theF2EChallange/mp3player.html</a></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player&body=Check out this article: https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/07/29/the-F2E-2nd-week3-mp3player/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 3. MP3 Player&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

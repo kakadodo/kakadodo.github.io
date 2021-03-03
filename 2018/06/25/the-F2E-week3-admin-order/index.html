@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="第三週來了!!!後台介面寫的好煎熬~~~    這週主題是很經典的後台介面!看到 UI 稿時已經開始頭痛了 哈哈除了要有可視化圖表外，版面中有許多小元件要刻整體就是個巢到出水的概念既然設計師都提供這麼詳細的內容了!這次就直接照 UI 來做!設計稿: http:&#x2F;&#x2F;bit.ly&#x2F;2tdOhm9 使用者故事:請以「管理訂單」為參考方向，來思考一個電商網站所具備的後台管理功能。 運用技術: Pug (h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order">
+<meta property="og:url" content="https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="第三週來了!!!後台介面寫的好煎熬~~~    這週主題是很經典的後台介面!看到 UI 稿時已經開始頭痛了 哈哈除了要有可視化圖表外，版面中有許多小元件要刻整體就是個巢到出水的概念既然設計師都提供這麼詳細的內容了!這次就直接照 UI 來做!設計稿: http:&#x2F;&#x2F;bit.ly&#x2F;2tdOhm9 使用者故事:請以「管理訂單」為參考方向，來思考一個電商網站所具備的後台管理功能。 運用技術: Pug (h">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kakadodo.github.io/theF2EChallange/img/week3.jpg">
+<meta property="article:published_time" content="2018-06-25T00:39:20.000Z">
+<meta property="article:modified_time" content="2019-06-26T07:30:56.000Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakadodo.github.io/theF2EChallange/img/week3.jpg">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/07/02/the-F2E-week4-product-gallery/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/06/19/the-F2E-week2-filter/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&text=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order&body=Check out this article: https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&name=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-06-25T00:39:20.000Z" itemprop="datePublished">2018-06-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/the-f2e-challenge/">the F2E challenge</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>第三週來了!!!後台介面寫的好煎熬~~~</p>
+<!-- excerpt -->
+
+<p><img src="https://kakadodo.github.io/theF2EChallange/img/week3.jpg" alt="blog image" title="Week 3. Admin Order"></p>
+<p>這週主題是很經典的後台介面!看到 UI 稿時已經開始頭痛了 哈哈<br>除了要有可視化圖表外，版面中有許多小元件要刻<del>整體就是個巢到出水的概念</del><br>既然設計師都提供這麼詳細的內容了!這次就直接照 UI 來做!<br>設計稿: <a target="_blank" rel="noopener" href="http://bit.ly/2tdOhm9">http://bit.ly/2tdOhm9</a></p>
+<h2 id="使用者故事"><a href="#使用者故事" class="headerlink" title="使用者故事:"></a>使用者故事:</h2><p>請以「管理訂單」為參考方向，來思考一個電商網站所具備的後台管理功能。</p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug (html模板語言)</li>
+<li>SCSS (css預處理語言)</li>
+<li>c3.js (chart library)</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>這次對我來說比較像是切版的細心度挑戰，設計稿總共有三個版面，雖然區塊中的元件都是重複性的，但元件本身並不簡單啊..光一個元件裡面的層級就有5.6層以上了..更不用說再搭配 hover 產生的額外內容~切一切都會懷疑自己這樣做是對的嗎XD(已迷失方向)</p>
+<p>元件中有不少元素排列的位置不一，用 flexbox 輕鬆解決<del>怎麼會這麼好用啊!!!!如果用一般切法的話，可能就會一堆 float 物件加特定的 padding 跟 margin，以及因為 float 而需要另外追加的 clearfix，flexbox 可以完全解決這類困擾!超推超推</del></p>
+<p>介面基本上都盡量照著設計稿刻，但圖表這塊就只能”盡力表現”了<del>之前一段時間接觸 D3.js，這次決定來使用它的延伸產品 C3.js</del><br>C3 官網直接了當的說明函示庫是基於 D3 引擎而來的<del>要使用 C3 的話，要先載入 D3 的函式庫喔</del><br>之前會想說既然還要載入 D3 幹嘛不直接用 D3 就好，這次實作下來的理解是… C3 在產生圖表過程會更直覺一點<del>把圖表需要呈現的配置塞在一個物件中，在呼叫 C3 去套用這個自訂義的配置物件，然後~~~~圖表就出來了!!<br>而且 C3 本身對圖表有基本的 CSS 設定，因此產生出來的圖表其實就很 OK 了!圖表的顏色呈現也可以直接在配置物件中設定</del>總之!要對圖表做甚麼設定，全部寫出來就對了! <code>c3.generate(&#123;配置內容&#125;)</code> 圖表就會出現在畫面上!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> chart = c3.generate(&#123;</span><br><span class="line">    bindto: <span class="string">&#x27;#chart&#x27;</span>, <span class="comment">//跟 Vue 一樣，會需要設定綁定的 html 元素</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      columns: [</span><br><span class="line">        [<span class="string">&#x27;data1&#x27;</span>, <span class="number">30</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">150</span>, <span class="number">250</span>],</span><br><span class="line">        [<span class="string">&#x27;data2&#x27;</span>, <span class="number">50</span>, <span class="number">20</span>, <span class="number">10</span>, <span class="number">40</span>, <span class="number">15</span>, <span class="number">25</span>]</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//其他配置設定...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>C3 在處理圖表的動畫似乎挺強大的!看官網的 examples 寫的一副超輕鬆的感覺..如果這些要用 D3 來寫的話..可能會佔不少版面跟時間!雖然 D3 的彈性真的非常大~但就變成需要一步一步地去設定這些參數，變成無限長的<code>.</code>連接(跟 jQuery 一樣)，久久一看可能就無法一下看懂自己在寫甚麼..</p>
+<p>這次還有一塊覺得很煎熬的是…下拉選單，頁面中的下拉選單超多~~~雖然用 bootstrap 可以很容易地把下拉選單生出來..但有碰到一個小問題，當下拉選單中塞入 checkbox 這種需要於特定位置點擊的元件時，會變成不好觸發..因為點不對位置選單就會當作是取消選取而變隱藏，這可能要再想想有沒有更好的解決方式 :p</p>
+<p>作品網址: <a href="https://kakadodo.github.io/theF2EChallange/admin-order.html">https://kakadodo.github.io/theF2EChallange/admin-order.html</a></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&text=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order&body=Check out this article: https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&title=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/06/25/the-F2E-week3-admin-order/&name=The F2E - 前端修練精神時光屋挑戰系列 - Week 3. Admin Order&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

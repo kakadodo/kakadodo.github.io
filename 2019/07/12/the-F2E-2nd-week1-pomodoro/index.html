@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="第二屆 The F2E 來了!!!  這次參賽規模好大，除了有專門的作品投稿網站，還可以自行挑選不同 UI 設計師作的設計稿當主題，慶幸這次是選工程師類型，跪著看設計稿啊..   這次主題根本是第一屆第一週的升級版啊~~除了 todolist 還要做計時器，洧杰老師真得很會挖坑耶😱 使用者故事: 我可以記錄代辦任務 我可以設定蕃茄鐘定時器 我可以透過報表檢視使用狀況  來自俊儀老師的設計稿，看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro">
+<meta property="og:url" content="https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="第二屆 The F2E 來了!!!  這次參賽規模好大，除了有專門的作品投稿網站，還可以自行挑選不同 UI 設計師作的設計稿當主題，慶幸這次是選工程師類型，跪著看設計稿啊..   這次主題根本是第一屆第一週的升級版啊~~除了 todolist 還要做計時器，洧杰老師真得很會挖坑耶😱 使用者故事: 我可以記錄代辦任務 我可以設定蕃茄鐘定時器 我可以透過報表檢視使用狀況  來自俊儀老師的設計稿，看">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week1.jpg">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190712-the-F2E-2nd-week1-pomodoro.jpg?alt=media&token=b87cbd14-12a9-423b-9346-2b5d58c63d09">
+<meta property="article:published_time" content="2019-07-12T02:54:00.000Z">
+<meta property="article:modified_time" content="2019-07-23T06:24:29.093Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week1.jpg">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/07/23/the-F2E-2nd-week2-free-cell/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/06/25/js-jsunderground-4f/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro&body=Check out this article: https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-12T02:54:00.000Z" itemprop="datePublished">2019-07-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/the-f2e-challenge/">the F2E challenge</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>第二屆 The F2E 來了!!!</p>
+</blockquote>
+<p>這次參賽規模好大，除了有專門的作品投稿網站，還可以自行挑選不同 UI 設計師作的設計稿當主題，慶幸這次是選工程師類型，跪著看設計稿啊..</p>
+<!-- excerpt -->
+<p><img src="https://kakadodo.github.io/theF2EChallange/img/2nd-week1.jpg" alt="blog image" title="Week 1. Pomodoro"></p>
+<p>這次主題根本是第一屆第一週的升級版啊~~<br>除了 todolist 還要做計時器，洧杰老師真得很會挖坑耶😱</p>
+<h2 id="使用者故事"><a href="#使用者故事" class="headerlink" title="使用者故事:"></a>使用者故事:</h2><ol>
+<li>我可以記錄代辦任務</li>
+<li>我可以設定蕃茄鐘定時器</li>
+<li>我可以透過報表檢視使用狀況</li>
+</ol>
+<p>來自俊儀老師的<a target="_blank" rel="noopener" href="https://challenge.thef2e.com/user/2760?schedule=2468#works-2468">設計稿</a>，看起來簡約做起來卻..不簡單!😂</p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug (html模板語言)</li>
+<li>SCSS (css預處理語言)</li>
+<li>Animate.css</li>
+<li>Vue.js</li>
+<li>Chart.js</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>對我來說這次的魔王應該是”計時器的動態顯示”跟”不同模式的介面顯示”吧。<br>自己的心態過程滿好笑的，從一開始抱著【第一週這甚麼鬼!不管啦切完初始畫面就當完成了~】的念頭切版，但初始畫面就把我覺得最需要挑戰的功能涵蓋了，好不容易把功能做出來後，覺得其他剩下的不做完有點可惜…所以，恩~我算是有盡可能地完成設計師給的版面。</p>
+<p>計時器的動態顯示苦惱了一段時間，雖然有想到用 SVG 或手刻 Canvas，但要搭配動態改變就有點想關機😂<br>最後決定用 <a target="_blank" rel="noopener" href="https://www.chartjs.org/">Chart.js</a> 這款圖表函式庫來客製成計時器。看上它原因是圖表簡單乾淨，本身就有響應式及動態功能，圖表調整彈性還算夠，對這次的設計稿來說應該滿好改的，圖型更新的方式也不難，修改原來的 data 值再執行 update 就會動態更新圖型了。<br>殊不知，官網的 Document 根本在開玩笑…我覺得它可以當作工程師需要通靈的最高指標性物件，文件寫得比別人做的 sample 還難懂，最後乾脆是用 Stack Overflow 來找寫法了，非常佩服那些可以解答的開發者..居然知道怎麼寫。<br>如果不太需要客製化圖表的話我覺得它還滿好用的啦~塞個 data 進去就可以秒產生圖表，一但要細節調整最好邊查 Stack Overflow 囉!<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190712-the-F2E-2nd-week1-pomodoro.jpg?alt=media&token=b87cbd14-12a9-423b-9346-2b5d58c63d09" alt="blog image"><br><small style="display: block; text-align: center;">有開發者還說寫文件的應該是個喝醉酒的律師 XDD</small></p>
+<p>至於不同模式介面其實是 CSS 要設定兩種主題樣式的意思，雖然不難但需要細心跟耐心(本人的弱點之一二..)<br>搭配 Vue 使用可以靈活的依照數據控制當前顯示的 class，所以我就先把兩種主題顏色的 class 寫好，再用 Vue 下判斷。(現在真的得了<strong>沒有框架該怎麼活</strong>的病了..)<br>雖然耗最多時間在樣式設定..但做好看到成品又滿感動的，不搭配點微互動效果不是很可惜嗎?!就這樣靠著奇怪的慣老闆心態讓我順利完成了挑戰🤣</p>
+<p>作品網址: <a href="https://kakadodo.github.io/theF2EChallange/pomodoro.html">https://kakadodo.github.io/theF2EChallange/pomodoro.html</a></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro&body=Check out this article: https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/07/12/the-F2E-2nd-week1-pomodoro/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 1. Pomodoro&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="過去沒有碰到需要整合其他社群平台帳號來做登入的專案過，對這方面有著未知的迷惑在，趁著好久沒寫文章的勢頭，來嘗試做做看多種社群平台的帳號登入功能。有先看過各家提供的 API 說明文件，呼叫方式及資料格式沒有完全相同，記得之前在碰 Firebase 的 auth 功能時有看過可以整合其他社群平台帳號的設定，既然 Firebase 都提供這種管道了，想必有做一定程度的整合XDD，不如就來依靠巨人肩膀實現">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)">
+<meta property="og:url" content="https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="過去沒有碰到需要整合其他社群平台帳號來做登入的專案過，對這方面有著未知的迷惑在，趁著好久沒寫文章的勢頭，來嘗試做做看多種社群平台的帳號登入功能。有先看過各家提供的 API 說明文件，呼叫方式及資料格式沒有完全相同，記得之前在碰 Firebase 的 auth 功能時有看過可以整合其他社群平台帳號的設定，既然 Firebase 都提供這種管道了，想必有做一定程度的整合XDD，不如就來依靠巨人肩膀實現">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-1.jpg?alt=media&token=f98071b9-cf1c-4704-840e-5d4778081c2d">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-2.jpg?alt=media&token=ee343daa-81a7-48e4-b736-0d39de7e2767">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-3.jpg?alt=media&token=38d3e487-38ff-4b37-9549-acb79456fb2c">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-4.jpg?alt=media&token=75f3b10b-f666-4878-8a3e-ace500e79546">
+<meta property="article:published_time" content="2020-05-24T07:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-24T11:41:29.674Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-1.jpg?alt=media&token=f98071b9-cf1c-4704-840e-5d4778081c2d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2021/02/27/gulp-imagemin-image-compression/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/10/16/chrome-devtools-debug-android/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&text=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&is_video=false&description=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)&body=Check out this article: https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&name=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%88%E6%A1%88%E6%BA%96%E5%82%99"><span class="toc-number">1.</span> <span class="toc-text">專案準備:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Firebase-Sign-in-methods"><span class="toc-number">2.</span> <span class="toc-text">Firebase Sign in methods:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%88%E6%A1%88%E8%BC%89%E5%85%A5-Firebase"><span class="toc-number">3.</span> <span class="toc-text">專案載入 Firebase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Firebase-auth-API"><span class="toc-number">4.</span> <span class="toc-text">Firebase auth API</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-05-24T07:00:00.000Z" itemprop="datePublished">2020-05-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/web-others/">Web Others</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>過去沒有碰到需要整合其他社群平台帳號來做登入的專案過，對這方面有著未知的迷惑在，趁著好久沒寫文章的勢頭，來嘗試做做看多種社群平台的帳號登入功能。有先看過各家提供的 API 說明文件，呼叫方式及資料格式沒有完全相同，記得之前在碰 Firebase 的 auth 功能時有看過可以整合其他社群平台帳號的設定，既然 Firebase 都提供這種管道了，想必有做一定程度的整合XDD，不如就來依靠巨人肩膀實現登入功能吧!</p>
+<!-- excerpt -->
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-1.jpg?alt=media&token=f98071b9-cf1c-4704-840e-5d4778081c2d" alt="blog image" title="用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"></p>
+<h2 id="專案準備"><a href="#專案準備" class="headerlink" title="專案準備:"></a>專案準備:</h2><ol>
+<li>基本的登入畫面前端專案，我是使用 Vue CLI 搭配 Firebase 的託管功能。</li>
+<li>需要有以下平台帳號: Google、Facebook、Twitter。</li>
+<li>建立 Firebase 專案，並且指定 Authentication 的 Sign in methods。</li>
+<li><a target="_blank" rel="noopener" href="https://developers.facebook.com/">Facebook</a> 和 <a target="_blank" rel="noopener" href="https://developer.twitter.com/en">Twitter</a> 需要擁有開發人員帳號，可以點擊連結前往開通並建立專案應用程式。</li>
+<li>連接 Firebase 與各平台的 App 應用程式之間的關聯設定，像是 App Id 、 產品密鑰及 OAuth 重新導向的 URI。</li>
+</ol>
+<h2 id="Firebase-Sign-in-methods"><a href="#Firebase-Sign-in-methods" class="headerlink" title="Firebase Sign in methods:"></a>Firebase Sign in methods:</h2><p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-2.jpg?alt=media&token=ee343daa-81a7-48e4-b736-0d39de7e2767" alt="blog image" title="用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"></p>
+<p>Firebase 整合了很多社群平台的登入功能!如上圖可以看出我激活了四種方式:</p>
+<ul>
+<li><p>電子郵件: 算是最簡單的一種了~基本上就是點個啟用再儲存即可，這樣就可以透過 Firebase 的 <code>firebase.auth().signInWithEmailAndPassword(email, password)</code> 來登入，當然前提是你有提供信箱註冊的功能或是有在 firebase 裡面手動新增使用者的信箱密碼。</p>
+</li>
+<li><p>Google: 由於 Firebase 是 Google 自家產品，所以在設定上非常輕鬆，會自動幫你建立 Google 的登入機制，因此也是按個啟用再儲存即可(也是可以另外設定專案名稱及專案管理者的信箱)。</p>
+</li>
+<li><p>Facebook: 需要建立開發人員帳號及應用程式，應用程式建立後，可以在裡面找到新增 <strong>Facebook 登入</strong> 這個功能，然後做一些與網站之間的關聯設定，例如要使用這個功能的網站網址，有效的 OAuth 重新導向 URI 等等，而 Firebase 這邊則是需要如下圖的兩個資訊，App Id 和產品密鑰，這兩個都可以在 Facebook 應用程式的設定頁面找到。</p>
+</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-3.jpg?alt=media&token=38d3e487-38ff-4b37-9549-acb79456fb2c" alt="blog image" title="用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"></p>
+<ul>
+<li>Twitter: 大致上跟 Facebook 差不多，也是要建立開發人員帳號及應用程式，但 Twitter 比較謹慎(囉嗦)一點，申請開發人員帳號之前要通過一連串的問卷調查…而且有規定描述要用英文且字數大於 200，當時在申請時還想說會不會卡在這就失敗了 XDD，好險有讓我申請成功，不確定 Twitter 小組之後是不是真的會來審查一番?總之就是盡可能描述你為什麼會想要使用 Twitter 的 API，以及大概會用到那些功能等等。</li>
+</ul>
+<p>個人覺得光是設定這塊就很方便了!基本該建的設定建一建，一些比較麻煩的 Firebase 也幫你做好了!(例如 OAuth 重新導向 URI，要自己做還真是不知道從何下手)，接下來就是實際在專案實現登入的功能啦!</p>
+<h2 id="專案載入-Firebase"><a href="#專案載入-Firebase" class="headerlink" title="專案載入 Firebase"></a>專案載入 Firebase</h2><p><a target="_blank" rel="noopener" href="https://firebase.google.com/docs/web/setup?authuser=0">官方文件</a>有提供多種情境的載入方式，CDN、ES6 模組、Node.js，甚至如果用 Firebase 做託管的話，可以載入特定 script，Firebase 會自動幫你做初始化(不會在外部顯露 firebase config)，我本來就打算用託管功能，所以試著用他提供的方式，但發現這個功能必須要在 run firebase server 的前提下才讀的到 API，且上線之後速度奇葩的慢(?)，只好改成模組化載入了。😢<br>Firebase 的 config 設定可以從下圖的位置取得:<br><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20200524-firebase-auth-social-login-4.jpg?alt=media&token=75f3b10b-f666-4878-8a3e-ace500e79546" alt="blog image" title="用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"></p>
+<p>下面介紹一下我的載入方式:</p>
+<ol>
+<li><code>npm install --save firebase</code></li>
+<li>建立一個 <strong>firebase.js</strong>，做初始化設定，新版的 firebase 有改變 import 的方式，除了載入必要的 app 核心模組之外，再依照實際會用到的產品模組做引入即可。我這次只使用 auth 功能，所以就 <code>import &#39;firebase/auth&#39;;</code> 而已，config 設定也可以依據實際用到的產品功能寫入，不用全部設定都加上去。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// firebase.js---</span></span><br><span class="line"><span class="keyword">import</span> firebase <span class="keyword">from</span> <span class="string">&#x27;firebase/app&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;firebase/auth&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// firebase config</span></span><br><span class="line"><span class="keyword">const</span> firebaseConfig = &#123;</span><br><span class="line">  apiKey: <span class="string">&#x27;xxxxxxxxxx&#x27;</span>,</span><br><span class="line">  authDomain: <span class="string">&#x27;xxxxxx.com&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> firebase.initializeApp(firebaseConfig);</span><br></pre></td></tr></table></figure></li>
+<li>於 Vue CLI 的 main.js 引入 firebase.js<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js---</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> firebase <span class="keyword">from</span> <span class="string">&#x27;./firebase&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ....</span></span><br></pre></td></tr></table></figure>
+這樣 firebase 就算載入成功囉!再來就是專案中使用 firebase 的 auth API。</li>
+</ol>
+<h2 id="Firebase-auth-API"><a href="#Firebase-auth-API" class="headerlink" title="Firebase auth API"></a>Firebase auth API</h2><p>UI 畫面會有 3 個社群登入 icon，以及信箱密碼的輸入框和一個登入按鈕，點擊 icon 就會觸發社群平台的登入功能，輸入框 + 登入按鈕則是一般電子信箱的登入方式。<br>稍微看過使用方法，除了 email/password 之外，透過第三方登入的 API 格式幾乎一樣，主要是帶入的 provider 不同而已。<br>方法開頭都是 <code>firebase.auth()</code>，可以用 firebase 初始化後的對象來呼叫，也可以直接拿 firebase 本身來使用。差異如下:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// firebase initial instance</span></span><br><span class="line"><span class="keyword">const</span> firebase = firebase.initializeApp(firebaseConfig);</span><br><span class="line"></span><br><span class="line"><span class="comment">// firebase</span></span><br><span class="line"><span class="keyword">import</span> firebase <span class="keyword">from</span> <span class="string">&#x27;firebase/app&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>不過兩者包含的功能還是有差喔!像是產生 provider 實例的功能只有 firebase 本身才有，初始化對象是沒有 new provider 的方法。</p>
+<ul>
+<li><p><code>firebase.auth().signInWithEmailAndPassword(email, password)</code>:<br>email 登入的方法，是個 promise，可用 <code>.then(res =&gt; &#123;&#125;)</code> 及 <code>.catch(err =&gt; &#123;&#125;)</code> 來執行成功或失敗的後續內容。</p>
+</li>
+<li><p><code>firebase.auth().signInWithPopup(provider)</code>:<br>我是使用 popup 的功能做登入，如果要選擇 <em>signInWithRedirect</em> 方法可以參考 firebase 提供的<a target="_blank" rel="noopener" href="https://github.com/firebase/quickstart-js/blob/master/auth/google-redirect.html">範例檔</a><br>一樣是個 promise，所以同上會有 <code>.then(res =&gt; &#123;&#125;)</code> 及 <code>.catch(err =&gt; &#123;&#125;)</code> 可用，firebase 把第三方登入功能做了包裝，只要載入不同的 provider，就可以用相同的方法來登入，成功或失敗的 response 都有格式化過，不太需要擔心例外處理。以下是自己在撰寫登入不同 provider 的範例:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  <span class="function"><span class="title">loginWithGoogle</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.loginError = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="built_in">this</span>.triggerFirebaseLogin(<span class="keyword">new</span> firebase.auth.GoogleAuthProvider());</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">loginWithFacebook</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.loginError = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="built_in">this</span>.triggerFirebaseLogin(<span class="keyword">new</span> firebase.auth.FacebookAuthProvider());</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">triggerFirebaseLogin</span>(<span class="params">method</span>)</span> &#123;</span><br><span class="line">    firebase</span><br><span class="line">      .auth()</span><br><span class="line">      .signInWithPopup(method)</span><br><span class="line">      .then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.successLogin(result.user);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (error.code === <span class="string">&#x27;auth/account-exists-with-different-credential&#x27;</span>) &#123;</span><br><span class="line">          <span class="keyword">const</span> pendingCred = error.credential;</span><br><span class="line">          <span class="keyword">const</span> &#123; email &#125; = error;</span><br><span class="line">          firebase</span><br><span class="line">            .auth()</span><br><span class="line">            .fetchSignInMethodsForEmail(email)</span><br><span class="line">            .then(<span class="function">(<span class="params">methods</span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">if</span> (methods[<span class="number">0</span>] === <span class="string">&#x27;password&#x27;</span>) &#123;</span><br><span class="line">                <span class="built_in">this</span>.loginError = <span class="string">&#x27;Your email has been used, please enter email/password to login&#x27;</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">const</span> provider = <span class="built_in">this</span>.getProviderForProviderId(methods[<span class="number">0</span>]);</span><br><span class="line">              firebase</span><br><span class="line">                .auth()</span><br><span class="line">                .signInWithPopup(provider)</span><br><span class="line">                .then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">                  result.user</span><br><span class="line">                    .linkAndRetrieveDataWithCredential(pendingCred)</span><br><span class="line">                    .then(<span class="function">(<span class="params">usercred</span>) =&gt;</span> &#123;</span><br><span class="line">                      <span class="built_in">this</span>.successLogin(usercred.user);</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.failLogin(error);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>既然方法都相同，就把方法額外拉出來寫，在綁定不同的 login 按鈕帶入對應的 provider 來呼叫，但在使用第三方登入時要注意 firebase 會用 email 作為 user 的判斷依據，如果有社群平台 email 是一樣的話，會導致 user 如果已經有一個登入方式了，又用另一個登入會失敗，error 訊息是 <code>auth/account-exists-with-different-credential</code>，因此需要特別處理這個狀況。 firebase 有提供 <code>linkAndRetrieveDataWithCredential</code> 的功能可以直接幫你整合一個信箱具有多種登入方式，但如果有做過一般信箱密碼登入的話就會比較麻煩一點，等於 user 需要額外輸入一般信箱登入的密碼後才能進行整合，這塊我還沒想法要怎麼實現，所以先跳 error 叫 user 改成用信箱密碼登入 XDD，有興趣的可以看看官方文件怎麼寫 <a target="_blank" rel="noopener" href="https://firebase.google.com/docs/auth/web/google-signin?authuser=0#expandable-1-label">Handling account-exists-with-different-credential Errors</a>。</p>
+</li>
+<li><p><code>firebase.auth().signOut()</code>: 登出的方法也整合好了，簡單一句幫你登出!一樣可以作成功或失敗的後續處理。</p>
+</li>
+<li><p><code>firebase.auth().onAuthStateChanged((user) =&gt; &#123;&#125;)</code>: 網站中總是要持續確認 user 的登入狀況，因此 firebase 有提供這個 observer 功能，幫你持續監聽 user 的狀態，會在狀態改變時觸發回呼函式，user 如果存在可以取得登入後的資料，沒有則是 <code>null</code>。我有用這個來判斷 user 當前應該進入的畫面為何，搭配 vue router 作導向。</p>
+</li>
+</ul>
+<p>關於上述方法的 catch error 可以到<a target="_blank" rel="noopener" href="https://firebase.google.com/docs/reference/js/firebase.auth.Auth?authuser=0">官方文件</a>查看，自己只有拿部分測試到的狀況來加錯誤訊息而已。</p>
+<p>這個週末就在 firebase 的擁抱下度過了~好久沒寫 side project，hexo 也差點忘記要怎麼用，好慘!</p>
+<p>我的實作範例: <a target="_blank" rel="noopener" href="https://social-login-9640e.firebaseapp.com/">https://social-login-9640e.firebaseapp.com/</a><br>(只有登入畫面稍微能看點…登入後就放過自己吧😭)</p>
+<p>以上內容如有勘誤，還請不吝告知 🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%88%E6%A1%88%E6%BA%96%E5%82%99"><span class="toc-number">1.</span> <span class="toc-text">專案準備:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Firebase-Sign-in-methods"><span class="toc-number">2.</span> <span class="toc-text">Firebase Sign in methods:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%88%E6%A1%88%E8%BC%89%E5%85%A5-Firebase"><span class="toc-number">3.</span> <span class="toc-text">專案載入 Firebase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Firebase-auth-API"><span class="toc-number">4.</span> <span class="toc-text">Firebase auth API</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&text=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&is_video=false&description=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)&body=Check out this article: https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&title=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2020/05/24/firebase-auth-social-login/&name=用 Firebase Authentication SDK 整合多種社群帳號登入(Google, Facebook, Twitter)&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

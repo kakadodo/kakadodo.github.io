@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="嗯，同一個主題隔一個禮拜才寫好像對我這種金魚不太適合…如果範例圖看起來跟上一篇不太一樣感覺的話請見諒 XD   上篇提到的 Flex Container 可以看出其屬性都是針對整體版面的布局做設定，大部分排版都可以輕鬆靠它達成，但總是會有那麼一個”有時候”，會需要排出較特殊的版面，Flex Item 就有很重要的戲份囉! For 子層元素使用的屬性:子層元素在父容器空間中的彈性調整相關屬性 fle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="好加在有 CSS - Flex-下">
+<meta property="og:url" content="https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="嗯，同一個主題隔一個禮拜才寫好像對我這種金魚不太適合…如果範例圖看起來跟上一篇不太一樣感覺的話請見諒 XD   上篇提到的 Flex Container 可以看出其屬性都是針對整體版面的布局做設定，大部分排版都可以輕鬆靠它達成，但總是會有那麼一個”有時候”，會需要排出較特殊的版面，Flex Item 就有很重要的戲份囉! For 子層元素使用的屬性:子層元素在父容器空間中的彈性調整相關屬性 fle">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-7.png?alt=media&token=c7c8e540-553f-47e3-a722-24e3fed1016e">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-8.png?alt=media&token=6cb07de2-3e57-4d47-82b6-01a89907ef75">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-9.png?alt=media&token=78f2ca47-4e28-4118-a05b-3f741af8916e">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-10.png?alt=media&token=89e355d3-6579-4896-b17e-dceb76b243e4">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-11.png?alt=media&token=05ac3d63-0dc6-4134-bd30-9207e5dcf396">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-12.png?alt=media&token=4afbeeaa-eb93-4f9b-845d-2815fec567e9">
+<meta property="article:published_time" content="2019-01-15T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:23:11.836Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>好加在有 CSS - Flex-下</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/01/22/css-about-css-border-radius/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/01/08/css-about-css-flex-1/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&text=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&is_video=false&description=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=好加在有 CSS - Flex-下&body=Check out this article: https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&name=好加在有 CSS - Flex-下&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#For-%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">For 子層元素使用的屬性:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E5%9C%A8%E7%88%B6%E5%AE%B9%E5%99%A8%E7%A9%BA%E9%96%93%E4%B8%AD%E7%9A%84%E5%BD%88%E6%80%A7%E8%AA%BF%E6%95%B4%E7%9B%B8%E9%97%9C%E5%B1%AC%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">子層元素在父容器空間中的彈性調整相關屬性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E8%87%AA%E8%BA%AB%E7%9A%84%E5%B0%8D%E9%BD%8A%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">子層元素自身的對齊方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.</span> <span class="toc-text">子層元素的排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%88%87-flex-%E7%9A%84%E7%A5%9E%E6%90%AD%E9%85%8D-margin"><span class="toc-number">1.4.</span> <span class="toc-text">與 flex 的神搭配 - margin</span></a></li></ol></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        好加在有 CSS - Flex-下
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-15T01:00:00.000Z" itemprop="datePublished">2019-01-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/css/">CSS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css/" rel="tag">CSS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>嗯，同一個主題隔一個禮拜才寫好像對我這種金魚不太適合…<br>如果範例圖看起來跟上一篇不太一樣感覺的話請見諒 XD</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190108-css-about-css.jpg?alt=media&token=e3c7ccc9-7207-4705-a791-c9ab07627e9b" alt="blog image" title="好加在有 CSS"></p>
+<p>上篇提到的 Flex Container 可以看出其屬性都是針對整體版面的布局做設定，大部分排版都可以輕鬆靠它達成，但總是會有那麼一個”有時候”，會需要排出較特殊的版面，Flex Item 就有很重要的戲份囉!</p>
+<h1 id="For-子層元素使用的屬性"><a href="#For-子層元素使用的屬性" class="headerlink" title="For 子層元素使用的屬性:"></a>For 子層元素使用的屬性:</h1><h2 id="子層元素在父容器空間中的彈性調整相關屬性"><a href="#子層元素在父容器空間中的彈性調整相關屬性" class="headerlink" title="子層元素在父容器空間中的彈性調整相關屬性"></a>子層元素在父容器空間中的彈性調整相關屬性</h2><ul>
+<li><code>flex-grow: 0 | 正整數 ;</code><br>設定 flex item 可以分配到剩餘空間的比例，預設值為 0，表示不會因為父容器中還有剩餘空間就變大，如果有設定 0 之外的<strong>正整數</strong>數值，就會依照該值的比例去分配空間。<br><strong>比例計算方式: 自身設定的比例/全部元素設定的比例總數*剩餘空間大小</strong></li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-7.png?alt=media&token=c7c8e540-553f-47e3-a722-24e3fed1016e" alt="blog image" title="flex-grow 圖例"><br>上圖第三個例子分別設定 flex item 有不同的 flex-grow 比例，可看出 item 3 因為設定 0 所以大小不會變，而 item 1 與 item 2 則將剩餘的空間依照 2:1 的比例分別加到自己身上。</p>
+<ul>
+<li><code>flex-shrink: 0 | 正整數 ;</code><br>設定 flex item 超出父容器時要不要自行瘦身 😂，預設值為 1，表示有超出父容器空間的話，自己的大小會依照比例縮減。如果設定為 0 就不會自行縮減喔!也可設定其他正整數，原理同 flex-grow 一樣，會將原本超出的空間大小，依據子層元素全部的比例總數以及自身的比例決定各自縮減的量。</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-8.png?alt=media&token=6cb07de2-3e57-4d47-82b6-01a89907ef75" alt="blog image" title="flex-shrink 圖例"><br>上圖第三個例子分別設定 flex item 有不同的 flex-shrink 比例，可看出 item 3 因為設定 0 所以大小不會變，而 item 1 與 item 2 則依照超出空間的 2:1 比例分別縮減自己。</p>
+<ul>
+<li><p><code>flex-basic: auto | 一般寬高設定單位 ;</code><br>設定 flex item 的”基本大小”，預設值為 auto，大小針對寬或高會根據父容器的主軸方向為何， 主軸為 row 的話是寬度， column 則是高度。該屬性可以當成是針對 flex 物件的寬高設定，因為當父容器是 display: flex 時，子層元素的 flex-basic 權重就會比原本的 width / height 屬性還高!建議元素為 flex-item 時都使用 flex-basic 這個屬性來設定寬高，可以省略額外修改 width / height 的功夫。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-9.png?alt=media&token=78f2ca47-4e28-4118-a05b-3f741af8916e" alt="blog image" title="flex-basic 圖例">  </p>
+</li>
+</ul>
+<ul>
+<li><code>flex: 0 | 1 | auto ;</code><br>flex-grow、flex-shrink 及 flex-basic 的 shorthand，設定有先後順序之差喔!</li>
+</ul>
+<h2 id="子層元素自身的對齊方式"><a href="#子層元素自身的對齊方式" class="headerlink" title="子層元素自身的對齊方式"></a>子層元素自身的對齊方式</h2><p>可以改變各個子層元素在容器中的排列方式，整個超強大的功能啊~~用 float 這樣排會哭吧…</p>
+<ul>
+<li><code>align-self: auto | flex-start | flex-end | center | strecth | baseline;</code><br>設定子層各自針對<strong>交錯軸</strong>方向的對齊<ul>
+<li>auto: 預設值，會跟隨父層設定</li>
+<li>flex-start: 對齊交錯軸起始處</li>
+<li>flex-end: 對齊交錯軸結尾處</li>
+<li>center: 對齊交錯軸中間</li>
+<li>baseline: 以文字基線為標準對齊</li>
+<li>strecth: 在交錯軸的方向延伸與主容器同高度</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-10.png?alt=media&token=89e355d3-6579-4896-b17e-dceb76b243e4" alt="blog image" title="align-self 圖例"></p>
+<h2 id="子層元素的排序"><a href="#子層元素的排序" class="headerlink" title="子層元素的排序"></a>子層元素的排序</h2><p>非常方便的功能，尤其版面要因應 RWD 調整時靠它很輕鬆就可以改變元素的排序位置!</p>
+<ul>
+<li><code>order: 0 | Number ;</code><br>預設值是 0，都沒有特地設值或 item 之間數值相同的話會依據 html 正常的流動順序排列，如果每個 item 的 order 值都不同時就會改變元素之間的順序位置喔! order 可以設定負值，總之數值越小排列越前面，數值越大就反之。</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-11.png?alt=media&token=05ac3d63-0dc6-4134-bd30-9207e5dcf396" alt="blog image" title="order 圖例"></p>
+<h2 id="與-flex-的神搭配-margin"><a href="#與-flex-的神搭配-margin" class="headerlink" title="與 flex 的神搭配 - margin"></a>與 flex 的神搭配 - margin</h2><p>雖然 flex 提供很多對齊方式，不過這些對齊通常是在某種”定律”之下，可能彼此距離相等或者周圍的邊距相等之類的，如果想排出其中一欄離大家很遠，或是彼此之間距離不一的版型，其實可以依靠<strong>margin</strong>這個屬性來幫忙。雖然元素變成 flex 性質的物件，但依然保有 box-model 的特性喔!所以一般 margin 使用方式用在它身上也是可以通的。其中特別的是，如果元素設定成 <code>margin-[left/right]:auto;</code> 的話，該元素就會往反方向推擠直到父容器邊距。</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20190115-css-about-css-flex-12.png?alt=media&token=4afbeeaa-eb93-4f9b-845d-2815fec567e9" alt="blog image" title="flex 搭配 margin auto"></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#For-%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">For 子層元素使用的屬性:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E5%9C%A8%E7%88%B6%E5%AE%B9%E5%99%A8%E7%A9%BA%E9%96%93%E4%B8%AD%E7%9A%84%E5%BD%88%E6%80%A7%E8%AA%BF%E6%95%B4%E7%9B%B8%E9%97%9C%E5%B1%AC%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">子層元素在父容器空間中的彈性調整相關屬性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E8%87%AA%E8%BA%AB%E7%9A%84%E5%B0%8D%E9%BD%8A%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">子層元素自身的對齊方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%B1%A4%E5%85%83%E7%B4%A0%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.</span> <span class="toc-text">子層元素的排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%88%87-flex-%E7%9A%84%E7%A5%9E%E6%90%AD%E9%85%8D-margin"><span class="toc-number">1.4.</span> <span class="toc-text">與 flex 的神搭配 - margin</span></a></li></ol></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&text=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&is_video=false&description=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=好加在有 CSS - Flex-下&body=Check out this article: https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&title=好加在有 CSS - Flex-下"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/01/15/css-about-css-flex-2/&name=好加在有 CSS - Flex-下&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

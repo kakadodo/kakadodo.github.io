@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="每週主題都在創新難是怎麼回事 😰，雖然剩兩週了還是擔心自己完成不了挑戰賽..   使用者故事: 我可以填寫暱稱或匿名形式，不需進行註冊，便可進入聊天室 聊天方式不限，可用大廳模式、一對一模式，或者是系統配對皆可，或者是自創聊天模式皆可 我可以上傳附件檔案、圖片 我可以使用內建的表情符號  來自 Yuri 的設計稿，不得不跟設計師說聲抱歉~有些圖片無法存取的情況下幾乎被我改了一大部分 UI 🙏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room">
+<meta property="og:url" content="https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="每週主題都在創新難是怎麼回事 😰，雖然剩兩週了還是擔心自己完成不了挑戰賽..   使用者故事: 我可以填寫暱稱或匿名形式，不需進行註冊，便可進入聊天室 聊天方式不限，可用大廳模式、一對一模式，或者是系統配對皆可，或者是自創聊天模式皆可 我可以上傳附件檔案、圖片 我可以使用內建的表情符號  來自 Yuri 的設計稿，不得不跟設計師說聲抱歉~有些圖片無法存取的情況下幾乎被我改了一大部分 UI 🙏">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week7.jpg">
+<meta property="article:published_time" content="2019-08-25T07:00:00.000Z">
+<meta property="article:modified_time" content="2019-08-25T08:04:12.483Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakadodo.github.io/theF2EChallange/img/2nd-week7.jpg">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/09/02/the-F2E-2nd-week8-cloud-drive/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2019/08/18/the-F2E-2nd-week6-booking/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room&body=Check out this article: https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-emoji-picker"><span class="toc-number">3.1.</span> <span class="toc-text">vue-emoji-picker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#firebase-Database-API"><span class="toc-number">3.2.</span> <span class="toc-text">firebase Database API</span></a></li></ol></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-08-25T07:00:00.000Z" itemprop="datePublished">2019-08-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/the-f2e-challenge/">the F2E challenge</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>每週主題都在創新難是怎麼回事 😰，雖然剩兩週了還是擔心自己完成不了挑戰賽..</p>
+<!-- excerpt -->
+<p><img src="https://kakadodo.github.io/theF2EChallange/img/2nd-week7.jpg" alt="blog image" title="Week 7. Chat Room"></p>
+<h2 id="使用者故事"><a href="#使用者故事" class="headerlink" title="使用者故事:"></a>使用者故事:</h2><ol>
+<li>我可以填寫暱稱或匿名形式，不需進行註冊，便可進入聊天室</li>
+<li>聊天方式不限，可用大廳模式、一對一模式，或者是系統配對皆可，或者是自創聊天模式皆可</li>
+<li>我可以上傳附件檔案、圖片</li>
+<li>我可以使用內建的表情符號</li>
+</ol>
+<p>來自 Yuri 的<a target="_blank" rel="noopener" href="https://challenge.thef2e.com/user/2943?schedule=3997">設計稿</a>，不得不跟設計師說聲抱歉~有些圖片無法存取的情況下幾乎被我改了一大部分 UI 🙏</p>
+<h2 id="運用技術"><a href="#運用技術" class="headerlink" title="運用技術:"></a>運用技術:</h2><ul>
+<li>Pug</li>
+<li>Vue.js</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/DCzajkowski/vue-emoji-picker">vue-emoji-picker</a> (Vue 的 emoji 表情包組件庫)</li>
+<li>Firebase Database API</li>
+</ul>
+<h2 id="挑戰心得"><a href="#挑戰心得" class="headerlink" title="挑戰心得:"></a>挑戰心得:</h2><p>主題雖然是匿名聊天室，但自己把它做成比較偏向即時留言版的感覺，實在是沒有開發後端程式的天分啦!!<br>也因此..一開始雖然有把設計師稿件的 UI 元素一一刻出來，隨著接上 database 的功能後，還是決定把沒有做出的功能 UI 移掉了😔<br>最後只有完成**”可以創建新的聊天室”<strong>、</strong>“可以多人匿名聊天”<strong>、</strong>“可以使用表情符號”<strong>、</strong>“可以上傳圖片(但是 by 貼網址 XDDD)”**這些功能實現。<br>自己寫完最滿意的應該是在詢問使用者身分並且創建身分的那個系統機器人介面，根本在耍 user 啊 XD</p>
+<p>以下就來分享這次挑戰賽有用到的工具:</p>
+<h3 id="vue-emoji-picker"><a href="#vue-emoji-picker" class="headerlink" title="vue-emoji-picker"></a>vue-emoji-picker</h3><p>還沒開始寫之前有先找一下如何用 JavaScript 產生 Emoji 表情，但看了覺得短時間會超出自己腦容量可以承受的範圍，所以放棄自幹這條路 😱<br>有興趣研究的可以參考保哥寫的<a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2019/01/08/Understanding-Emoji-Unicode-and-JavaScript">用 JavaScript 玩轉 Emoji 表情圖示原來這麼簡單</a>這篇文章，非常清楚的告訴你要如何解析 Emoji 字元，及 UTF 的字元轉換，其實 Emoji 有固定的邏輯，例如基本的人物 Emoji 加上菲茨派屈克修飾符後可以產生不同膚色的相同人物，又或是一個學士帽的 Emoji 加上一個女生的 Emoji 就會變成一個畢業女學生圖案 ，根本就是檸檬加冬瓜迸出新滋味的概念啊!<br>最後是找了一款包成 Vue 組件的 emoji-picker，基本上就是直接在想要呈現的位置中塞入組件即可，開發者也有提供 CSS 樣式，不用自己慢慢排版了，更貼心的是還有搜尋功能，可以輸入表情的關鍵字來過濾出想要使用的 Emoji!<br>因為我是偷懶派的直接用 new Vue 來寫，所以組件的安裝就要搭配 cdn:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 掛載組件 cdn --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/vue-emoji-picker/dist/vue-emoji-picker.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 創建 Vue 之前記得先使用組件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  Vue.use(EmojiPicker)</span><br><span class="line"></span><br><span class="line"><span class="javascript">  <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// ...</span></span></span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>組件本身的內容就像上面說的一樣，其實把整段程式碼貼上就會產生了，基本上不太需要去修改裡面的屬性，但記得要在 Vue 中寫上對應的 data 及 methods 及另外刻 CSS 樣式或是使用作者提供的 CSS 樣式，不然會變成一盤散沙呈現 XD</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 這是實際要做文字輸入、插入 Emoji 的 input 欄位 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">v-model</span>=<span class="string">&quot;input&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- emoji-picker 組件本身，@emoji 事件可以將選定的表情插入到 input 中，search 是搜尋的資料綁定，會過濾符合的 Emoji --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">emoji-picker</span> @<span class="attr">emoji</span>=<span class="string">&quot;insert&quot;</span> <span class="attr">:search</span>=<span class="string">&quot;search&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- invoker 是切換 emoji picker 顯示/關閉的介面，可以自行改成其他 btn 或放一個笑臉代替 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">&quot;emoji-invoker&quot;</span> <span class="attr">slot-scope</span>=<span class="string">&quot;&#123; events: &#123; click: clickEvent &#125; &#125;&quot;</span> @<span class="attr">click.stop</span>=<span class="string">&quot;clickEvent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>&gt;</span>open<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- emoji picker 的彈出介面，裡面就會顯示所有的 emoji 表情、搜尋框等 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">&quot;emoji-picker&quot;</span> <span class="attr">slot-scope</span>=<span class="string">&quot;&#123; emojis, insert, display &#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;search&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;(emojiGroup, category) in emojis&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;category&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h5</span>&gt;</span>&#123;&#123; category &#125;&#125;<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            &lt;span</span><br><span class="line">              v-for=&quot;(emoji, emojiName) in emojiGroup&quot;</span><br><span class="line">              :key=&quot;emojiName&quot;</span><br><span class="line">              @click=&quot;insert(emoji)&quot;</span><br><span class="line">              :title=&quot;emojiName&quot;</span><br><span class="line">            &gt;&#123;&#123; emoji &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">emoji-picker</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      input: <span class="string">&#x27;&#x27;</span>, <span class="comment">// 文字輸入框的 data 綁定</span></span><br><span class="line">      search: <span class="string">&#x27;&#x27;</span>, <span class="comment">// 搜尋框的 data 綁定</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// @emoji 監聽的回調函式，其實就是在 input 內容後加上 emoji 字元</span></span><br><span class="line">    <span class="function"><span class="title">insert</span>(<span class="params">emoji</span>)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.input += emoji</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>是不是很簡單~~~感恩作者、讚嘆作者!!如果想進階一點修改 emoji-picker 顯示的表情圖案，可以複寫組件的 default object，實際位置會在組件庫中的 emojis.js 檔中，但因為我是用 cdn 直接載入就沒去修改它了。</p>
+<h3 id="firebase-Database-API"><a href="#firebase-Database-API" class="headerlink" title="firebase Database API"></a>firebase Database API</h3><p>這塊之所以有接觸也要感謝六角學院之前直播過 Vue 教學，搭配 firebase 的即時資料庫可以立即顯示更新的 data 內容，因此這次就拿來當複習使用。<br>不過 firebase 似乎改寫了一些規則，現在不再是單純載入 firebase.js 的檔案，而是做為各功能拆分檔，除了基本核心 app.js 要載入外，再來就是看你要使用它的哪些功能，分別載入那個功能的 js 檔。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 我只有用到 database，所以就載入這兩支 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://www.gstatic.com/firebasejs/6.4.2/firebase-database.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>之後其實就差不多，需要先在 firebase 的 console 建立自己的 app 專案，然後開通 database 功能，最後再將 firebaseConfig 寫入自己的 js 中並 initializeApp 即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// config 可以視情況寫入，以下是完整的內容，但如果沒用到 message 或 storage 功能其實可以不用寫</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> firebaseConfig = &#123;</span></span><br><span class="line"><span class="javascript">      apiKey: <span class="string">&quot;api-key&quot;</span>,</span></span><br><span class="line"><span class="javascript">      authDomain: <span class="string">&quot;project-id.firebaseapp.com&quot;</span>,</span></span><br><span class="line"><span class="javascript">      databaseURL: <span class="string">&quot;https://project-id.firebaseio.com&quot;</span>,</span></span><br><span class="line"><span class="javascript">      projectId: <span class="string">&quot;project-id&quot;</span>,</span></span><br><span class="line"><span class="javascript">      storageBucket: <span class="string">&quot;project-id.appspot.com&quot;</span>,</span></span><br><span class="line"><span class="javascript">      messagingSenderId: <span class="string">&quot;sender-id&quot;</span>,</span></span><br><span class="line"><span class="javascript">      appID: <span class="string">&quot;app-id&quot;</span>,</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="javascript">    <span class="comment">// 初始化 Firebase</span></span></span><br><span class="line">    firebase.initializeApp(firebaseConfig);</span><br><span class="line"><span class="javascript">    <span class="comment">// database 就是你專案的 database啦!</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> database = firebase.database();</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下來就是處理 database 的讀取跟寫入等功能而已，firebase 的官方 Docs 其實都有滿完整的範例程式碼，有興趣可以直接前往<a target="_blank" rel="noopener" href="https://firebase.google.com/docs/database/web/start">官網</a>查看。</p>
+<p>最後的額外小插曲是，當使用 firebase API 並上傳到 Github 這類公開的資料庫，等同於公開你的 config 設定檔，大家都可以知道你的 api key 是甚麼，如果無聊一點可能就抓你的 config 檔來讀取/寫入 database 的內容。謹慎一點會在 database 的規則中寫入身分驗證來阻擋讀取與寫入，但像這次是以匿名形式的聊天室，不太可能去建立 auth 規則，所以至少要確保你的 api key 只能在固定的網域下才能被請求。可以參考這篇文章說明: <a target="_blank" rel="noopener" href="https://medium.com/@impaachu/how-to-secure-your-firebase-project-even-when-your-api-key-is-publicly-available-a462a2a58843">How to secure your Firebase project even when your API key is publicly available</a></p>
+<p>其實我自己也是發布之後收到 github 的 gitguardian 不斷咆嘯我暴露的 google 的 api key 才想到要做這件事 XDDD<br>firebase 畢竟是 google 自家產品，因此很貼心地會在建立 app 專案的同時，將你的 api key 憑證傳送到 google 的 APIs console，我們就可以到那邊去設定憑證的使用限制。<br>上面那篇文章都有附上詳細的使用教學及圖片截圖，這邊就不自己亂講了。接下來只需祈禱 api 的使用次數不會超過 firebase 提供的免費流量，不然就要進行國外匯款了…請大家手下留情 QQ</p>
+<p>作品網址: <a href="https://kakadodo.github.io/theF2EChallange/chatroom.html">https://kakadodo.github.io/theF2EChallange/chatroom.html</a></p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E6%95%85%E4%BA%8B"><span class="toc-number">1.</span> <span class="toc-text">使用者故事:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%94%A8%E6%8A%80%E8%A1%93"><span class="toc-number">2.</span> <span class="toc-text">運用技術:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%B0%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">挑戰心得:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-emoji-picker"><span class="toc-number">3.1.</span> <span class="toc-text">vue-emoji-picker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#firebase-Database-API"><span class="toc-number">3.2.</span> <span class="toc-text">firebase Database API</span></a></li></ol></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&text=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&is_video=false&description=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room&body=Check out this article: https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&title=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2019/08/25/the-F2E-2nd-week7-chatroom/&name=The F2E - 前端修練精神時光屋挑戰系列 - 2nd Week 7. Chat Room&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

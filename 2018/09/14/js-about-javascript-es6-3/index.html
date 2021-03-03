@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="JavaScript 中創建物件的正統用法是使用建構式，建構式跟原型息息相關，如果沒搞懂原型概念的話看了只會覺得霧煞煞。而 ES6 新出的 Class 類別其實是建構式的語法糖，原理來說其實並無改變，只是撰寫方式更為簡潔有條理。   介紹 Class 之前，先回顧一下原本建構式，寫法跟創建 function 很像，不過為了容易辨別與 function 之間的差異，命名會是大寫駝峰式，而 funct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別">
+<meta property="og:url" content="https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="JavaScript 中創建物件的正統用法是使用建構式，建構式跟原型息息相關，如果沒搞懂原型概念的話看了只會覺得霧煞煞。而 ES6 新出的 Class 類別其實是建構式的語法糖，原理來說其實並無改變，只是撰寫方式更為簡潔有條理。   介紹 Class 之前，先回顧一下原本建構式，寫法跟創建 function 很像，不過為了容易辨別與 function 之間的差異，命名會是大寫駝峰式，而 funct">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-09-14T01:01:58.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/09/25/js-about-javascript-es6-4/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/09/07/js-about-javascript-es6-2/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別&body=Check out this article: https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-%E9%A1%9E%E5%88%A5"><span class="toc-number">1.</span> <span class="toc-text">Class 類別</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%88%E7%AE%97%E5%B1%AC%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">計算屬性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%9E%E5%88%A5%E7%B9%BC%E6%89%BF"><span class="toc-number">3.</span> <span class="toc-text">類別繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9C%E6%85%8B%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">靜態方法</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-09-14T01:01:58.000Z" itemprop="datePublished">2018-09-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/es6/" rel="tag">ES6</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>JavaScript 中創建物件的正統用法是使用建構式，建構式跟原型息息相關，如果沒搞懂原型概念的話看了只會覺得霧煞煞。而 ES6 新出的 Class 類別其實是建構式的語法糖，原理來說其實並無改變，只是撰寫方式更為簡潔有條理。</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>介紹 Class 之前，先回顧一下原本建構式，寫法跟創建 function 很像，不過為了容易辨別與 function 之間的差異，命名會是大寫駝峰式，而 function 內部則是定義建構式的屬性及方法。如果方法是共用給物件實例的話，則會寫在建構式的 prototype 中而不是建構式本身，因為這樣會造成不必要的記憶體產生。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一個人的建構式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 共用的方法寫在 prototype</span></span><br><span class="line">Person.prototype.introSelf = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;嗨!我是 &#x27;</span> + <span class="built_in">this</span>.name + <span class="string">&#x27;, 我 &#x27;</span> + <span class="built_in">this</span>.age + <span class="string">&#x27; 歲了!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 建立物件實例</span></span><br><span class="line"><span class="keyword">var</span> mary = <span class="keyword">new</span> Person(<span class="string">&#x27;Mary&#x27;</span>, <span class="number">15</span>);</span><br><span class="line">mary.introSelf(); <span class="comment">// 嗨!我是 Mary, 我 15 歲了!</span></span><br></pre></td></tr></table></figure>
+
+<p>這種寫法由於將 prototype 另外拉出來設定，當內容一多時，可能就不易閱讀，因此就有 Class 這樣的語法糖誕生來改善這樣的問題。</p>
+<h2 id="Class-類別"><a href="#Class-類別" class="headerlink" title="Class 類別"></a>Class 類別</h2><p>Class 的寫法稍微特別一點，首先以 <code>class</code> 這個特殊命名做開頭再接上要賦予他的類別名稱，之後則用大括號框起定義建構式的內容。<br>建構式的內容會寫在 <code>constructor</code> 中，裡面的寫法基本上同原本建構式沒有太大差別，而原本要在外層設定 prototype 的方法，可以直接寫在 Class 內，寫法可用 ES6 的物件方法模式來寫。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">introSelf</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;嗨!我是 &#x27;</span> + <span class="built_in">this</span>.name + <span class="string">&#x27;, 我 &#x27;</span> + <span class="built_in">this</span>.age + <span class="string">&#x27; 歲了!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> mary = <span class="keyword">new</span> Person(<span class="string">&#x27;Mary&#x27;</span>, <span class="number">15</span>);</span><br><span class="line">mary.introSelf(); <span class="comment">// 嗨!我是 Mary, 我 15 歲了!</span></span><br></pre></td></tr></table></figure>
+<p>這樣看整個好懂多啦!!! 用 Class 包成一包更好閱讀了~</p>
+<h2 id="計算屬性"><a href="#計算屬性" class="headerlink" title="計算屬性"></a>計算屬性</h2><p>ES6 新增了物件計算屬性的方法，可藉由方法的 get 與 set 來回傳/設定經過計算後的值，以此減少屬性不必要的重複設定，存取計算屬性時會觸發 get 來取得計算後回傳的值，設定計算屬性的話則是觸發 set，並且將設定的值當作參數傳入 set 的 function 以改變既有屬性的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">firstname, lastname, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.firstname = firstname;</span><br><span class="line">    <span class="built_in">this</span>.lastname = lastname;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">fullname</span>()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.firstname&#125;</span> <span class="subst">$&#123;<span class="built_in">this</span>.lastname&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title">fullname</span>(<span class="params">val</span>)&#123;</span><br><span class="line">    <span class="built_in">this</span>.firstname = val.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">this</span>.lastname = val.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">introSelf</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;嗨!我是 &#x27;</span> + <span class="built_in">this</span>.fullname + <span class="string">&#x27;, 我 &#x27;</span> + <span class="built_in">this</span>.age + <span class="string">&#x27; 歲了!&#x27;</span>);</span><br><span class="line">    <span class="comment">// 利用 get 特性取得 firstname + lastname</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> mary = <span class="keyword">new</span> Person(<span class="string">&#x27;Mary&#x27;</span>, <span class="string">&#x27;Chang&#x27;</span>, <span class="number">15</span>);</span><br><span class="line">mary.introSelf(); <span class="comment">// 嗨!我是 Mary Chang, 我 15 歲了!</span></span><br><span class="line"></span><br><span class="line">mary.fullname = <span class="string">&#x27;Chelsea Chang&#x27;</span>; <span class="comment">// 利用 set 特性來改變原本的值</span></span><br><span class="line">mary.introSelf(); <span class="comment">// 嗨!我是 Chelsea Chang, 我 15 歲了!</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="類別繼承"><a href="#類別繼承" class="headerlink" title="類別繼承"></a>類別繼承</h2><p>Class 的繼承，也就是建立子類別，子類別會命名自己的類別名稱再加上 <code>extends</code> 延伸父類別。而子類別的 <code>constructor</code> 中，需要特別使用 <code>super()</code> 來呼叫父類別的建構式設定，可以想成是把父類別的建構式 copy 一份到自己身上的概念啦~子類別如果有撰寫相同名稱的方法，會取代原本父類別的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父類別</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">introSelf</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;嗨!我是 &#x27;</span> + <span class="built_in">this</span>.name + <span class="string">&#x27;, 我 &#x27;</span> + <span class="built_in">this</span>.age + <span class="string">&#x27; 歲了!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子類別</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Engineer</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">super</span>(name, age); <span class="comment">// 父類別有帶參數，super 就要寫入這些參數</span></span><br><span class="line">    <span class="built_in">this</span>.job = <span class="string">&#x27;engineer&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">introSelf</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`嗨!我是 <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>，我 <span class="subst">$&#123;<span class="built_in">this</span>.age&#125;</span> 歲了!我的職業是 <span class="subst">$&#123;<span class="built_in">this</span>.job&#125;</span> !`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> chelsea = <span class="keyword">new</span> Engineer(<span class="string">&#x27;Chelsea&#x27;</span>, <span class="number">31</span>);</span><br><span class="line">chelsea.introSelf(); <span class="comment">// 嗨!我是 Chelsea，我 31 歲了!我的職業是 engineer !</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="靜態方法"><a href="#靜態方法" class="headerlink" title="靜態方法"></a>靜態方法</h2><p>靜態方法是與類別綁定的方法，此方法不會被繼承，只能 Class 自身使用。建立靜態方法的方式就是在 Class 中於指定的方法前加上 <code>static</code> 這個特殊命名。呼叫靜態方法由 Class 本身作為呼叫的對象，創建出來的實例是無法使用這個方法喔!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">introSelf</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;嗨!我是 &#x27;</span> + <span class="built_in">this</span>.name + <span class="string">&#x27;, 我 &#x27;</span> + <span class="built_in">this</span>.age + <span class="string">&#x27; 歲了!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">eat</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;好餓!我要吃 10 碗!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mary = <span class="keyword">new</span> Person(<span class="string">&#x27;Mary&#x27;</span>, <span class="string">&#x27;Chang&#x27;</span>, <span class="number">15</span>);</span><br><span class="line">mary.eat(); <span class="comment">// 跳錯: mary.eat is not a function</span></span><br><span class="line">Person.eat(); <span class="comment">// 好餓!我要吃 10 碗!</span></span><br></pre></td></tr></table></figure>
+<p>只能給建構式本身使用的方法用處會高嗎??? 我自己是還沒這樣創建過啦<del>不過 JavaScript 中的 <code>Array.from()</code> 倒是用了不少次</del>它本身就是一個 Array 的靜態方法喔!!自行產生的 array，查看 prototype 的話是找不到 .from() 這個 method 的!</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-%E9%A1%9E%E5%88%A5"><span class="toc-number">1.</span> <span class="toc-text">Class 類別</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%88%E7%AE%97%E5%B1%AC%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">計算屬性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%9E%E5%88%A5%E7%B9%BC%E6%89%BF"><span class="toc-number">3.</span> <span class="toc-text">類別繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9C%E6%85%8B%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">靜態方法</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別&body=Check out this article: https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/09/14/js-about-javascript-es6-3/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 13.ES6 - Class 類別&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

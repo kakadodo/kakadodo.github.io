@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ES6 新出兩種建立數據結構的方式 Set() 與 Map()，幫助我們方便產生不同格式或需求的數據資料。   雖然 Set() 與 Map() 產生出來的數據結構看起來像 Array 但卻是不同的資料類型，但它們都有 Symbol.iterator 這個原型方法，具有可迭代的特性。 Set()Set 最大的特點就是 “產生一組不重複值的資料”，只要資料型態本身具有 iterator 的特性 Se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()">
+<meta property="og:url" content="https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="ES6 新出兩種建立數據結構的方式 Set() 與 Map()，幫助我們方便產生不同格式或需求的數據資料。   雖然 Set() 與 Map() 產生出來的數據結構看起來像 Array 但卻是不同的資料類型，但它們都有 Symbol.iterator 這個原型方法，具有可迭代的特性。 Set()Set 最大的特點就是 “產生一組不重複值的資料”，只要資料型態本身具有 iterator 的特性 Se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-09-28T01:01:58.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/10/15/css-sass-1/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/09/25/js-about-javascript-es6-4/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()&body=Check out this article: https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">1.</span> <span class="toc-text">Set()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">2.</span> <span class="toc-text">Map()</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-09-28T01:01:58.000Z" itemprop="datePublished">2018-09-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/es6/" rel="tag">ES6</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>ES6 新出兩種建立數據結構的方式 Set() 與 Map()，幫助我們方便產生不同格式或需求的數據資料。</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>雖然 Set() 與 Map() 產生出來的數據結構看起來像 Array 但卻是不同的資料類型，但它們都有 <code>Symbol.iterator</code> 這個原型方法，具有可迭代的特性。</p>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set()"></a>Set()</h2><p>Set 最大的特點就是 “產生一組不重複值的資料”，只要資料型態本身具有 iterator 的特性 Set 就能接收並轉成過濾後的資料。<br>不過 Set 產生的資料無法個別訪問也不具有 index，比較像是單純的一組值，靠新增刪除等方式直接對值做處理。如果要取用這些值，就需要轉換成 array 的型態，或是使用 for…of、forEach 等迭代方法將值挖出來。</p>
+<ul>
+<li><code>new Set()</code>  建立 Set</li>
+<li><code>.add(val)</code>  新增值</li>
+<li><code>.delete(val)</code>  刪除值</li>
+<li><code>.clear()</code>  清除整組 Set</li>
+<li><code>.size</code>  取得 Set 值的總數</li>
+<li><code>.has(val)</code>  檢查是否已經有值，回傳布林值</li>
+<li><code>.values()</code>  取得 Set 的 values iterator</li>
+<li><code>.keys()</code>  取得 Set 的 keys iterator，但 key 與值其實相同</li>
+<li><code>.entries()</code>  同時取得 Set 的 key 跟 value，格式看起來會是 [key, value] 的 iterator</li>
+<li><code>.forEach()</code>  遍歷 Set 每筆資料</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> people = <span class="keyword">new</span> <span class="built_in">Set</span>(); <span class="comment">// 建立空的 Set</span></span><br><span class="line">people.add(<span class="string">&#x27;Mary&#x27;</span>); <span class="comment">// 新增 Mary</span></span><br><span class="line">people.add(<span class="string">&#x27;Ben&#x27;</span>); <span class="comment">// 新增 Ben</span></span><br><span class="line"><span class="built_in">console</span>.log(people.size); <span class="comment">// 2，裡面有2筆資料</span></span><br><span class="line">people.delete(<span class="string">&#x27;Ben&#x27;</span>); <span class="comment">// 刪除 Ben，直接帶值進去</span></span><br><span class="line"><span class="built_in">console</span>.log(people.size); <span class="comment">// 1，裡面有1筆資料</span></span><br><span class="line"><span class="built_in">console</span>.log(people.has(<span class="string">&#x27;Ben&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line">people.clear(); <span class="comment">// 清空 Set</span></span><br><span class="line"><span class="built_in">console</span>.log(people.size); <span class="comment">// 0，裡面沒資料</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 values()、keys()、entries() 雖然可以取得資料，</span></span><br><span class="line"><span class="comment">// 但無法直接取用，要真正把值抓出來需要使用迭代方法將他們遍歷出來</span></span><br><span class="line">people.add(<span class="string">&#x27;Mary&#x27;</span>); <span class="comment">// 新增 Mary</span></span><br><span class="line">people.add(<span class="string">&#x27;Ben&#x27;</span>); <span class="comment">// 新增 Ben</span></span><br><span class="line"><span class="built_in">console</span>.log(people.values()); <span class="comment">// 只會顯示是個 Set iterator 物件</span></span><br><span class="line">people.forEach(<span class="function">(<span class="params">val, key</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;val&#125;</span>`</span>);</span><br><span class="line">&#125;); <span class="comment">// &quot;Mary:Mary&quot;, &quot;Ben:Ben&quot;</span></span><br></pre></td></tr></table></figure>
+<p>這樣寫下來好像比用 Array 更麻煩，但如果把 Set 與 Array 結合的話就會方便很多!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在 new Set() 的同時帶入一筆 array 資料</span></span><br><span class="line"><span class="keyword">const</span> num = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(num.size); <span class="comment">// 結果是 7，已刪除重複的數字</span></span><br><span class="line"><span class="keyword">const</span> numArray = <span class="built_in">Array</span>.from(num); <span class="comment">// 使用 Array.from() 來轉成 Array 型態</span></span><br><span class="line"><span class="built_in">console</span>.log(numArray); <span class="comment">// [1, 2, 3, 4, 5, 6, 7] 變回乾淨的 Array 啦!</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 上例也可以簡化成一行搞定 XDD</span></span><br><span class="line"><span class="keyword">const</span> numFilter = <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>]));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以使用 ES6 的展開語法</span></span><br><span class="line"><span class="keyword">const</span> numFilter = [...new <span class="built_in">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>])];</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map()"></a>Map()</h2><p>Map 提供了一種類似 “Object” 具有 key 與 value 的資料型態，但存放方式又像 “Array”，一筆資料本身會有兩個值，第一個值是 key，第二個值是 value，因此一組 Map 會是二維陣列的形式呈現。而新增刪除 Map 資料時會是以 key 作為辨識。Map 資料在遍歷時，順序是跟最初設定值的順序一樣。</p>
+<ul>
+<li><code>new Map()</code>  建立 Map</li>
+<li><code>.set(key, val)</code>  設定屬性跟值</li>
+<li><code>.get(key)</code>  取得 key 的值</li>
+<li><code>.delete(key)</code>  刪除這組 key 值</li>
+<li><code>.clear()</code>  清除 Map</li>
+<li><code>.size</code>  取得 Map 的總數</li>
+<li><code>.has(key)</code>  檢查是否已經有 key，回傳布林值</li>
+<li><code>.keys()</code>  取得 Map 的 keys iterator</li>
+<li><code>.values()</code>  取得 Map 的 values iterator</li>
+<li><code>.entries()</code>  同時取得 Map 的 key 跟 value，格式看起來會是 [key, value] 的 iterator</li>
+<li><code>.forEach()</code>  遍歷 Map 每筆資料</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> family = <span class="keyword">new</span> <span class="built_in">Map</span>(); <span class="comment">// 建立空 Map</span></span><br><span class="line">family.set(<span class="string">&#x27;Mom&#x27;</span>, <span class="number">70</span>); <span class="comment">// set 來設定 key 跟 value</span></span><br><span class="line">family.set(<span class="string">&#x27;Dad&#x27;</span>, <span class="number">70</span>);</span><br><span class="line"><span class="built_in">console</span>.log(family.get(<span class="string">&#x27;Mom&#x27;</span>)); <span class="comment">// 70, get 使用 key 來取得 value</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 一樣可以使用 forEach 遍歷</span></span><br><span class="line">family.forEach(<span class="function">(<span class="params">value, key</span>)=&gt;</span>&#123;<span class="built_in">console</span>.log(value, key)&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 for of 的話則是抓出 [key, value] 的陣列</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> person <span class="keyword">of</span> family)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(person); <span class="comment">//[&#x27;Mom&#x27;, 70],[&#x27;Dad&#x27;, 70]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Map 一樣可轉為一般陣列</span></span><br><span class="line"><span class="built_in">console</span>.log([...family.keys()]); <span class="comment">// [&quot;Mom&quot;, &quot;Dad&quot;]</span></span><br><span class="line"><span class="built_in">console</span>.log([...family.values()]); <span class="comment">// [70, 70]</span></span><br><span class="line"><span class="built_in">console</span>.log([...family.entries()]); <span class="comment">// [[&quot;Mom&quot;, 70], [&quot;Dad&quot;, 70]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 當然轉成 Object 也沒問題</span></span><br><span class="line"><span class="keyword">const</span> familyObj = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, val] <span class="keyword">of</span> family) &#123;</span><br><span class="line">  familyObj[key] = val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(familyObj); <span class="comment">// &#123; Dad: 70, Mom: 70 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>感覺 Map 可以輸出格式帶有 key, value 的陣列還滿方便的!不過目前還沒實際應用到就是了 XD<br>Set 就真得挺好實用的~以前會用 filter() 來過濾重複值，現在只要靠 Set 就能簡單達成這個任務了!</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">1.</span> <span class="toc-text">Set()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">2.</span> <span class="toc-text">Map()</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()&body=Check out this article: https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/09/28/js-about-javascript-es6-5/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 15.ES6 - 數據結構 Set() 與 Map()&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

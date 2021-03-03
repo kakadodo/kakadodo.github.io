@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="IIFE 算是 JavaScrip function 中很重要的觀念跟運用!搞懂的話可是會讓功力大昇啊~~突然發現自己紀錄的順序也太跳了吧 XDD 都寫到 async await 了居然又跳回最早開始就有的功能…   平常在寫 code 時，可能是想到甚麼寫甚麼的概念，照腦袋所想的順序 var 很多變數或是宣告很多 function，這種寫法雖然沒有甚麼不對，但當程式碼一多時…很可能就會出現 “不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE">
+<meta property="og:url" content="https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="IIFE 算是 JavaScrip function 中很重要的觀念跟運用!搞懂的話可是會讓功力大昇啊~~突然發現自己紀錄的順序也太跳了吧 XDD 都寫到 async await 了居然又跳回最早開始就有的功能…   平常在寫 code 時，可能是想到甚麼寫甚麼的概念，照腦袋所想的順序 var 很多變數或是宣告很多 function，這種寫法雖然沒有甚麼不對，但當程式碼一多時…很可能就會出現 “不">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-12-25T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2019/01/02/js-about-javascript-closure/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/12/18/js-about-javascript-call-apply-bind/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE&body=Check out this article: https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IIFE-immediately-invoked-function-expression"><span class="toc-number">1.</span> <span class="toc-text">IIFE (immediately invoked function expression)</span></a></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-12-25T01:00:00.000Z" itemprop="datePublished">2018-12-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>IIFE 算是 JavaScrip function 中很重要的觀念跟運用!搞懂的話可是會讓功力大昇啊~~<br>突然發現自己紀錄的順序也太跳了吧 XDD 都寫到 async await 了居然又跳回最早開始就有的功能…</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>平常在寫 code 時，可能是想到甚麼寫甚麼的概念，照腦袋所想的順序 var 很多變數或是宣告很多 function，這種寫法雖然沒有甚麼不對，但當程式碼一多時…很可能就會出現 “不好管理” 以及 “重複命名” 或是 “結果好像出乎意料?” 的狀況發生。由於 JavaScript 最小的私有作用域在 function，一般寫在最外圍的變數其實是很危險的~一不小心可能值就被改變了也沒注意到。如果有個方法可以讓變數處於被保護的狀態，只能被有關的功能給修改或取用的話那該有多好啊~~</p>
+<p>有這種想法出現時，就是需要 IIFE 的時候啦!!</p>
+<h2 id="IIFE-immediately-invoked-function-expression"><a href="#IIFE-immediately-invoked-function-expression" class="headerlink" title="IIFE (immediately invoked function expression)"></a>IIFE (immediately invoked function expression)</h2><p>中文直譯為”立即函示表達式”，算是滿直觀的解釋 XD ，會取成這樣的名稱可以從他的語法定義看出蛛絲馬跡。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// code here...</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>一開始看到這種寫法應該會超困惑吧…其實把符號拆解開來看就滿好理解了。首先最外層的結構是一個括號包住一個匿名 function，後方再接一個括號。前面包住 function 的括號其實是為了讓 JavaScript 在一開始解析文件時，把這段當成一般表達式看待(像是 if()、for() 那種)，從而跳過 function 本應被 hoisting 的步驟，而之後接的括號就是一般要調用 function 時會有的括號。因此實際上 JavaScript 會在真正逐行跑程式碼跑到這段時才同時 <strong>定義 + 調用</strong> 立即函式表達式。</p>
+<p>所以使用 IIFE 到底有甚麼好處??</p>
+<ul>
+<li>可以是一次性執行的 function，程式碼永遠只會調用一次</li>
+<li>可保有 IIFE 被調用時，當下的環境變數</li>
+<li>雖然會在定義的下一步就被執行，但因為有遵守程式碼逐行執行的規則，因此是可以取用外部環境的變數</li>
+<li>由於本體是個 function，因此作用域是私有的，外部或其他函式無法直接取用，可避免全域汙染</li>
+<li>適合用來撰寫 MVC 架構</li>
+</ul>
+<p>以最最最簡單的例子來說:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="number">1</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> num2 = <span class="number">2</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(num1 + num2); <span class="comment">// 3</span></span><br><span class="line">  num1 = <span class="number">2</span>;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log(num1); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(num2); <span class="comment">// num2 is not defined</span></span><br></pre></td></tr></table></figure>
+<p>首先 num1 在立即函式中是可以被取用的，而 num2 由於是在立即函式內宣告的變數，因此會受到保護而無法被外部存取，全域的 console.log 是找不到這個變數的。而當立即函式執行完後再取得 num1 也可發現 num1 確實被改變值了。</p>
+<p>但如果還是希望可以透過某種方式來取用在 IIFE 中的值或 function 該怎麼辦?其實是可以的喔!由於本體是 function 的關係，因此具有 return 的功能，我們依然可以在保有私有域的環境下撰寫相關的功能，並在最後 return 出可讓外部取用的功能或是值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iife = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    addA: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      a++;</span><br><span class="line">      <span class="keyword">return</span> a;</span><br><span class="line">    &#125;,</span><br><span class="line">    multiply: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> a*b;</span><br><span class="line">    &#125;,</span><br><span class="line">    name: <span class="string">&#x27;Tom&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(iife.addA()); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(iife.multiply()); <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">console</span>.log(iife.name); <span class="comment">// Tom</span></span><br></pre></td></tr></table></figure>
+<p>像上例這樣的寫法，即使 IIFE 會在最初就執行完畢，但依然可以藉由 return 方法或是值來存取到本應該在執行完畢就被刪除記憶體的內容喔!而這種用法最常見在 MVC 架構的撰寫。</p>
+<p>另外 IIFE 也常被第三方函式庫使用，由於函式庫很多又廣，難保證不會出現重複命名的問題發生，這時候如果沒有私有域保護的話，很可能會出現函式庫彼此發生衝突的情況，像使用率最普及的 jQuery，它的原始碼最外圍就是用 IIFE 包住的喔!</p>
+<p>最後還有一種用法也是滿常見的!因為 IIFE 可以保存當下執行環境的參數值，這在撰寫與”非同步”相關的程式碼時非常有幫助!以最經典的例子來講就可以知道它有多好用了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// html 有 3 個 button</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">value</span>=<span class="string">&quot;A&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">value</span>=<span class="string">&quot;B&quot;</span>&gt;</span>B<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">value</span>=<span class="string">&quot;C&quot;</span>&gt;</span>C<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 使用 for 迴圈一次對按鈕做 click 的監聽</span><br><span class="line">var btns = document.querySelectorAll(&#x27;button&#x27;);</span><br><span class="line">for(var i=0; i&lt; btns.length; i++)&#123;</span><br><span class="line">  (function(i)&#123;</span><br><span class="line">    var a = 1;</span><br><span class="line">    btns[i].addEventListener(&#x27;click&#x27;, function(e)&#123;</span><br><span class="line">      console.log(i);</span><br><span class="line">      console.log(e.target.value);</span><br><span class="line">      a+=1;</span><br><span class="line">      console.log(a);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當迴圈搭配 event 監聽時，如果有要取用 for 迴圈中的參數時是很容易發生致命錯誤的!由於 for 迴圈是同步執行而監聽是非同步的關係，當真正觸發監聽的行為時，for 迴圈老早就跑完了。以上例的 i 來說，如果沒使用 IIFE 來保存每次迴圈時改變的 i 值，i 永遠都會是最後跑完的值。所以很容易出現不是自己想要的結果。而要存取當下環境的外層變數也很簡單，只要把變數當作 IIFE 的參數帶入即可，這樣 IIFE 就會記住當下環境時的那個值，而不會因為外層迴圈跑完值也跟著被改變。</p>
+<p>這樣看下來 IIFE 真的是非常之好用啊~~~~</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IIFE-immediately-invoked-function-expression"><span class="toc-number">1.</span> <span class="toc-text">IIFE (immediately invoked function expression)</span></a></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE&body=Check out this article: https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/12/25/js-about-javascript-IIFE/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 19.function 的進階概念 - IIFE&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

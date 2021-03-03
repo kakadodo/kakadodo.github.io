@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="這次要來介紹的是 Sass 的一些輔助函式及功能，”你不一定要用~但用了一定幫助你更多”的概念 XD   計算功能Sass 既然是工程化的語法~自然可以做數值計算啦!搭配變數的設定，可以讓整體數值的變化更有統一性，除了基本的加減乘除外，取餘數也是可以的喔!最扯的是連顏色都可以計算 XD 12345678910111213141516171819$base:10px;.box&amp;#123;  widt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式">
+<meta property="og:url" content="https://kakadodo.github.io/2018/11/13/css-sass-5/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="這次要來介紹的是 Sass 的一些輔助函式及功能，”你不一定要用~但用了一定幫助你更多”的概念 XD   計算功能Sass 既然是工程化的語法~自然可以做數值計算啦!搭配變數的設定，可以讓整體數值的變化更有統一性，除了基本的加減乘除外，取餘數也是可以的喔!最扯的是連顏色都可以計算 XD 12345678910111213141516171819$base:10px;.box&amp;#123;  widt">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-10-15-css-sass.jpg?alt=media&token=bf9f5870-7806-48db-9d36-34c6f65b9c71">
+<meta property="article:published_time" content="2018-11-13T01:00:00.000Z">
+<meta property="article:modified_time" content="2018-11-13T05:48:26.000Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="Sass&#x2F;SCSS">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-10-15-css-sass.jpg?alt=media&token=bf9f5870-7806-48db-9d36-34c6f65b9c71">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/11/20/css-sass-6/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/11/06/css-sass-4/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/11/13/css-sass-5/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&text=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&is_video=false&description=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式&body=Check out this article: https://kakadodo.github.io/2018/11/13/css-sass-5/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&name=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%88%E7%AE%97%E5%8A%9F%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text">計算功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#random-limit"><span class="toc-number">1.0.1.</span> <span class="toc-text">random($limit)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%8F%E8%89%B2%E8%BC%94%E5%8A%A9%E5%87%BD%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">顏色輔助函式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list-%E8%88%87-map-%E7%9A%84%E8%BC%94%E5%8A%A9%E5%87%BD%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">list 與 map 的輔助函式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list-%E5%8F%AF%E7%94%A8%E7%9A%84-function"><span class="toc-number">3.0.1.</span> <span class="toc-text">list 可用的 function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map-%E5%8F%AF%E7%94%A8%E7%9A%84-function"><span class="toc-number">3.0.2.</span> <span class="toc-text">map 可用的 function</span></a></li></ol></li></ol></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-11-13T01:00:00.000Z" itemprop="datePublished">2018-11-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/css/">CSS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css/" rel="tag">CSS</a>, <a class="tag-link-link" href="/tags/sass-scss/" rel="tag">Sass/SCSS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>這次要來介紹的是 Sass 的一些輔助函式及功能，”你不一定要用~但用了一定幫助你更多”的概念 XD</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/2018-10-15-css-sass.jpg?alt=media&token=bf9f5870-7806-48db-9d36-34c6f65b9c71" alt="blog image" title="Sass - 前端工程師應該要會的工程化 CSS"></p>
+<h2 id="計算功能"><a href="#計算功能" class="headerlink" title="計算功能"></a>計算功能</h2><p>Sass 既然是工程化的語法~自然可以做數值計算啦!搭配變數的設定，可以讓整體數值的變化更有統一性，除了基本的加減乘除外，取餘數也是可以的喔!最扯的是連顏色都可以計算 XD</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$base</span>:<span class="number">10px</span>;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="variable">$base</span>*<span class="number">2</span> + <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="variable">$base</span>*<span class="number">3</span> - <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="variable">$base</span>*<span class="number">2</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="variable">$base</span> % <span class="number">7</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#333</span> + rgb(<span class="number">33</span>,<span class="number">250</span>,<span class="number">158</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#54ffd1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一般計算過程要注意單位是否正確，px 就對 px，em 就對 em，不同單位的計算會有問題。不過顏色的單位好像例外…以上例的 hex 跟 rgb 就可以混用，但如果是 hex 跟 rgba 就會報錯(多了透明度的計算)。如果要處理透明度的計算，兩者之間的透明度值一定要相等否則一樣會報錯喔!<br>經測試下來，不含透明度的顏色計算輸出會是 hex 的格式，含透明度的顏色計算輸出則是 rgba。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: rgba(<span class="number">55</span>,<span class="number">78</span>,<span class="number">30</span>,<span class="number">0.5</span>)+ rgba(<span class="number">200</span>,<span class="number">30</span>,<span class="number">67</span>,<span class="number">0.5</span>);</span><br><span class="line">  <span class="comment">// OK! background-color: rgba(255, 108, 97, 0.5);</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">background-color</span>: rgba(<span class="number">55</span>,<span class="number">78</span>,<span class="number">30</span>,<span class="number">0.5</span>)+ rgba(<span class="number">200</span>,<span class="number">30</span>,<span class="number">67</span>,<span class="number">0.2</span>);</span><br><span class="line">  <span class="comment">// 不OK! Alpha channels must be equal: rgba(55, 78, 30, 0.5) + rgba(200, 30, 67, 0.2)</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">background-color</span>: rgba(<span class="number">55</span>,<span class="number">78</span>,<span class="number">30</span>,<span class="number">0.5</span>)+ hsla(<span class="number">20</span>,<span class="number">70%</span>,<span class="number">50%</span>,<span class="number">0.5</span>);</span><br><span class="line">  <span class="comment">// OK! background-color: rgba(255, 176, 68, 0.5);</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">background-color</span>: rgba(<span class="number">55</span>,<span class="number">78</span>,<span class="number">30</span>,<span class="number">0.5</span>)+ hsla(<span class="number">20</span>,<span class="number">70%</span>,<span class="number">50%</span>,<span class="number">0.2</span>);</span><br><span class="line">  <span class="comment">// 不OK! Alpha channels must be equal: rgba(55, 78, 30, 0.5) + rgba(217, 98, 38, 0.2)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="random-limit"><a href="#random-limit" class="headerlink" title="random($limit)"></a>random($limit)</h4><p>產生隨機數值的方法，$limit 值必須大於0，會產生 1 ~ $limit 之間(有包括 $limit)的正整數。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: random(<span class="number">300</span>)+px;</span><br><span class="line">  <span class="attribute">height</span>: random(<span class="number">300</span>)+px;</span><br><span class="line">  <span class="attribute">border-radius</span>:<span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">155px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">101px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="顏色輔助函式"><a href="#顏色輔助函式" class="headerlink" title="顏色輔助函式"></a>顏色輔助函式</h2><p>比起顏色的加減，自己反而比較常用輔助函式，Sass 關於顏色方面的函式真的很多…有興趣可以直接看 <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/Sass/Script/Functions.html">Sass documents</a></p>
+<ul>
+<li><code>darken($color, %)</code>: 回傳暗化的顏色</li>
+<li><code>lighten($color, %)</code>: 回傳亮化的顏色</li>
+<li><code>adjust-hue($color, degree)</code>: 回傳調整色相後的顏色</li>
+<li><code>invert($color)</code>: 回傳相反色</li>
+<li><code>fade-in($color, %)</code>: 顏色增加不透明度</li>
+<li><code>fade-out($color, %)</code>: 顏色減少不透明度</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$color</span>: <span class="number">#beed25</span>;</span><br><span class="line"><span class="selector-class">.btn</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="variable">$color</span>;</span><br><span class="line">  &amp;<span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: darken(<span class="variable">$color</span>, <span class="number">8%</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;<span class="selector-pseudo">:active</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: lighten(<span class="variable">$color</span>, <span class="number">8%</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;<span class="selector-class">.btn-secondary</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: invert(<span class="variable">$color</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#beed25</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#a9d712</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn</span><span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#c9f04b</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn</span><span class="selector-class">.btn-secondary</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#4112da</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上例來說，使用顏色的輔助函式可以很方便的產生按鈕不同狀態下的顏色，且這些顏色是有整體關聯性的，當主顏色被改變時，其他狀態的顏色也會跟著變化。</p>
+<h2 id="list-與-map-的輔助函式"><a href="#list-與-map-的輔助函式" class="headerlink" title="list 與 map 的輔助函式"></a>list 與 map 的輔助函式</h2><p>之前提到的 list 和 map 其實最常和表達式指令一起使用。例如 <code>@for、@each</code> 它們都具有遍歷的特性，在遍歷中取特定的值就需要依靠 list 和 map 的輔助函式。</p>
+<h4 id="list-可用的-function"><a href="#list-可用的-function" class="headerlink" title="list 可用的 function"></a>list 可用的 function</h4><ul>
+<li><code>length($list)</code>: 取得 list 的長度</li>
+<li><code>nth($list，index)</code>: 取得 list 索引位置的值(index 從 1 開始)</li>
+<li><code>index($list，val)</code>: 取得 list 某個值的索引位置</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$types</span>: primary, secondary, danger, warn, success;</span><br><span class="line"><span class="variable">$colors</span>: blue, gray, red, orange, green;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 @for 來產生一系列的 btn 樣式</span></span><br><span class="line"><span class="keyword">@for</span> <span class="variable">$i</span> from <span class="number">1</span> through length(<span class="variable">$types</span>)&#123;</span><br><span class="line">  <span class="selector-class">.btn-</span>#&#123;nth($types, $i)&#125;&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: nth(<span class="variable">$colors</span>, <span class="variable">$i</span>);</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.btn-primary</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: blue;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-secondary</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gray;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-danger</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-warn</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: orange;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-success</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="map-可用的-function"><a href="#map-可用的-function" class="headerlink" title="map 可用的 function"></a>map 可用的 function</h4><ul>
+<li><code>map-get（$map，$key）</code>: 取得 key 的 value</li>
+<li><code>map-keys（$map）</code>: 取得 map 所有的 key</li>
+<li><code>map-values（$map）</code>: 取得 map 所有的 value</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$btns</span>: (primary: blue, secondary: gray, danger: red, warn: orange, success: green);</span><br><span class="line"><span class="variable">$className</span>: map-keys(<span class="variable">$btns</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">@for</span> <span class="variable">$i</span> from <span class="number">1</span> through length(<span class="variable">$className</span>)&#123;</span><br><span class="line">  <span class="selector-class">.btn-</span>#&#123;nth($className, $i)&#125;&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: map-get(<span class="variable">$btns</span>, nth(<span class="variable">$className</span>, <span class="variable">$i</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 轉成 CSS</span></span><br><span class="line"><span class="selector-class">.btn-primary</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-secondary</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-danger</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-warn</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: orange;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-success</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>非常多此一舉的範例 XDDD<br>用 list 還是 map 都可以達成想要的結果~所以就看自己對哪一種方式比較上手囉!<br>其實官網還有很多關於它們可用的函式，但有沒有功力用到就是個人的本事了….恕我愚鈍只會這幾種 QQ</p>
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%88%E7%AE%97%E5%8A%9F%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text">計算功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#random-limit"><span class="toc-number">1.0.1.</span> <span class="toc-text">random($limit)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%8F%E8%89%B2%E8%BC%94%E5%8A%A9%E5%87%BD%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">顏色輔助函式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list-%E8%88%87-map-%E7%9A%84%E8%BC%94%E5%8A%A9%E5%87%BD%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">list 與 map 的輔助函式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list-%E5%8F%AF%E7%94%A8%E7%9A%84-function"><span class="toc-number">3.0.1.</span> <span class="toc-text">list 可用的 function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map-%E5%8F%AF%E7%94%A8%E7%9A%84-function"><span class="toc-number">3.0.2.</span> <span class="toc-text">map 可用的 function</span></a></li></ol></li></ol></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/11/13/css-sass-5/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&text=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&is_video=false&description=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式&body=Check out this article: https://kakadodo.github.io/2018/11/13/css-sass-5/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&title=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/11/13/css-sass-5/&name=Sass - 前端工程師應該要會的工程化 CSS - 計算功能與顏色、list、map 的輔助函式&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

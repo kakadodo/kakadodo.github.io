@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="現在支援 ES6 語法的瀏覽器越來越多了~~不趕快納入必備技能怎麼行!ES6 有不少 “超偷懶” 語法，根本在開外掛模式 XD這篇就來介紹如何利用 ES6 的 字串模板、 展開剩餘、 解構賦值 來 write less do more 啦!   在開始撰寫 ES6 前要注意一下，雖然現在的瀏覽器大多支援 ES6 語法，如要考慮到舊版瀏覽器或是某萬惡瀏覽器，還是得透過一些編譯的工具將 ES6 的語言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值">
+<meta property="og:url" content="https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/index.html">
+<meta property="og:site_name" content="你今天打肉了沒?">
+<meta property="og:description" content="現在支援 ES6 語法的瀏覽器越來越多了~~不趕快納入必備技能怎麼行!ES6 有不少 “超偷懶” 語法，根本在開外掛模式 XD這篇就來介紹如何利用 ES6 的 字串模板、 展開剩餘、 解構賦值 來 write less do more 啦!   在開始撰寫 ES6 前要注意一下，雖然現在的瀏覽器大多支援 ES6 語法，如要考慮到舊版瀏覽器或是某萬惡瀏覽器，還是得透過一些編譯的工具將 ES6 的語言">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="article:published_time" content="2018-08-31T01:01:58.000Z">
+<meta property="article:modified_time" content="2021-02-26T18:22:15.015Z">
+<meta property="article:author" content="Chelsea Chang">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d">
+<meta property="fb:admins" content="1420062581">
+<meta property="fb:app_id" content="333459487173924">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://c-space.herokuapp.com/img/cspace-logo-b.ico">
+          
+        
+    
+    <!-- title -->
+    <title>這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值</title>
+    <!-- preload assets -->
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="lib/font-awesome/css/all.min.css" as="style" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ">
+    
+      <div id="header-post">
+  <a
+    id="menu-icon"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="menu-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="hamburger_tablet"
+    ><i class="fas fa-bars fa-lg"></i
+  ></a>
+  <a
+    id="top-icon-tablet"
+    href="#"
+    data-gtm-category="menu_link"
+    data-gtm-label="backToTop_tablet"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display: none"
+    ><i class="fas fa-chevron-up fa-lg"></i
+  ></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+        <li>
+          <a
+            href="/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/archives/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Writing"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/tags/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Tag"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/categories/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Category"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a
+            target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Portfolio"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/search/"
+            data-gtm-category="menu_link"
+            data-gtm-label="Search"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a
+            class="icon"
+            href="/2018/09/07/js-about-javascript-es6-2/"
+            data-gtm-category="action_link"
+            data-gtm-label="prev"
+            ><i
+              class="fas fa-chevron-left"
+              aria-hidden="true"
+              onmouseover="$('#i-prev').toggle();"
+              onmouseout="$('#i-prev').toggle();"
+            ></i
+          ></a>
+        </li>
+         
+        <li>
+          <a
+            class="icon"
+            href="/2018/08/27/js-about-javascript-XMLHttpRequest/"
+            data-gtm-category="action_link"
+            data-gtm-label="next"
+            ><i
+              class="fas fa-chevron-right"
+              aria-hidden="true"
+              onmouseover="$('#i-next').toggle();"
+              onmouseout="$('#i-next').toggle();"
+            ></i
+          ></a>
+        </li>
+        
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="backToTop"
+            onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+            ><i
+              class="fas fa-chevron-up"
+              aria-hidden="true"
+              onmouseover="$('#i-top').toggle();"
+              onmouseout="$('#i-top').toggle();"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a
+            class="icon"
+            href="#"
+            data-gtm-category="action_link"
+            data-gtm-label="share"
+            ><i
+              class="fas fa-share-alt"
+              aria-hidden="true"
+              onmouseover="$('#i-share').toggle();"
+              onmouseout="$('#i-share').toggle();"
+              onclick="$('#share').toggle();return false;"
+            ></i
+          ></a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display: none"
+        >Previous post</span
+      >
+      <span id="i-next" class="info" style="display: none"
+        >Next post</span
+      >
+      <span id="i-top" class="info" style="display: none"
+        >Back to top</span
+      >
+      <span id="i-share" class="info" style="display: none"
+        >Share post</span
+      >
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值&body=Check out this article: https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon "
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg " aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr " aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%E6%A8%A1%E6%9D%BF-template-string"><span class="toc-number">1.</span> <span class="toc-text">字串模板 (template string)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%95%E9%96%8B%E8%88%87%E5%89%A9%E9%A4%98-spread-and-rest"><span class="toc-number">2.</span> <span class="toc-text">展開與剩餘 (spread and rest)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%95%E9%96%8B-%E2%80%A6spread"><span class="toc-number">2.0.1.</span> <span class="toc-text">展開 (…spread)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%A9%E9%A4%98-%E2%80%A6rest"><span class="toc-number">2.0.2.</span> <span class="toc-text">剩餘 (…rest)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%A7%8B%E8%B3%A6%E5%80%BC-destructuring"><span class="toc-number">3.</span> <span class="toc-text">解構賦值 (destructuring)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A3%E5%88%97%E8%A7%A3%E6%A7%8B"><span class="toc-number">3.0.1.</span> <span class="toc-text">陣列解構:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E4%BB%B6%E8%A7%A3%E6%A7%8B"><span class="toc-number">3.0.2.</span> <span class="toc-text">物件解構:</span></a></li></ol></li></ol></li></ol></div>
+  </span>
+</div>
+
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">你今天打肉了沒?</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-08-31T01:01:58.000Z" itemprop="datePublished">2018-08-31</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/es6/" rel="tag">ES6</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>現在支援 ES6 語法的瀏覽器越來越多了~~不趕快納入必備技能怎麼行!<br>ES6 有不少 “超偷懶” 語法，根本在開外掛模式 XD<br>這篇就來介紹如何利用 ES6 的 <strong>字串模板</strong>、 <strong>展開剩餘</strong>、 <strong>解構賦值</strong> 來 write less do more 啦!</p>
+<!-- excerpt -->
+<p><img src="https://firebasestorage.googleapis.com/v0/b/for-hexo.appspot.com/o/20180319-js-about-javascript.jpg?alt=media&token=68f6351d-34bc-45bf-ae3f-9671da27b39d" alt="blog image" title="這個朋友必交! 關於 JavaScript 的眉眉角角"></p>
+<p>在開始撰寫 ES6 前要注意一下，雖然現在的瀏覽器大多支援 ES6 語法，如要考慮到舊版瀏覽器或是某萬惡瀏覽器，還是得透過一些編譯的工具將 ES6 的語言轉為舊版瀏覽器可用的語法才行。自己是使用 <a target="_blank" rel="noopener" href="https://babeljs.io/">Babel</a> 這款工具來編譯 ES6 的語法，相關操作可以參考官網教學，現在一些主流的編輯器也會有擴充功能可以進行編譯，諸如此類的一堆東風可借~好 ES6，不用嗎? 😍</p>
+<p>在 MDN 有找到一個網站 <a target="_blank" rel="noopener" href="https://kangax.github.io/compat-table/es6/">ECMAScript 5/6/7 compatibility tables</a> 列出 ES6 的支援狀況，不只瀏覽器版本，連編譯工具跟 server 端都有涵蓋!實在是太佛心了!!</p>
+<p>這邊也提供兩個介紹 ES6 語法的 gitbooks:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/">從ES6開始的JavaScript學習生活</a> 作者: eyesofkids 大大</li>
+<li><a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/">ECMAScript 6 入门</a> 作者: 阮一峰 大大 (簡體中文)</li>
+</ul>
+<hr>
+<h2 id="字串模板-template-string"><a href="#字串模板-template-string" class="headerlink" title="字串模板 (template string)"></a>字串模板 (template string)</h2><p>ES6 提供了字串模板的功能，可以更方便的於 JavaScript 中組字串。字串模板會以兩個 <strong>` ` (反斜線)</strong> 框起，於反斜線中寫入的任何文字都會當成 string 處理，此時要使用變數或是表達式，就要另外用 <code>$&#123;&#125;</code> 包住。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示範一: 使用 ES6</span></span><br><span class="line"><span class="keyword">const</span> imgUrl = <span class="string">&quot;img/logo.png&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> str = <span class="string">`&lt;li&gt;&lt;img src=<span class="subst">$&#123;imgUrl&#125;</span>&gt;&lt;/li&gt;`</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示範一: 使用 ES5</span></span><br><span class="line"><span class="keyword">var</span> imgUrl = <span class="string">&quot;img/logo.png&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;&lt;li&gt;&lt;img src=&quot;</span>+imgUrl+<span class="string">&quot;&gt;&lt;/li&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示範二: 使用 ES6</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greet</span>(<span class="params">name, days</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`hi <span class="subst">$&#123;name&#125;</span>, it has been <span class="subst">$&#123;days * <span class="number">24</span>&#125;</span> hours not to see you`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示範二: 使用 ES5</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greet</span>(<span class="params">name, days</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;hi &quot;</span> + name + <span class="string">&quot;, it has been &quot;</span> + <span class="number">24</span> * days + <span class="string">&quot; hours not to see you&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示範三: 使用 ES6</span></span><br><span class="line"><span class="keyword">const</span> people = [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&#x27;Troy&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&#x27;Chelsea&#x27;</span>, <span class="attr">age</span>: <span class="number">16</span>&#125;</span><br><span class="line">];</span><br><span class="line"><span class="keyword">const</span> ul = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;ul&gt;</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123; people.map( person =&gt; <span class="string">`&lt;li&gt;我叫做 <span class="subst">$&#123;person.name&#125;</span>&lt;/li&gt;`</span> ).join(<span class="string">&#x27;&#x27;</span>) &#125;</span></span></span><br><span class="line"><span class="string">  &lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//示範三: 使用 ES5</span></span><br><span class="line"><span class="keyword">var</span> people = [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&#x27;Troy&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&#x27;Chelsea&#x27;</span>, <span class="attr">age</span>:<span class="number">16</span>&#125;</span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> ul = <span class="string">&#x27;&lt;ul&gt;&#x27;</span> + people.map( <span class="function"><span class="keyword">function</span>(<span class="params">person</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;li&gt;我叫做&#x27;</span> + a.name + <span class="string">&#x27;&lt;/li&gt;&#x27;</span></span><br><span class="line">  &#125;).join(<span class="string">&#x27;&#x27;</span>) + <span class="string">&#x27;&lt;/ul&gt;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>光看示範一可能無感，但示範二組字串要帶的變數變多，原本的組法就要不斷用引號分割。一般專案中組字串 + 變數的數量一定更多，需要利用 js 動態產生 DOM 的內容…這時就會容易進入組字串地獄 =_=</p>
+<p>從示範三中也可以知道被反引號包起的範圍內，直接空行換行是不會被另外編譯的，可以用一般在寫 html 的方式來組標籤內容，字串模板也可巢狀應用，這樣不僅閱讀上可容易，程式碼更精簡，也不用怕一直用引號分割結果格式亂掉。</p>
+<h2 id="展開與剩餘-spread-and-rest"><a href="#展開與剩餘-spread-and-rest" class="headerlink" title="展開與剩餘 (spread and rest)"></a>展開與剩餘 (spread and rest)</h2><p>展開與剩餘其實是兩個截然不同的功能，只是看起來都是三個點符號 <code>...</code>，在一開始還滿容易搞混的，想說放在一起解釋比較有助於區分差異。而且看到這符號時真的會納悶 js 在開玩笑嗎? <code>...</code> 這種表達方式也太簡略了吧!!!</p>
+<h4 id="展開-…spread"><a href="#展開-…spread" class="headerlink" title="展開 (…spread)"></a>展開 (…spread)</h4><p>展開可以將物件中的值一個個的抽取出來另外存放，這種方式可以很簡單的達成物件合併、拆解二維陣列變一維，也可以做到物件的複製(淺複製)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示範一: 合併二維陣列變成一維陣列</span></span><br><span class="line"><span class="keyword">const</span> concat = [...[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="number">4</span>, ...[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]];</span><br><span class="line"><span class="built_in">console</span>.log(concat); <span class="comment">//[1,2,3,4,5,6,7]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//示範二: 複製陣列(複製後的陣列跟原陣列不是同一個參考，屬於淺複製)</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;lime&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>];</span><br><span class="line"><span class="keyword">let</span> copy = [...arr];</span><br><span class="line">copy[<span class="number">0</span>] = <span class="string">&#x27;melon&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(arr[<span class="number">0</span>], copy[<span class="number">0</span>]); <span class="comment">//apple, melon</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//示範三: 排除陣列中某筆資料</span></span><br><span class="line"><span class="keyword">const</span> arr2 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line"><span class="keyword">const</span> newArr = [...arr3.slice(<span class="number">0</span>,<span class="number">3</span>), ...arr3.slice(<span class="number">4</span>)];</span><br><span class="line"><span class="built_in">console</span>.log(newArr); <span class="comment">//[1,2,3,5,6], 4被過濾掉了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//示範四: 物件格式也可用展開複製，屬於淺複製</span></span><br><span class="line"><span class="keyword">const</span> chelsea = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Chelsea&#x27;</span>,</span><br><span class="line">  family: [<span class="string">&#x27;Dad&#x27;</span>, <span class="string">&#x27;Mon&#x27;</span>, <span class="string">&#x27;Brother&#x27;</span>, <span class="string">&#x27;Cat&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> troy = &#123;...chelsea&#125;;</span><br><span class="line">troy.name = <span class="string">&#x27;Troy&#x27;</span>;</span><br><span class="line">troy.family.pop();</span><br><span class="line"><span class="built_in">console</span>.log(chelsea, troy); <span class="comment">//name 會不同，但 family 是相同的</span></span><br></pre></td></tr></table></figure>
+<p>使用展開符號進行物件(陣列)的複製時要特別注意子層的型別，如果抓出來的值本身是一組陣列或物件，那麼他們的參考來源還是會相同。</p>
+<h4 id="剩餘-…rest"><a href="#剩餘-…rest" class="headerlink" title="剩餘 (…rest)"></a>剩餘 (…rest)</h4><p>剩餘的目的就是將剩餘的部分另存到指定變數中，主要會在兩種情境用到，一是在物件(陣列)的解構賦值，二是作為函式參數宣告。</p>
+<ul>
+<li>運用在解構賦值<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// array 解構</span></span><br><span class="line"><span class="keyword">const</span> arr4 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">const</span> [a, ...b] = arr4;</span><br><span class="line"><span class="built_in">console</span>.log(a,b); <span class="comment">//a = 1, b = [2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// obj 解構</span></span><br><span class="line"><span class="keyword">const</span> foods = &#123;</span><br><span class="line">  taiwan: [<span class="string">&#x27;麻婆豆腐&#x27;</span>, <span class="string">&#x27;牛肉麵&#x27;</span>, <span class="string">&#x27;熱炒&#x27;</span>],</span><br><span class="line">  japan: [<span class="string">&#x27;壽司&#x27;</span>, <span class="string">&#x27;拉麵&#x27;</span>, <span class="string">&#x27;丼飯&#x27;</span>],</span><br><span class="line">  america: [<span class="string">&#x27;漢堡&#x27;</span>, <span class="string">&#x27;熱狗&#x27;</span>, <span class="string">&#x27;捲餅&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123;america, ...asia&#125; = foods;</span><br><span class="line"><span class="built_in">console</span>.log(america, asia); <span class="comment">//america 會直接變成陣列， asia 依然是個物件並保有 taiwan 及 japan 的 key/value</span></span><br></pre></td></tr></table></figure></li>
+<li>運用在函式參數，當函式可能帶入不確定數量的參數時，使用剩餘就可以存取所有參數到指定的變數中。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertCurrency</span>(<span class="params">rate, ...amounts</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> amounts.map( <span class="function"><span class="params">amount</span> =&gt;</span> amount * rate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(convertCurrency(<span class="number">1.5</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">66</span>, <span class="number">150</span>)); <span class="comment">// [30, 75, 99, 225]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="解構賦值-destructuring"><a href="#解構賦值-destructuring" class="headerlink" title="解構賦值 (destructuring)"></a>解構賦值 (destructuring)</h2><p>解構賦值可以在宣告變數的同時，順便進行值的拆解以及重新指定。短短一行程式碼就可以達成以往需要二到三行才能完成的動作。<br>主要分為陣列解構及物件解構:</p>
+<h4 id="陣列解構"><a href="#陣列解構" class="headerlink" title="陣列解構:"></a>陣列解構:</h4><p>陣列解構會用 <code>[]</code> 符號框起要被賦值的變數，這種方式可以達成取出一組陣列當中的某個值，或是變數之間值的互換。變數也可先設預設值，如果解構時抓不到值就會以預設值為準。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取出陣列中的值並直接儲存到宣告的變數中</span></span><br><span class="line"><span class="keyword">const</span> [a, b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a,b); <span class="comment">//a = 1, b = 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取出陣列中特定位置的值</span></span><br><span class="line"><span class="keyword">const</span> [,, third] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(third); <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 變數設定預設值</span></span><br><span class="line"><span class="keyword">const</span> [a, b, c=<span class="number">0</span>] = [<span class="number">1</span>,<span class="number">2</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a,b,c); <span class="comment">//1,2,0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 變數值互換</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];  <span class="comment">//a變成2，b變成1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="物件解構"><a href="#物件解構" class="headerlink" title="物件解構:"></a>物件解構:</h4><p>物件解構會用 <code>&#123;&#125;</code> 符號框起要被賦值的變數，與陣列不同的是，物件取值時預設是拿 key 值當取值的變數，如要改變數名稱須要另外設定，一樣可以設預設值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 key 值為變數名稱</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>: <span class="number">50</span>, <span class="attr">y</span>: <span class="number">100</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> &#123;x, y&#125; = obj;</span><br><span class="line"><span class="built_in">console</span>.log(x, y); <span class="comment">//50, 100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 另外命名其他變數及設定預設值, key : variable name = default value</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>: <span class="number">50</span>, <span class="attr">y</span>: <span class="number">100</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> &#123;<span class="attr">x</span>: a, <span class="attr">y</span>: b, <span class="attr">z</span>: c = <span class="number">0</span>&#125; = obj;</span><br><span class="line"><span class="built_in">console</span>.log(a, b, c); <span class="comment">//50, 100, 0</span></span><br></pre></td></tr></table></figure>
+<p>命名成其他變數後，key 本身就無效了，以上例來說等於是把 x 的值直接指定到變數 a 的意思。</p>
+<p>陣列/物件解構可以讓函式的參數寫法更彈性方便:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> point = &#123;</span><br><span class="line">  x: <span class="number">30</span>,</span><br><span class="line">  y: <span class="number">100</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不使用解構的寫法:</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">distance</span>(<span class="params">point</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt( point.x * point.x + point.y * point.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 參數解構寫法1:</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">distance</span>(<span class="params">point</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;x, y&#125; = point;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(x * x + y * y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//參數解構寫法2(更簡短):</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">distance</span>(<span class="params">&#123;x, y&#125;</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(x * x + y * y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>以上內容如有勘誤，還請不吝告知🙇</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+        <li>
+          <a href="/"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a href="/archives/"
+            >Writing</a
+          >
+        </li>
+        
+        <li>
+          <a href="/tags/"
+            >Tag</a
+          >
+        </li>
+        
+        <li>
+          <a href="/categories/"
+            >Category</a
+          >
+        </li>
+        
+        <li>
+          <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/"
+            >Portfolio</a
+          >
+        </li>
+        
+        <li>
+          <a href="/search/"
+            >Search</a
+          >
+        </li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%E6%A8%A1%E6%9D%BF-template-string"><span class="toc-number">1.</span> <span class="toc-text">字串模板 (template string)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%95%E9%96%8B%E8%88%87%E5%89%A9%E9%A4%98-spread-and-rest"><span class="toc-number">2.</span> <span class="toc-text">展開與剩餘 (spread and rest)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%95%E9%96%8B-%E2%80%A6spread"><span class="toc-number">2.0.1.</span> <span class="toc-text">展開 (…spread)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%A9%E9%A4%98-%E2%80%A6rest"><span class="toc-number">2.0.2.</span> <span class="toc-text">剩餘 (…rest)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%A7%8B%E8%B3%A6%E5%80%BC-destructuring"><span class="toc-number">3.</span> <span class="toc-text">解構賦值 (destructuring)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A3%E5%88%97%E8%A7%A3%E6%A7%8B"><span class="toc-number">3.0.1.</span> <span class="toc-text">陣列解構:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E4%BB%B6%E8%A7%A3%E6%A7%8B"><span class="toc-number">3.0.2.</span> <span class="toc-text">物件解構:</span></a></li></ol></li></ol></li></ol></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/"
+      data-gtm-category="share_link" data-gtm-label="facebook"
+      ><i class="fab fa-facebook fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&text=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="twitter"
+      ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="linkedin"
+      ><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&is_video=false&description=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="pinterest"
+      ><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      href="mailto:?subject=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值&body=Check out this article: https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/"
+      data-gtm-category="share_link" data-gtm-label="email"
+      ><i class="fas fa-envelope fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="getpocket"
+      ><i
+        class="fab fa-get-pocket fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="reddit"
+      ><i class="fab fa-reddit fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="stumbleupon"
+      ><i
+        class="fab fa-stumbleupon fa-lg"
+        aria-hidden="true"
+      ></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&title=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值"
+      data-gtm-category="share_link" data-gtm-label="digg"
+      ><i class="fab fa-digg fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+  <li>
+    <a
+      class="icon"
+      target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kakadodo.github.io/2018/08/31/js-about-javascript-es6-1/&name=這個朋友必交! 關於 JavaScript 的眉眉角角 - 11.ES6 - 字串模板、展開與剩餘、解構賦值&description="
+      data-gtm-category="share_link" data-gtm-label="tumblr"
+      ><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i
+    ></a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <a
+        id="menu"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="menu"
+        onclick="$('#nav-footer').toggle();return false;"
+        ><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a
+      >
+      <a
+        id="toc"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="toc"
+        onclick="$('#toc-footer').toggle();return false;"
+        ><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a
+      >
+      <a
+        id="share"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="share"
+        onclick="$('#share-footer').toggle();return false;"
+        ><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a
+      >
+      <a
+        id="top"
+        style="display: none"
+        class="icon"
+        href="#"
+        data-gtm-category="action_footer_link" data-gtm-label="backToTop"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a
+      >
+    </div>
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chelsea Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li>
+            <a href="/" data-gtm-category="footer_link" data-gtm-label="Home">
+              Home
+            </a>
+          </li>
+         
+          <li>
+            <a href="/archives/" data-gtm-category="footer_link" data-gtm-label="Writing">
+              Writing
+            </a>
+          </li>
+         
+          <li>
+            <a href="/tags/" data-gtm-category="footer_link" data-gtm-label="Tag">
+              Tag
+            </a>
+          </li>
+         
+          <li>
+            <a href="/categories/" data-gtm-category="footer_link" data-gtm-label="Category">
+              Category
+            </a>
+          </li>
+         
+          <li>
+            <a target="_blank" rel="noopener" href="https://c-space.herokuapp.com/" data-gtm-category="footer_link" data-gtm-label="Portfolio">
+              Portfolio
+            </a>
+          </li>
+         
+          <li>
+            <a href="/search/" data-gtm-category="footer_link" data-gtm-label="Search">
+              Search
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Google Tag Manager -->
+
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KTHVLGR');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kakadodo';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
