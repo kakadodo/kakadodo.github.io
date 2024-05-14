@@ -45,7 +45,25 @@ sidebar: [
 ],
 ```
 
+### VitePress Sidebar
+官方沒有提供 sidebar 的自動生成功能，找到了這個 [VitePress Sidebar](https://vitepress-sidebar.jooy2.com/getting-started) 由其他開發者提供的套件，透過套件做一些設定便可將轉換後的路徑結構注入到 themeConfig 的 sidebar 屬性中。不過用這套件的前提是專案結構要符合他的設計方式，源目錄下的 md 檔會視為第一層級，同層級的資料夾則會轉為路徑名，資料夾內的 md 檔路徑就會包含資料夾名稱。如果放置 md 檔的位置不是從源目錄開始的話就會出現路徑編譯錯誤的問題。套件提供滿多可設定的選項，有興趣可以試試看。
+
 其他設定基本上就是替換為網站要呈現的內容，其中 search 的部分，官方提供開箱即用的本地搜索功能(MiniSearch)，如果習慣使用 algolia 搜尋引擎，也有相對應的配置可用。
+
+## 建構時的數據加載
+::: tip 官方說明
+VitePress 提供了資料載入的功能，它允許載入任意資料並從頁面或元件中匯入它。資料載入只在建置時執行：最終的資料將被序列化為 JavaScript 套件中的 JSON。資料載入可以用來取得遠端數據，也可以基於本地文件產生元數據。
+:::
+這個部落格有使用本地文件的數據加載來實現[筆記總覽頁](/posts-map)。
+
+數據加載會在建構階段執行，文件檔名必須以 `.data.js` 或 `.data.ts` 結尾。官方有提供 `createContentLoader` 這個輔助函數來簡化抓取數據的方式，依據畫面需要的資料回傳對應的數據出來，於 md 檔或 vue 檔就能以 import 的方式來取得回傳的數據。
+
+過程中有碰到 import 檔案報錯的問題，錯誤提示如下:
+``` bash
+Build failed with 1 error:
+node_modules/esbuild/lib/main.js:1374:27: ERROR: [plugin: externalize-deps] "vitepress" resolved to an ESM file. ESM file cannot be loaded by `require`. See https://vitejs.dev/guide/troubleshooting.html#this-package-is-esm-only for more details.
+```
+解法是在 package.json 中增加 `"type": "module"` 設定，重啟就可運作了。
 
 ## GA4、GTM 設定
 config 檔中沒有提供可以直接設定 ID 的位置，但可以透過 `head` 屬性來增加 `<script>` 標籤，像是 GA4 的設定如下:
@@ -97,7 +115,7 @@ import { loadEnv } from 'vitepress'
 const env = loadEnv("", process.cwd());
 console.log(env.VITE_GTM_TRACKING_ID);
 ```
-3. 照理說運行環境下要抓取環境變數可以使用 import.meta.env 來取得，但不知道為何我都只能抓到官方預設的環境變數資料，最後是繞了個彎換個方式來寫，由於在 config 中已用第二點的方式拿到當前環境變數，所以透過設定 vite -> define 來定義全局常數，這樣就可以在運行環境下取得這些變數了。
+3. 由於我的 `.env` 檔是放在根目錄下，vitepress 是在 /docs 資料夾內，運行環境無法抓到外層的環境變數，所以用了繞彎的方式來寫，在 config 檔中已用第二點的方式拿到當前環境變數，透過設定 vite -> define 來定義全局常數，這樣就可以在運行環境下取得這些變數了。
 ::: code-group
 ```js [vitepress.config.ts] {5-9}
 import { defineConfig, loadEnv } from 'vitepress'
@@ -138,10 +156,10 @@ const VITE_GTM_TRACKING_ID = process.env.VITE_GTM_TRACKING_ID;
 2. 在 GitHub repository -> Settings -> Pages 選單下，選擇 Build and deployment > Source > GitHub Actions 表示專案要使用 GitHub Actions 的方式來部署
 3. 專案 commit 並推送到 main 分支，就會觸發 Actions 進行自動部署的流程。分支預設是用 main，如果要建立在其他分支上，記得要更改 yml 檔中的 push 設定。
 
-### Github Pages 設定環境變數
+### Github Pages 使用 secrets 設定環境變數
 GitHub Pages 有提供 Actions secrets and variables 的設定，使用 Actions 方式部署的話，就可以在部署過程植入環境變數。
-1. 專案 repository -> Settings -> Secrets and Variables -> Manage environment secrets，選擇需要建立 secret 的環境，於最下方點擊 Add environment secret 來新增，名稱建議跟 `.env` 檔中定義的一樣，於 yml 檔中可以這樣引用 <span v-pre>`${{ secrets.VITE_GTM_TRACKING_ID }}`</span>。
-2. `.github/workflows/deploy.yml` 中，需要在 job build 設定 Github repository 的 `environment` 名稱(對應 secret 建立的環境)，並且在 build 指令下方加上 `env` 設定。
+1. 專案 repository -> Settings -> Secrets and Variables -> Repository secrets -> New repository secret 來建立 repository 層級的 secrets，名稱建議跟 `.env` 檔中定義的一樣，於 yml 檔中可以這樣引用 <span v-pre>`${{ secrets.VITE_GTM_TRACKING_ID }}`</span>。
+2. `.github/workflows/deploy.yml` 中，在 `run: npm run docs:build` 指令下方加上 `env` 設定。
 ```yml {5-6,11-12}
 jobs:
   # 构建工作
