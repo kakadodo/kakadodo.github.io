@@ -1,5 +1,5 @@
 ---
-title: 陣列(Array)
+title: 陣列 (Array)
 categories: JavaScript
 tags:
   - JavaScript

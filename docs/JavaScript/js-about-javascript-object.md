@@ -1,5 +1,5 @@
 ---
-title: 物件(Object)
+title: 物件 (Object)
 categories: JavaScript
 tags:
   - JavaScript
