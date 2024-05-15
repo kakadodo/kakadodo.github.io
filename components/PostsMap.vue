@@ -34,11 +34,15 @@ const filteredPosts = (category: string) => {
     font-weight: bold;
   }
   &-categories {
+    position: sticky;
+    top: 64px;
     margin-bottom: 32px;
     padding: 12px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    background-color: var(--vp-c-bg);
+    z-index: 1;
     &-item {
       display: flex;
       align-items: center;
