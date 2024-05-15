@@ -27,7 +27,7 @@ const filteredPosts = (category: string) => {
 <style scoped lang="scss">
 .postsMap {
   margin: 0 auto;
-  padding: 12px;
+  padding: 32px 12px;
   max-width: 600px;
   &-title {
     font-size: 24px;

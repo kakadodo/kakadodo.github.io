@@ -1,5 +1,5 @@
 ---
-title: 迴圈(Loop)
+title: 迴圈 (Loop)
 categories: JavaScript
 tags:
   - JavaScript
